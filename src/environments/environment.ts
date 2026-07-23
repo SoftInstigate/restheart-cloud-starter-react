@@ -1,5 +1,5 @@
 export const environment = {
-  apiUrl: 'https://cff6b8.eu-central-1-shared-1.restheart.com',
+  apiUrl: '',
   features: {
     emailRegistration: true,
     passwordReset: true,
