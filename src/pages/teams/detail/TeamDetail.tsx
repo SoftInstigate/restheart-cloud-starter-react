@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, type FormEvent } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@restheart-cloud/kit-react';
 import type { TeamMembership, TeamMember, PendingInvitation } from '@restheart-cloud/kit-react';
 import { Alert } from '../../../ui/alert/Alert';
@@ -9,6 +9,7 @@ const RESEND_COOLDOWN_MS = 5 * 60 * 1000;
 
 export default function TeamDetail() {
   const auth = useAuth();
+  const navigate = useNavigate();
   const { id: teamId } = useParams<{ id: string }>();
 
   const [team, setTeam] = useState<TeamMembership | undefined>(undefined);
@@ -176,9 +177,11 @@ export default function TeamDetail() {
     setDeleteError(null);
     try {
       await auth.deleteTeam();
-      setDeleting(false);
-      setDeleteConfirming(false);
-      await auth.checkSession();
+      const remaining = await auth.loadTeams();
+      if (remaining.length > 0 && !remaining.some(t => t.active)) {
+        await auth.switchTeam(remaining[0].id);
+      }
+      navigate('/teams');
     } catch (err: unknown) {
       setDeleting(false);
       const e = err as { message?: string };

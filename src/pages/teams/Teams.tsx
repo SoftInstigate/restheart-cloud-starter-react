@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@restheart-cloud/kit-react';
 import type { TeamMembership } from '@restheart-cloud/kit-react';
 import './Teams.css';
 
 export default function Teams() {
   const auth = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [switchingTo, setSwitchingTo] = useState<string | null>(null);
 
   useEffect(() => {
     auth.loadTeams().then(
@@ -15,10 +17,14 @@ export default function Teams() {
     );
   }, [auth.loadTeams]);
 
-  const switchTeam = async (team: TeamMembership) => {
-    if (team.active) return;
-    await auth.switchTeam(team.id);
-  };
+  const openTeam = useCallback(async (team: TeamMembership) => {
+    if (!team.active) {
+      setSwitchingTo(team.id.$oid);
+      await auth.switchTeam(team.id);
+      setSwitchingTo(null);
+    }
+    navigate(`/teams/${team.id.$oid}`);
+  }, [auth, navigate]);
 
   return (
     <section className="card">
@@ -36,7 +42,11 @@ export default function Teams() {
           {auth.teams.map(team => (
             <li key={team.id.$oid}>
               <div className={`team-row${team.active ? ' active' : ''}`}>
-                <Link to={`/teams/${team.id.$oid}`} className="team-link">
+                <Link
+                  to={`/teams/${team.id.$oid}`}
+                  className="team-link"
+                  onClick={e => { e.preventDefault(); openTeam(team); }}
+                >
                   <span className="team-name">{team.name || team.id.$oid}</span>
                   {team.description && (
                     <span className="team-desc">{team.description}</span>
@@ -45,9 +55,9 @@ export default function Teams() {
                 </Link>
                 {team.active ? (
                   <span className="team-badge">current</span>
-                ) : (
-                  <button type="button" className="btn-switch" onClick={() => switchTeam(team)}>Switch</button>
-                )}
+                ) : switchingTo === team.id.$oid ? (
+                  <span className="muted">Switching…</span>
+                ) : null}
               </div>
             </li>
           ))}
