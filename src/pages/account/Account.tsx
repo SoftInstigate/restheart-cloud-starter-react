@@ -32,7 +32,7 @@ export default function Account() {
       }
       setProfileLoading(false);
     });
-  }, [auth]);
+  }, [auth.checkSession]);
 
   const saveProfile = async (e: FormEvent) => {
     e.preventDefault();

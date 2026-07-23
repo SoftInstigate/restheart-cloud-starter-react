@@ -13,7 +13,7 @@ export default function Teams() {
       () => setLoading(false),
       () => setLoading(false)
     );
-  }, [auth]);
+  }, [auth.loadTeams]);
 
   const switchTeam = async (team: TeamMembership) => {
     if (team.active) return;

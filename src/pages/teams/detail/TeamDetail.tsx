@@ -73,7 +73,7 @@ export default function TeamDetail() {
       inv => { setInvitations(inv); setInvitationsLoading(false); },
       () => setInvitationsLoading(false)
     );
-  }, [teamId, auth]);
+  }, [teamId, auth.loadTeams, auth.listTeamMembers, auth.listInvitations]);
 
   const canResend = (email: string): boolean => {
     const since = resendCooldownsRef.current[email];
