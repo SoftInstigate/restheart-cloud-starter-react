@@ -104,5 +104,5 @@ Complete inventory of repository source files. Each entry links to the page wher
 
 | File | Purpose |
 |------|---------|
-| `.github/workflows/openwiki-update.yml` | GitHub Actions workflow: runs OpenWiki documentation update daily at 08:00 UTC, creates PR with changes |
+| `.github/workflows/openwiki-update.yml` | GitHub Actions workflow: runs OpenWiki documentation update daily at 04:00 UTC, creates PR with changes |
 | `AGENTS.md` / `CLAUDE.md` | Agent instruction files for OpenWiki documentation runs |
