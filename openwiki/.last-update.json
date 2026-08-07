@@ -1,6 +1,8 @@
 {
-  "updatedAt": "2026-07-24T10:51:12.686Z",
+  "updatedAt": "2026-08-07T06:05:25.784Z",
   "command": "update",
-  "gitHead": "22609a56c4e2beeaff102496407fb731b904316e",
-  "model": "xiaomi/mimo-v2.5-pro"
+  "gitHead": "e87b2e155815d3a634339836ee13970ddda2a33c",
+  "model": "xiaomi/mimo-v2.5-pro",
+  "status": "complete",
+  "language": "en"
 }

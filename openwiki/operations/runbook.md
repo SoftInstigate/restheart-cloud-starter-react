@@ -15,7 +15,7 @@ This is the single configuration file for the starter. It contains:
 
 ```typescript
 export const environment = {
-  apiUrl: '<your-restheart-cloud-servie-url>',
+  apiUrl: '',
   features: {
     emailRegistration: true,
     passwordReset: true,
@@ -28,6 +28,7 @@ export const environment = {
 
 ### apiUrl
 
+<!-- openwiki: broken internal link [source-map.md#entrypoint--app-shell] file "source-map.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 Must be a valid `*.restheart.com` URL. The app validates this on startup with `isValidApiBaseUrl()` from the kit. If invalid, a [ConfigPage](source-map.md#entrypoint--app-shell) is shown instead of the app.
 
 **After cloning**, tell git to ignore local changes:
@@ -40,6 +41,7 @@ Then edit the file to point to your own service.
 
 ### Feature Flags
 
+<!-- openwiki: broken internal link [domain/auth-and-teams.md#feature-flags] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 See [Auth & Teams — Feature Flags](domain/auth-and-teams.md#feature-flags) for the complete reference. These must match your RESTHeart Cloud service's toggles.
 
 ## Design System
@@ -118,7 +120,7 @@ function useTheme() {
 - Toggling adds/removes the `dark` class on `<html>`
 - Override tokens for `.dark` in `styles.css` to implement dark mode colors
 
-The toggle button is in the user avatar dropdown menu in the Shell header.
+The toggle button is a standalone icon button (sun/moon) in the header actions area, next to the user avatar dropdown menu.
 
 ## Build & Deploy
 
@@ -150,6 +152,9 @@ Each page directory under `src/pages/` contains its own CSS file (e.g., `Shell.c
 
 ## See Also
 
+<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Architecture Overview](architecture/overview.md) — component tree and config gating
+<!-- openwiki: broken internal link [domain/auth-and-teams.md] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Auth & Teams](domain/auth-and-teams.md) — feature flag definitions
+<!-- openwiki: broken internal link [testing/guidance.md] file "testing/guidance.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Testing Guidance](testing/guidance.md) — running tests
