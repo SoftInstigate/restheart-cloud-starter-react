@@ -88,5 +88,7 @@ npm test -- --run # Single run
 
 ## See Also
 
+<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Architecture Overview](architecture/overview.md) — understanding the component tree for test setup
+<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Operations & Runbook](operations/runbook.md) — build and dev workflow

@@ -7,6 +7,7 @@ tags: [auth, teams, invitations, oauth, feature-flags, domain]
 
 # Auth & Teams
 
+<!-- openwiki: broken internal link [architecture/overview.md#auth-provider] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 This page documents every authentication and multi-tenancy flow implemented in the starter. All auth logic is provided by `@restheart-cloud/kit-react` through the [`RhAuthProvider`](architecture/overview.md#auth-provider) and the `useAuth()` hook.
 
 ## Authentication Flows
@@ -32,7 +33,11 @@ Loading state disables the submit button. Password visibility toggle is provided
 
 **Route:** `/auth/signup` · **Guard:** `PublicGuard` · **Shown when:** `emailRegistration || oauthLogin` · **File:** `src/pages/auth/signup/Signup.tsx`
 
-Registration form with email/password. On success, the URL gets `?flow=signup` appended (via navigation), which triggers the [`justSignedUp`](#just-signed-up-flag) flag in `App.tsx` for a welcome message in the [Shell](architecture/overview.md#component-tree).
+Registration form collecting first name, last name, email, and password (minimum 8 characters). On submit, calls `auth.register({ teamName, firstName, lastName, email, password })` where `teamName` is auto-generated as `"${firstName}'s Team"`.
+
+On success, the form is replaced in-place by a "Check your email" confirmation — the user must click the verification link to complete registration. A 409 error shows "An account with this email already exists."
+
+If `oauthLogin` is enabled, OAuth buttons appear above the form. If `emailRegistration` is off but `oauthLogin` is on, only the OAuth buttons are shown (no email form).
 
 ### Email Verification
 
@@ -54,6 +59,7 @@ Two-step flow:
 
 OAuth is initiated by navigating to `${apiUrl}/auth/oauth/authorize/${provider}?noauthchallenge`. The `oauthUrl()` helper in `src/oauth-url.ts` builds this URL.
 
+<!-- openwiki: broken internal link [architecture/overview.md#fragment-token-capture] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 After the OAuth provider authenticates the user, they are redirected back with an access token in the URL **fragment** (`#access_token=...`). The [fragment token capture](architecture/overview.md#fragment-token-capture) in `App.tsx` picks this up.
 
 **Supported providers:** Configured in `environment.features.oauthProviders` array. Currently `['google']`. Add `'github'` or others as your RESTHeart Cloud service supports them.
@@ -79,9 +85,8 @@ On load, `auth.getInvitation(email, token)` is called. If `invitation.isNewUser 
 ### Flow 3: Existing User
 
 If `invitation.isNewUser === false`:
-- Shows "Accept invitation to {teamName}"
-- If already logged in → one-click "Accept" button calls `auth.acceptInvite(token)`
-- If not logged in → password form, submit logs in then calls `auth.acceptInvite(token)`
+- **Already logged in** → shows "Join {teamName}" with one-click "Join team" button that calls `auth.acceptInvite(token)`
+- **Not logged in** → shows "Log in to join {teamName}" with password form, submit calls `auth.login(email, password)` then `auth.acceptInvite(token)`
 - On success → shows "You're in" and redirects to `/` after 1.2 seconds
 
 Error handling:
@@ -97,21 +102,38 @@ Error handling:
 
 - Calls `auth.loadTeams()` on mount
 - Renders each team with name, description, role
-- Active team gets a "current" badge; inactive teams get a "Switch" button
+- Active team gets a "current" badge
+- Clicking any team row calls `auth.switchTeam(teamId)` (if not already active), then navigates to `/teams/:id`
 - "New team" link at top
 - Empty state: "You're not part of any team yet."
 
-### Team Switching
-
-`auth.switchTeam(teamId)` — called from the team list. The team switcher in the Shell header is only shown when the user belongs to more than one team.
-
 ### Team Detail (`/teams/:id`)
 
-Shows detailed information for a single team. Extend this page with member management, invite management, and team settings as needed.
+The detail page is **owner-aware** — owners see management panels that members do not. On mount it loads teams, members (`auth.listTeamMembers()`), and pending invitations (`auth.listInvitations()`).
+
+**Members section** (all users):
+- Lists members with name, email, and role
+- Owners can change a member's role via a `<select>` dropdown (`auth.updateMemberRole()`)
+- Owners can remove members with a two-step confirmation (`auth.removeMember()`)
+
+**Invite a team member** (owners only):
+- Form with email and role (member/owner) fields
+- Calls `auth.invite(email, role)`
+- 409 → "This person is already a member of your team."
+
+**Pending invitations** (owners only, shown when invitations exist):
+- Lists invitations with email, role, creation date, expired status
+- Resend button with 5-minute cooldown (`auth.resendInvite()`)
+- Cooldown timer updates every 30 seconds
+
+**Team settings** (owners only):
+- Edit team name and description (`auth.updateTeam()`)
+- Save button is disabled until form is dirty
+- **Danger zone**: Delete team button with confirmation dialog (`auth.deleteTeam()`). After deletion, switches to the next available team or navigates to `/teams`.
 
 ### New Team (`/teams/new`)
 
-Form to create a new team.
+Form with team name field. Calls `auth.createTeam(teamName)` and navigates to `/teams` on success.
 
 ## Just-Signed-Up Flag
 
@@ -144,5 +166,7 @@ These flags must match your RESTHeart Cloud service's **Sign-up Mgmt → Feature
 
 ## See Also
 
+<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Architecture Overview](architecture/overview.md) — how the auth provider and routing work
+<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Operations & Runbook](operations/runbook.md) — how to configure feature flags and environment
