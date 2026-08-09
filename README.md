@@ -198,6 +198,17 @@ hold.
 The overlay is user experience, not enforcement — remove it with the dev tools and every
 request still comes back `451`.
 
+### When the gate actually fires
+
+The interceptor sees every `fetch` the app makes, kit calls included — but the kit only ever
+talks to `/auth/*`, `/token` and `/users/me`, the paths the rule excludes, so those can never
+return `451`.
+
+That has a consequence worth knowing before you go looking for a bug: **this starter makes no
+data requests of its own**, so with the server fully configured the overlay still never
+appears. It appears as soon as you add your first one — a collection read on the home page,
+say. That is the request the gate is there to protect.
+
 ### Server setup (required)
 
 Enable the **Guards** plugin from *Service → Guards*, then create four documents in the
@@ -215,8 +226,8 @@ and the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_
    acceptance `PATCH` itself, which are the requests a blocked user needs in order to stop
    being blocked.
 
-Until those exist the app behaves exactly as it does today: nothing ever returns `451`, the
-flag stays down, and the overlay never renders.
+Until those exist nothing ever returns `451`, the flag stays down, and the overlay never
+renders.
 
 ## Packages used
 
