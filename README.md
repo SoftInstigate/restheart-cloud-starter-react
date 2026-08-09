@@ -209,9 +209,9 @@ does a single `GET` on `PROBE_PATH` when the gate mounts. Two things to know abo
 
 - **`PROBE_PATH` is `/demo` — change it** to a collection your service actually has. The
   server setup below creates one.
-- **It attaches the bearer token itself.** `rhAuthInterceptor` only clears the session on a
-  `401`; it does not authenticate outgoing requests. An unauthenticated probe gets `401`,
-  not `451`, and the gate stays down.
+- **It goes through `auth.api`**, the kit's authenticated `fetch`. That is what makes it a
+  request the rule can evaluate: an anonymous one comes back `401`, and the gate stays down.
+  Use `auth.api` for your own data requests too, and you never attach the token by hand.
 
 Once your app reads data on its first screen, delete the probe — any real request raises the
 flag just as well.

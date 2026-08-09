@@ -19,8 +19,8 @@ export function ConsentsGate({ children }: { children: React.ReactNode }) {
 
   // Ask once on arrival, so a blocked user meets the form immediately.
   useEffect(() => {
-    void probeConsents();
-  }, []);
+    void probeConsents(auth.api);
+  }, [auth.api]);
 
   if (!blocked) return <>{children}</>;
 

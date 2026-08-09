@@ -11,9 +11,6 @@
  * and no redeploy on this side.
  */
 
-import { getToken } from '@restheart-cloud/kit-react';
-import { environment } from './environments/environment';
-
 /**
  * A collection your service actually has — change it.
  *
@@ -59,25 +56,20 @@ export function installConsentsInterceptor(): void {
  * One data request, so a blocked user is told so on arrival rather than
  * whenever the app happens to need data.
  *
- * The response is thrown away — the interceptor above already saw the status.
- * The token has to be attached by hand: `rhAuthInterceptor` only clears the
- * session on 401, it does not authenticate outgoing requests.
+ * Pass `auth.api` — it applies the session on the way out, which is what makes
+ * this a request the rule can evaluate rather than an anonymous `401`. The
+ * outcome is ignored on purpose: the interceptor above already saw the status,
+ * and nothing here needs to know what came back.
  *
  * Drop this once the app has data requests of its own on the first screen —
  * any one of them raises the flag just as well.
  */
-export async function probeConsents(): Promise<void> {
-  const token = getToken();
-  if (!token) return;
+export async function probeConsents(
+  api: (path: string, init?: RequestInit) => Promise<Response>
+): Promise<void> {
   try {
-    await fetch(`${environment.apiUrl}${PROBE_PATH}?pagesize=1`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        // Suppress the browser's native Basic Auth popup on a 401.
-        'No-Auth-Challenge': 'true',
-      },
-    });
+    await api(`${PROBE_PATH}?pagesize=1`);
   } catch {
-    // Network error — nothing to gate on.
+    // Any non-2xx throws, 451 included — already flagged by the interceptor.
   }
 }
