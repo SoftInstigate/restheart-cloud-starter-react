@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Outlet, Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@restheart-cloud/kit-react';
 import { isJustSignedUp, setJustSignedUp } from '../../just-signed-up';
+import { ConsentsGate } from './ConsentsGate';
 import './Shell.css';
 
 const STORAGE_KEY = 'rh-theme';
@@ -188,7 +189,9 @@ export default function Shell() {
         )}
 
         <main id="main" className="main">
-          <Outlet />
+          <ConsentsGate>
+            <Outlet />
+          </ConsentsGate>
         </main>
       </div>
     </>

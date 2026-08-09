@@ -56,6 +56,7 @@ src/
   routes.tsx              ← route map, feature-flag gating, lazy loading
   App.tsx                 ← fragment token capture + config screen
   main.tsx                ← RhAuthProvider + BrowserRouter
+  consents-signal.ts      ← the 451 flag + the fetch interceptor that raises it
   theme hook              ← light/dark toggle, persisted (in Shell.tsx)
   ui/alert/               ← the one shared feedback component
   pages/
@@ -169,19 +170,53 @@ A plain `fetch` to the same URL is unauthenticated, and the service answers `401
 reads as "logged out" rather than "you forgot the header". That is the one mistake worth
 knowing about in advance.
 
-### Gating on consents
 
-A worked example of the above — every user must accept the current Terms of Service and
-Privacy Policy before the app serves them anything — lives on the **`feat/consents-gate`**
-branch, with the server-side setup in
-[the tutorial](https://cloud.restheart.com/blog).
+## Consents gate
 
-```bash
-git checkout feat/consents-gate
-```
+Every user must accept the current Terms of Service and Privacy Policy before they can use
+the app. The rule lives on the server, as a **Guards** rule, so it applies to this app, to a
+mobile client, to `curl`, and to any API integration — not just to the code below.
 
-It is a branch and not the default on purpose: which consents you collect, and when you
-re-ask, are product decisions.
+The client's only job is to react to a status code. Three files:
+
+| File | Job |
+|---|---|
+| `src/consents-signal.ts` | Raises a flag on any `451` the API returns. Installed as a `fetch` interceptor. |
+| `src/main.tsx` | Calls `installConsentsInterceptor()` before the first render. |
+| `src/pages/shell/ConsentsGate.tsx` | Renders the blocking overlay while the flag is up; calls `auth.acceptConsents()` on accept. |
+
+Nothing in the client knows which versions are current, and nothing reads `latestConsents`
+— the permission's `mergeRequest` stamps the versions and the timestamp server-side. Bump
+the versions in the console and every user meets the form again on their next request, with
+nothing to redeploy here.
+
+`auth.acceptConsents()` (kit ≥ 0.6.0) does the `PATCH`, then `GET /token?renew=true`, then
+`GET /users/me`, then `setUser()`. The renewal is not optional: a JWT is a snapshot, and
+without a fresh one the rule keeps blocking the user for the whole life of the token they
+hold.
+
+The overlay is user experience, not enforcement — remove it with the dev tools and every
+request still comes back `451`.
+
+### Server setup (required)
+
+Enable the **Guards** plugin from *Service → Guards*, then create four documents in the
+console. Full walkthrough: [Gating a React app on consents](https://cloud.restheart.com/blog)
+and the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
+
+1. **A schema** (`userConsentsSchema`) allowing `latestConsents` and `consents` on the user
+   document — with neither in `required`, since registration does not write them.
+2. **A permission** on `PATCH /users/{userId}`, scoped with `bson-request-whitelist(consents)`
+   and carrying the `mergeRequest` that stamps the versions. Without it the acceptance is a
+   `403` and the user is locked out for good.
+3. **Two JWT claims**: `latestConsents/tos` *and* `latestConsents/pp`. If either is missing,
+   the rule blocks every token-authenticated user permanently.
+4. **The rule**, blocking with `451` — and excluding `/auth`, `/token`, `/users/me` and the
+   acceptance `PATCH` itself, which are the requests a blocked user needs in order to stop
+   being blocked.
+
+Until those exist the app behaves exactly as it does today: nothing ever returns `451`, the
+flag stays down, and the overlay never renders.
 
 ## Packages used
 
