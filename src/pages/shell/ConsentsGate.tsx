@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@restheart-cloud/kit-react';
-import { isBlocked, setBlocked, subscribe } from '../../consents-signal';
+import { isBlocked, probeConsents, setBlocked, subscribe } from '../../consents-signal';
 
 /**
  * Covers the app with an acceptance form while the API is answering `451`.
@@ -16,6 +16,11 @@ export function ConsentsGate({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => subscribe(setBlockedState), []);
+
+  // Ask once on arrival, so a blocked user meets the form immediately.
+  useEffect(() => {
+    void probeConsents();
+  }, []);
 
   if (!blocked) return <>{children}</>;
 

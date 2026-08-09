@@ -198,16 +198,23 @@ hold.
 The overlay is user experience, not enforcement — remove it with the dev tools and every
 request still comes back `451`.
 
-### When the gate actually fires
+### What makes the gate fire
 
 The interceptor sees every `fetch` the app makes, kit calls included — but the kit only ever
 talks to `/auth/*`, `/token` and `/users/me`, the paths the rule excludes, so those can never
-return `451`.
+return `451`. Only a **data** request can.
 
-That has a consequence worth knowing before you go looking for a bug: **this starter makes no
-data requests of its own**, so with the server fully configured the overlay still never
-appears. It appears as soon as you add your first one — a collection read on the home page,
-say. That is the request the gate is there to protect.
+This starter has none of its own yet, so `consents-signal.ts` makes one: `probeConsents()`
+does a single `GET` on `PROBE_PATH` when the gate mounts. Two things to know about it:
+
+- **`PROBE_PATH` is `/demo` — change it** to a collection your service actually has. The
+  server setup below creates one.
+- **It attaches the bearer token itself.** `rhAuthInterceptor` only clears the session on a
+  `401`; it does not authenticate outgoing requests. An unauthenticated probe gets `401`,
+  not `451`, and the gate stays down.
+
+Once your app reads data on its first screen, delete the probe — any real request raises the
+flag just as well.
 
 ### Server setup (required)
 
@@ -215,6 +222,8 @@ Enable the **Guards** plugin from *Service → Guards*, then create four documen
 console. Full walkthrough: [Gating a React app on consents](https://cloud.restheart.com/blog)
 and the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
 
+0. **A collection to read**, so there is a request the rule can block:
+   `PUT /demo`, then `POST /demo` with `[{"n": 1}, {"n": 2}, {"n": 3}]`.
 1. **A schema** (`userConsentsSchema`) allowing `latestConsents` and `consents` on the user
    document — with neither in `required`, since registration does not write them.
 2. **A permission** on `PATCH /users/{userId}`, scoped with `bson-request-whitelist(consents)`
