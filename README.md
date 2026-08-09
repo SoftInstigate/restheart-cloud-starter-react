@@ -136,6 +136,53 @@ roles. Swap that one component and every success/error message in the app follow
 Page-specific layout (`.team-row`, `.member-row`, `.feature-grid`, …) stays in the
 component's own `.css` file and is not part of this contract.
 
+## Reading your own data
+
+Everything the starter does talks to `/auth/*`, `/token` and `/users/me` — the kit handles
+those. For your application's own collections, use `auth.api`: it applies the session on the
+way out, so you never attach the bearer token by hand.
+
+```tsx
+import { useAuth } from '@restheart-cloud/kit-react';
+import type { ApiError } from '@restheart-cloud/kit-react';
+
+function Notes() {
+  const auth = useAuth();
+  const [notes, setNotes] = useState<unknown[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    auth.api('/notes?pagesize=10')
+      .then(res => res.json())
+      .then(setNotes)
+      .catch((err: ApiError) => setError(err.message));
+  }, [auth.api]);
+
+  // …
+}
+```
+
+Pass a path, not a URL. Any non-2xx rejects with an `ApiError` (`{ status, message }`), so a
+`403` from an ACL or a `451` from a Guards rule is something you branch on rather than parse.
+
+A plain `fetch` to the same URL is unauthenticated, and the service answers `401` — which
+reads as "logged out" rather than "you forgot the header". That is the one mistake worth
+knowing about in advance.
+
+### Gating on consents
+
+A worked example of the above — every user must accept the current Terms of Service and
+Privacy Policy before the app serves them anything — lives on the **`feat/consents-gate`**
+branch, with the server-side setup in
+[the tutorial](https://cloud.restheart.com/blog).
+
+```bash
+git checkout feat/consents-gate
+```
+
+It is a branch and not the default on purpose: which consents you collect, and when you
+re-ask, are product decisions.
+
 ## Packages used
 
 - [`@restheart-cloud/kit`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit) — TypeScript auth logic (framework-agnostic)
