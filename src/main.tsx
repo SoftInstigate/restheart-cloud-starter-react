@@ -3,14 +3,14 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { RhAuthProvider } from '@restheart-cloud/kit-react';
 import { App } from './App';
-import { consentsTransport } from './consents-signal';
+import { consentsOnError } from './consents-signal';
 import { environment } from './environments/environment';
 import './styles.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <RhAuthProvider config={{ apiBaseUrl: environment.apiUrl, transport: consentsTransport }}>
+      <RhAuthProvider config={{ apiBaseUrl: environment.apiUrl, onError: consentsOnError }}>
         <App />
       </RhAuthProvider>
     </BrowserRouter>

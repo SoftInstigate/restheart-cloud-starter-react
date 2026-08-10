@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@restheart-cloud/kit-react';
-import { isBlocked, probeConsents, setBlocked, subscribe } from '../../consents-signal';
+import { isBlocked, setBlocked, subscribe } from './consents-signal';
+import './ConsentsGate.css';
 
 /**
- * Covers the app with an acceptance form while the API is answering `451`.
+ * Replaces the whole app with an acceptance form while the API is answering
+ * `451`.
+ *
+ * It sits at the root, above the router, and that placement is the point: a
+ * blocked user has no session — `/users/me` is refused too — so `AuthGuard`
+ * would bounce them to the login page and they would never reach a screen
+ * inside the app. Here there is no guard to get past.
  *
  * The overlay is user experience, not enforcement: remove it with the dev
- * tools and every request still comes back `451`. The rule lives on the
- * server.
+ * tools and every request still comes back `451`. The rule lives on the server.
  */
 export function ConsentsGate({ children }: { children: React.ReactNode }) {
   const auth = useAuth();
@@ -17,11 +23,6 @@ export function ConsentsGate({ children }: { children: React.ReactNode }) {
 
   useEffect(() => subscribe(setBlockedState), []);
 
-  // Ask once on arrival, so a blocked user meets the form immediately.
-  useEffect(() => {
-    void probeConsents(auth.api);
-  }, [auth.api]);
-
   if (!blocked) return <>{children}</>;
 
   const accept = async () => {
@@ -29,8 +30,13 @@ export function ConsentsGate({ children }: { children: React.ReactNode }) {
     setError(null);
     try {
       // The versions and the timestamp are stamped by the permission's
-      // mergeRequest — this call states nothing about what is accepted.
+      // mergeRequest — this call states nothing about what is accepted. The
+      // user id comes from the token, since the user document is exactly what
+      // we cannot read yet.
       await auth.acceptConsents();
+      // The token is new and /users/me now answers: reload the session so the
+      // app starts with a user and their teams rather than a blank shell.
+      await auth.checkSession();
       setBlocked(false);
     } catch {
       setError('We could not record your acceptance. Please try again.');

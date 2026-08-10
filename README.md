@@ -56,7 +56,8 @@ src/
   routes.tsx              ← route map, feature-flag gating, lazy loading
   App.tsx                 ← fragment token capture + config screen
   main.tsx                ← RhAuthProvider + BrowserRouter
-  consents-signal.ts      ← the 451 flag + the transport that raises it
+  consents-signal.ts      ← the 451 flag + the onError handler that raises it
+  ConsentsGate.tsx        ← the blocking overlay, mounted at the app root
   theme hook              ← light/dark toggle, persisted (in Shell.tsx)
   ui/alert/               ← the one shared feedback component
   pages/
@@ -181,9 +182,9 @@ The client's only job is to react to a status code. Three files:
 
 | File | Job |
 |---|---|
-| `src/consents-signal.ts` | Raises a flag on any `451` the API returns. Exported as `consentsTransport`. |
-| `src/main.tsx` | Passes it to `RhAuthProvider` as `config.transport`. |
-| `src/pages/shell/ConsentsGate.tsx` | Renders the blocking overlay while the flag is up; calls `auth.acceptConsents()` on accept. |
+| `src/consents-signal.ts` | Raises a flag on any `451` the API returns. Exported as `consentsOnError`. |
+| `src/main.tsx` | Passes it to `RhAuthProvider` as `config.onError`. |
+| `src/ConsentsGate.tsx` | The blocking overlay, wrapped around the router in `App.tsx` — **above `AuthGuard`**. |
 
 Nothing in the client knows which versions are current, and nothing reads `latestConsents`
 — the permission's `mergeRequest` stamps the versions and the timestamp server-side. Bump
@@ -200,25 +201,21 @@ request still comes back `451`.
 
 ### What makes the gate fire
 
-The transport sees every call that goes through the kit, `auth.api` included — but the kit
-itself only ever talks to `/auth/*`, `/token` and `/users/me`, the paths the rule excludes, so
-those can never return `451`. Only a **data** request can.
+Nothing you have to arrange. `/users/me` is one of the requests the rule blocks, and restoring
+the session is the first thing the app does on load — so a blocked user trips the gate before
+anything else happens. No probe, no collection to create, no path to configure.
 
-React has no interceptor slot, and `config.transport` is what replaces one. It is a declared
-dependency rather than a patched global `fetch`, so loading this app does not change how
-anything else in the page makes requests.
+That is also why the overlay wraps the router in `App.tsx` rather than living inside the
+shell: with `/users/me` refused there is no session, so `AuthGuard` bounces the user to the
+login page. A gate mounted behind that guard would never be seen.
 
-This starter has none of its own yet, so `consents-signal.ts` makes one: `probeConsents()`
-does a single `GET` on `PROBE_PATH` when the gate mounts. Two things to know about it:
+`onError` is what makes it visible at all. The provider restores the session on mount and
+absorbs the failure — `checkSession().catch(() => null)` — because it has to keep the app
+usable. Without the hook, a blocked user and a signed-out user look identical.
 
-- **`PROBE_PATH` is `/demo` — change it** to a collection your service actually has. The
-  server setup below creates one.
-- **It goes through `auth.api`**, the kit's authenticated `fetch`. That is what makes it a
-  request the rule can evaluate: an anonymous one comes back `401`, and the gate stays down.
-  Use `auth.api` for your own data requests too, and you never attach the token by hand.
-
-Once your app reads data on its first screen, delete the probe — any real request raises the
-flag just as well.
+If your own data requests should raise the flag too — say the terms change while someone is
+mid-session — call `setBlocked(true)` when `auth.api` rejects with a `451`. The starter does
+not, because it makes no data requests of its own.
 
 ### Server setup (required)
 
@@ -226,8 +223,6 @@ Enable the **Guards** plugin from *Service → Guards*, then create four documen
 console. Full walkthrough: [Gating a React app on consents](https://cloud.restheart.com/blog)
 and the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
 
-0. **A collection to read**, so there is a request the rule can block:
-   `PUT /demo`, then `POST /demo` with `[{"n": 1}, {"n": 2}, {"n": 3}]`.
 1. **A schema** (`userConsentsSchema`) allowing `latestConsents` and `consents` on the user
    document — with neither in `required`, since registration does not write them.
 2. **A permission** on `PATCH /users/{userId}`, scoped with `bson-request-whitelist(consents)`
@@ -235,9 +230,8 @@ and the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_
    `403` and the user is locked out for good.
 3. **Two JWT claims**: `latestConsents/tos` *and* `latestConsents/pp`. If either is missing,
    the rule blocks every token-authenticated user permanently.
-4. **The rule**, blocking with `451` — and excluding `/auth`, `/token`, `/users/me` and the
-   acceptance `PATCH` itself, which are the requests a blocked user needs in order to stop
-   being blocked.
+4. **The rule**, blocking with `451` — excluding `/auth` and `/token`, and the acceptance
+   `PATCH` itself. Note that `/users/me` is **not** excluded: it is what trips the gate.
 
 Until those exist nothing ever returns `451`, the flag stays down, and the overlay never
 renders.
