@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@restheart-cloud/kit-react';
 import { environment } from '../../environments/environment';
@@ -13,6 +14,26 @@ interface StarterFeature {
 export default function Home() {
   const auth = useAuth();
   const features = environment.features;
+
+  const [demoData, setDemoData] = useState<unknown[] | null>(null);
+  const [demoError, setDemoError] = useState<string | null>(null);
+  const [demoLoading, setDemoLoading] = useState(false);
+
+  async function fetchDemo() {
+    setDemoLoading(true);
+    setDemoError(null);
+    setDemoData(null);
+    try {
+      const res = await auth.api('/demo');
+      const json = await res.json();
+      setDemoData(Array.isArray(json) ? json : []);
+    } catch (err: unknown) {
+      const e = err as { status?: number; message?: string };
+      setDemoError(e.message ?? `HTTP ${e.status ?? '?'}`);
+    } finally {
+      setDemoLoading(false);
+    }
+  }
 
   const capabilities: StarterFeature[] = [
     {
@@ -158,6 +179,51 @@ export default function Home() {
             </div>
           </li>
         </ol>
+      </section>
+
+      <section className="card">
+        <div className="card-header">
+          <h2>Fetch your data</h2>
+        </div>
+
+        <p className="muted">
+          The kit provides <code>auth.api()</code> — an authenticated <code>fetch</code> wrapper
+          that attaches the bearer token and handles errors. Here is how to use it.
+        </p>
+
+        <h3>1. Create the <code>demo</code> collection</h3>
+        <p className="muted">
+          In your RESTHeart Cloud dashboard, create a collection called <code>demo</code>
+          and add a permission so the signed-in user can read it:
+        </p>
+        <pre className="code-block">path(/demo) and method(GET)</pre>
+
+        <h3>2. Fetch from your component</h3>
+        <pre className="code-block">{`import { useAuth } from '@restheart-cloud/kit-react';
+
+function DemoComponent() {
+  const auth = useAuth();
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    auth.api('/demo')
+      .then(res => res.json())
+      .then(json => setItems(Array.isArray(json) ? json : []));
+  }, []);
+
+  return <pre>{JSON.stringify(items, null, 2)}</pre>;
+}`}</pre>
+
+        <h3>3. Try it now</h3>
+        <p className="muted">
+          Press the button to fetch <code>/demo</code> from your service.
+        </p>
+        <button className="btn btn-primary" onClick={fetchDemo} disabled={demoLoading}>
+          {demoLoading ? 'Loading…' : 'Fetch /demo'}
+        </button>
+
+        {demoError && <p className="demo-error">{demoError}</p>}
+        {demoData && <pre className="code-block">{JSON.stringify(demoData, null, 2)}</pre>}
       </section>
     </>
   );
