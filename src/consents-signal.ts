@@ -42,15 +42,20 @@ export function subscribe(l: Listener): () => void {
   };
 }
 
-/** Flags every 451 the API returns, from any request the app makes. */
-export function installConsentsInterceptor(): void {
-  const original = window.fetch;
-  window.fetch = async (...args) => {
-    const res = await original(...args);
-    if (res.status === 451) setBlocked(true);
-    return res;
-  };
-}
+/**
+ * Flags every 451 the API returns, from any call that goes through the kit —
+ * `auth.api` included, which is how the probe below is seen.
+ *
+ * Passed to `RhAuthProvider` as `config.transport`. React has no interceptor
+ * slot, and this is the seam that replaces one: a declared dependency rather
+ * than a patched global, so nothing else in the page changes behaviour because
+ * this app was loaded.
+ */
+export const consentsTransport = async (url: string, init?: RequestInit): Promise<Response> => {
+  const res = await fetch(url, init);
+  if (res.status === 451) setBlocked(true);
+  return res;
+};
 
 /**
  * One data request, so a blocked user is told so on arrival rather than

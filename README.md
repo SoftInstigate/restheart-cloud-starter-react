@@ -56,7 +56,7 @@ src/
   routes.tsx              ← route map, feature-flag gating, lazy loading
   App.tsx                 ← fragment token capture + config screen
   main.tsx                ← RhAuthProvider + BrowserRouter
-  consents-signal.ts      ← the 451 flag + the fetch interceptor that raises it
+  consents-signal.ts      ← the 451 flag + the transport that raises it
   theme hook              ← light/dark toggle, persisted (in Shell.tsx)
   ui/alert/               ← the one shared feedback component
   pages/
@@ -181,8 +181,8 @@ The client's only job is to react to a status code. Three files:
 
 | File | Job |
 |---|---|
-| `src/consents-signal.ts` | Raises a flag on any `451` the API returns. Installed as a `fetch` interceptor. |
-| `src/main.tsx` | Calls `installConsentsInterceptor()` before the first render. |
+| `src/consents-signal.ts` | Raises a flag on any `451` the API returns. Exported as `consentsTransport`. |
+| `src/main.tsx` | Passes it to `RhAuthProvider` as `config.transport`. |
 | `src/pages/shell/ConsentsGate.tsx` | Renders the blocking overlay while the flag is up; calls `auth.acceptConsents()` on accept. |
 
 Nothing in the client knows which versions are current, and nothing reads `latestConsents`
@@ -190,7 +190,7 @@ Nothing in the client knows which versions are current, and nothing reads `lates
 the versions in the console and every user meets the form again on their next request, with
 nothing to redeploy here.
 
-`auth.acceptConsents()` (kit ≥ 0.6.0) does the `PATCH`, then `GET /token?renew=true`, then
+`auth.acceptConsents()` (kit ≥ 0.7.0) does the `PATCH`, then `GET /token?renew=true`, then
 `GET /users/me`, then `setUser()`. The renewal is not optional: a JWT is a snapshot, and
 without a fresh one the rule keeps blocking the user for the whole life of the token they
 hold.
@@ -200,9 +200,13 @@ request still comes back `451`.
 
 ### What makes the gate fire
 
-The interceptor sees every `fetch` the app makes, kit calls included — but the kit only ever
-talks to `/auth/*`, `/token` and `/users/me`, the paths the rule excludes, so those can never
-return `451`. Only a **data** request can.
+The transport sees every call that goes through the kit, `auth.api` included — but the kit
+itself only ever talks to `/auth/*`, `/token` and `/users/me`, the paths the rule excludes, so
+those can never return `451`. Only a **data** request can.
+
+React has no interceptor slot, and `config.transport` is what replaces one. It is a declared
+dependency rather than a patched global `fetch`, so loading this app does not change how
+anything else in the page makes requests.
 
 This starter has none of its own yet, so `consents-signal.ts` makes one: `probeConsents()`
 does a single `GET` on `PROBE_PATH` when the gate mounts. Two things to know about it:
