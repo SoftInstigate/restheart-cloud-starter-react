@@ -20,6 +20,11 @@ export function ConsentsGate({ children }: { children: React.ReactNode }) {
   const [blocked, setBlockedState] = useState(isBlocked);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Two boxes because there are two documents. They gate the button and
+  // nothing else: the request that follows carries no versions, and the server
+  // stamps both in one go — see the permission's mergeRequest.
+  const [acceptedTos, setAcceptedTos] = useState(false);
+  const [acceptedPp, setAcceptedPp] = useState(false);
 
   useEffect(() => subscribe(setBlockedState), []);
 
@@ -56,13 +61,39 @@ export function ConsentsGate({ children }: { children: React.ReactNode }) {
     <div className="consents-overlay" role="dialog" aria-modal="true" aria-labelledby="consents-title">
       <div className="consents-card">
         <h1 id="consents-title">Before you continue</h1>
-        <p>
-          Please review our <a href="/terms" target="_blank" rel="noreferrer">Terms of Service</a> and
-          our <a href="/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>. You need to accept
-          them to use the application.
-        </p>
+        <p>Please review these documents and accept them to use the application.</p>
+
+        <label className="consents-check">
+          <input
+            type="checkbox"
+            checked={acceptedTos}
+            onChange={e => setAcceptedTos(e.target.checked)}
+          />
+          <span>
+            I have read and accept the{' '}
+            <a href="/terms.html" target="_blank" rel="noreferrer">Terms of Service</a>
+          </span>
+        </label>
+
+        <label className="consents-check">
+          <input
+            type="checkbox"
+            checked={acceptedPp}
+            onChange={e => setAcceptedPp(e.target.checked)}
+          />
+          <span>
+            I have read and accept the{' '}
+            <a href="/privacy.html" target="_blank" rel="noreferrer">Privacy Policy</a>
+          </span>
+        </label>
+
         {error && <p className="field-error">{error}</p>}
-        <button type="button" className="btn-primary" onClick={accept} disabled={busy}>
+        <button
+          type="button"
+          className="btn-primary"
+          onClick={accept}
+          disabled={busy || !acceptedTos || !acceptedPp}
+        >
           {busy ? 'Saving…' : 'I accept'}
         </button>
         <button type="button" className="btn-plain" onClick={signOut}>Sign out</button>

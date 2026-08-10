@@ -58,6 +58,8 @@ src/
   main.tsx                ← RhAuthProvider + BrowserRouter
   consents-signal.ts      ← the 451 flag + the onError handler that raises it
   ConsentsGate.tsx        ← the blocking overlay, mounted at the app root
+public/
+  terms.html, privacy.html ← PLACEHOLDER legal documents — replace them
   theme hook              ← light/dark toggle, persisted (in Shell.tsx)
   ui/alert/               ← the one shared feedback component
   pages/
@@ -185,6 +187,7 @@ The client's only job is to react to a status code. Three files:
 | `src/consents-signal.ts` | Raises a flag on any `451` the API returns. Exported as `consentsOnError`. |
 | `src/main.tsx` | Passes it to `RhAuthProvider` as `config.onError`. |
 | `src/ConsentsGate.tsx` | The blocking overlay, wrapped around the router in `App.tsx` — **above `AuthGuard`**. |
+| `public/terms.html`, `public/privacy.html` | Placeholder legal documents. Static, so a blocked user can read them. |
 
 Nothing in the client knows which versions are current, and nothing reads `latestConsents`
 — the permission's `mergeRequest` stamps the versions and the timestamp server-side. Bump
@@ -216,6 +219,20 @@ usable. Without the hook, a blocked user and a signed-out user look identical.
 If your own data requests should raise the flag too — say the terms change while someone is
 mid-session — call `setBlocked(true)` when `auth.api` rejects with a `451`. The starter does
 not, because it makes no data requests of its own.
+
+### The legal documents
+
+`public/terms.html` and `public/privacy.html` are **placeholders — replace them.** Plain HTML,
+no build step, no framework.
+
+They are static files rather than app routes on purpose: a blocked user has no session, so
+anything routed through the app would sit behind the gate they are trying to read their way
+out of. A file in `public/` is served to anyone, in any state, and opens in a new tab without
+booting the app at all.
+
+Each carries `Version 2026-07-01` at the top. That date has to match the one in the Guards rule
+and in the ACL permission — change it in all three places together, or users accept one version
+while the server records another.
 
 ### Server setup (required)
 
