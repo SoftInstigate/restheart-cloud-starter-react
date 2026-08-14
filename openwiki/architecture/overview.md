@@ -24,21 +24,58 @@ This page explains how the application boots, authenticates users, routes reques
                     └── <Outlet /> → Home / Teams / NewTeam / TeamDetail / Account
 ```
 
+<!-- openwiki: broken internal link [domain/auth-and-teams.md] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 The entrypoint is `src/main.tsx`, which renders `<RhAuthProvider>` from `@restheart-cloud/kit-react` wrapping the entire app. This provider manages auth state (user, teams, tokens) and exposes it via the [`useAuth()` hook](domain/auth-and-teams.md).
 
 ## Auth Provider
 
 `RhAuthProvider` receives `config={{ apiBaseUrl: environment.apiUrl }}` and provides:
 
+### Properties
+
 - **`auth.user`** — the authenticated user object (with `profile.name`, `profile.surname`, `_id`)
 - **`auth.teams`** — array of `TeamMembership` objects (each with `id.$oid`, `name`, `role`, `active`)
+- **`auth.isAuthenticated`** — boolean indicating whether the user is currently signed in
+
+### Authentication
+
 - **`auth.login(email, password)`** — email/password login
 - **`auth.logout()`** — sign out
-- **`auth.loadTeams()`** — fetch team memberships
-- **`auth.switchTeam(teamId)`** — switch active team
+- **`auth.register({ teamName, firstName, lastName, email, password })`** — create account and default team
+- **`auth.checkSession()`** — validate current session, returns user or null
+- **`auth.forgotPassword(email)`** — request password reset email
+- **`auth.resetPassword({ email, token, password })`** — set new password with reset token
+- **`auth.verify(email, token)`** — verify email address, returns redirect URL
+
+### Invitations
+
 - **`auth.activate({ email, token, password })`** — activate new user from invitation
 - **`auth.acceptInvite(token)`** — accept invitation for existing user
 - **`auth.getInvitation(email, token)`** — fetch invitation details
+
+### Team Management
+
+- **`auth.loadTeams()`** — fetch team memberships, returns the updated array
+- **`auth.switchTeam(teamId)`** — switch active team
+- **`auth.createTeam(name)`** — create a new team
+- **`auth.updateTeam({ name, description })`** — update team settings
+- **`auth.deleteTeam()`** — delete the active team (owner only, no members remaining)
+- **`auth.listTeamMembers()`** — list members of the active team
+- **`auth.listInvitations()`** — list pending invitations for the active team
+- **`auth.invite(email, role)`** — send team invitation
+- **`auth.resendInvite(email)`** — resend a pending invitation
+- **`auth.removeMember(email)`** — remove a member from the active team
+- **`auth.updateMemberRole(email, role)`** — change a member's role
+
+### User Profile
+
+- **`auth.updateProfile({ firstName, lastName })`** — update user profile
+- **`auth.changePassword(currentPassword, newPassword)`** — change password
+
+### Data Access
+
+<!-- openwiki: broken internal link [domain/auth-and-teams.md#reading-your-own-data] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
+- **`auth.api(path)`** — authenticated `fetch` wrapper; attaches the bearer token automatically and rejects non-2xx responses as `ApiError({ status, message })`. Use this for your app's own collections — see [Auth & Teams](domain/auth-and-teams.md#reading-your-own-data).
 
 Token management (`setToken`, `scheduleRefresh`) is also provided by the kit and is called during [fragment token capture](#fragment-token-capture).
 
@@ -58,6 +95,7 @@ const Shell = lazy(() => import('./pages/shell/Shell'));
 
 ### Feature-Flag Gating
 
+<!-- openwiki: broken internal link [domain/auth-and-teams.md#feature-flags] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 Routes are conditionally included in the array based on [feature flags](domain/auth-and-teams.md#feature-flags) from `src/environments/environment.ts`:
 
 ```typescript
@@ -110,6 +148,9 @@ This prevents confusing failures when someone clones the repo but forgets to con
 
 ## See Also
 
+<!-- openwiki: broken internal link [domain/auth-and-teams.md] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Auth & Teams](domain/auth-and-teams.md) — detailed auth flows, team management, and feature flag definitions
+<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Operations & Runbook](operations/runbook.md) — how to configure `environment.ts` and the styling system
+<!-- openwiki: broken internal link [source-map.md] file "source-map.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Source Map](source-map.md) — file-by-file inventory
