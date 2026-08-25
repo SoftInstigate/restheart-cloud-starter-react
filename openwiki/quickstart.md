@@ -68,7 +68,7 @@ src/
   ui/alert/               ← Shared feedback component
   pages/
     shell/                ← Authenticated frame: header, nav, user menu, theme toggle
-    home/                 ← PLACEHOLDER showcase — replace with your content
+    home/                 ← Getting-started showcase with feature flags grid and auth.api() demo — replace with your content
     auth/                 ← login, signup, verify, forgot/reset password, OAuth buttons
     invitations/accept/   ← One page, three flows (new user, logged-in, missing params)
     teams/                ← list, detail (members/invites/settings), new
@@ -98,6 +98,5 @@ src/
 ## Backlog
 
 - **No test files exist** — Vitest is configured but no `.test.ts` or `.spec.ts` files have been written. Source anchor: `package.json` → `"test": "vitest"`. Deferred because the project is in its initial commit phase.
-- **Team detail page** (`pages/teams/detail/TeamDetail.tsx`) exists but may need richer member/invite/settings management UI depending on requirements.
 - **Account page** (`pages/account/Account.tsx`) provides profile and password management — extend as needed.
 - **Additional OAuth providers** — currently only `google` is configured; the environment supports `oauthProviders` array for GitHub, etc.

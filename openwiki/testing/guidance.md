@@ -47,7 +47,7 @@ Auth pages have the most logic (form validation, error handling, loading states)
 | Component | Key Test Cases |
 |-----------|---------------|
 | `Login` | Renders email/password fields; shows validation errors on blur; handles 401 with specific message; calls `auth.login` on submit; shows OAuth buttons when `oauthLogin` is enabled |
-| `Signup` | Form validation; calls auth signup; redirects with `?flow=signup` |
+| `Signup` | Form validation (first/last name, email, password min 8 chars); calls `auth.register()`; shows "Check your email" confirmation on success; handles 409 duplicate email; shows OAuth buttons when enabled |
 | `Accept` | Missing params → error; new user flow → password form; existing user flow → login + accept; 404 → expired message |
 | `ForgotPassword` | Submits email; shows success message |
 | `ResetPassword` | Validates token from URL; submits new password |
@@ -88,5 +88,7 @@ npm test -- --run # Single run
 
 ## See Also
 
+<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Architecture Overview](architecture/overview.md) — understanding the component tree for test setup
+<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
 - [Operations & Runbook](operations/runbook.md) — build and dev workflow

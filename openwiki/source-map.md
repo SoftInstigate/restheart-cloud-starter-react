@@ -48,7 +48,7 @@ Complete inventory of repository source files. Each entry links to the page wher
 
 | File | Purpose | See Also |
 |------|---------|----------|
-| `src/ui/alert/Alert.tsx` | Shared feedback component. Props: `type` ("error"/"success"), `children`, `onClose`. Used across auth and invitation pages. | [Auth & Teams](domain/auth-and-teams.md) |
+| `src/ui/alert/Alert.tsx` | Shared feedback component. Props: `type` ("error"/"success"), `children`, `onClose`, `dismissible?` (default `true`), `autoDismiss?` (default `4000`ms). Auto-dismisses after the timeout. Uses `.form-error` / `.success-msg` class hooks and correct ARIA roles (`alert` / `status`). | [Auth & Teams](domain/auth-and-teams.md) |
 
 ## Page Components
 
@@ -63,16 +63,16 @@ Complete inventory of repository source files. Each entry links to the page wher
 
 | File | Purpose | See Also |
 |------|---------|----------|
-| `src/pages/home/Home.tsx` | **Placeholder** page. Replace with your application content. | — |
+| `src/pages/home/Home.tsx` | **Getting-started page**. Welcome hero, feature-flag status grid (on/off badges linked to team/account pages), 5-step customization guide, and an interactive `auth.api('/demo')` fetch demo. Replace with your own landing content. | [Auth & Teams](domain/auth-and-teams.md#reading-your-own-data) |
 | `src/pages/home/Home.css` | Home page styles | — |
 
 ### Auth Pages
 
 | File | Purpose | See Also |
 |------|---------|----------|
-| `src/pages/auth/login/Login.tsx` | Email/password login form. Shows OAuth buttons if `oauthLogin` is enabled. Form validation (email format, required fields), error display, loading state. Links to signup and forgot-password. | [Auth & Teams](domain/auth-and-teams.md#login) |
-| `src/pages/auth/signup/Signup.tsx` | Registration form. Email/password with validation. On success, redirects with `?flow=signup` for welcome message. | [Auth & Teams](domain/auth-and-teams.md#signup) |
-| `src/pages/auth/verify/Verify.tsx` | Email verification page. Reads verification token from URL params. | [Auth & Teams](domain/auth-and-teams.md#email-verification) |
+| `src/pages/auth/login/Login.tsx` | Email/password login form. Shows OAuth buttons if `oauthLogin` is enabled. Form validation (email format, required fields), error display, loading state. Reads `error` search param for `invalid_token` message. Links to signup and forgot-password. | [Auth & Teams](domain/auth-and-teams.md#login) |
+| `src/pages/auth/signup/Signup.tsx` | Registration form with first name, last name, email, password. Auto-generates team name. On success shows "Check your email" confirmation. OAuth buttons shown when enabled. Handles 409 duplicate email. | [Auth & Teams](domain/auth-and-teams.md#signup) |
+| `src/pages/auth/verify/Verify.tsx` | Email verification page. Reads `email`, `token`, and `error` from URL search params. Handles missing params and error states. Calls `auth.verify(email, token)` which returns a redirect URL. | [Auth & Teams](domain/auth-and-teams.md#email-verification) |
 | `src/pages/auth/forgot-password/ForgotPassword.tsx` | Request password reset email. | [Auth & Teams](domain/auth-and-teams.md#password-reset) |
 | `src/pages/auth/reset-password/ResetPassword.tsx` | Set new password using reset token from email link. | [Auth & Teams](domain/auth-and-teams.md#password-reset) |
 | `src/pages/auth/oauth-buttons/OAuthButtons.tsx` | Renders OAuth provider buttons (Google, etc.). Builds URLs via `oauthUrl()`. | [Auth & Teams](domain/auth-and-teams.md#oauth-login) |
@@ -89,7 +89,7 @@ Complete inventory of repository source files. Each entry links to the page wher
 | File | Purpose | See Also |
 |------|---------|----------|
 | `src/pages/teams/Teams.tsx` | Team list. Shows all user's teams with role, active badge, switch button. Links to team detail and new team. | [Auth & Teams](domain/auth-and-teams.md#team-management) |
-| `src/pages/teams/detail/TeamDetail.tsx` | Team detail view (members, settings). | [Auth & Teams](domain/auth-and-teams.md#team-management) |
+| `src/pages/teams/detail/TeamDetail.tsx` | Full team management: member list with role change/remove (owner), invite form, pending invitations with resend cooldown (5 min), team name/description settings, and delete team with confirmation dialog. | [Auth & Teams](domain/auth-and-teams.md#team-detail-teamsid) |
 | `src/pages/teams/new/NewTeam.tsx` | Create new team form. | [Auth & Teams](domain/auth-and-teams.md#team-management) |
 | `src/pages/teams/*.css` | Team-specific layout styles | — |
 
@@ -97,7 +97,7 @@ Complete inventory of repository source files. Each entry links to the page wher
 
 | File | Purpose | See Also |
 |------|---------|----------|
-| `src/pages/account/Account.tsx` | User profile management + change password form. | — |
+| `src/pages/account/Account.tsx` | User profile management (first name, last name via `auth.updateProfile()`) + change password form (`auth.changePassword()`). Loads profile via `auth.checkSession()` on mount. | [Auth & Teams](domain/auth-and-teams.md#reading-your-own-data) |
 | `src/pages/account/Account.css` | Account page styles | — |
 
 ## CI/CD
