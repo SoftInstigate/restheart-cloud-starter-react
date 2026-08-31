@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:05a87fe8cc27fde9c9e53037d80776e5d45ff7969fdbd90fea2083713d316bc8",
+  "claims": [
+    {
+      "id": "claim_7a4f63e51f6144af85d6d857b3f4b4aa",
+      "statement": "The environment configuration file `src/environments/environment.ts` contains the `apiUrl` (must be a valid `*.restheart.com` URL) and feature flags (`emailRegistration`, `passwordReset`, `oauthLogin`, `oauthProviders`, `teamInvitations`) that control which auth flows are available.",
+      "evidence": [
+        {
+          "resource": "repo://src/environments/environment.ts",
+          "version": "repo-file-v1:sha256:c8b8bb3d574f916b328a791cfe2774c88a5c72b2f4a8540a0cd26ce3fc48b51d"
+        }
+      ]
+    },
+    {
+      "id": "claim_32b55e0006a049c09eb8cd99bd81938e",
+      "statement": "The rhc CLI workflow uses `rhc login`, `rhc setup --srv <srvId> --dry-run` (checks only), and `rhc setup --srv <srvId>` (apply changes) to configure the RESTHeart Cloud service.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:b2161f1898ab50dbe4ffb58fd9a1a0069649b1320b7a4471da8c615ffb756bef"
+        },
+        {
+          "resource": "repo://rhc.setup.ts",
+          "version": "repo-file-v1:sha256:2c84d9a03bd7c70adfa49cf50afae15f5f1d38565f9c102a0c6988381290027f"
+        }
+      ]
+    },
+    {
+      "id": "claim_fdc69146fbd34d96901a82ce44297e80",
+      "statement": "The basic setup file `rhc.setup.ts` configures the accounts plugin, derives server feature flags from `environment.features`, sets Google OAuth credentials (when enabled) using `fromEnv()`, and manages the origin allowlist.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts",
+          "version": "repo-file-v1:sha256:2c84d9a03bd7c70adfa49cf50afae15f5f1d38565f9c102a0c6988381290027f"
+        }
+      ]
+    },
+    {
+      "id": "claim_b58adea449ce4e639101b0150fc329b6",
+      "statement": "The consents setup file `rhc.setup.consents.ts` extends the basic setup with: user schema validation, users collection validation, consents permission (mergeRequest), JWT claims for `latestConsents/tos` and `latestConsents/pp`, and a Guards rule (451 blocking).",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:b2161f1898ab50dbe4ffb58fd9a1a0069649b1320b7a4471da8c615ffb756bef"
+        }
+      ]
+    },
+    {
+      "id": "claim_15cbe63a4c3744bc883914984dc4dc82",
+      "statement": "Version strings `TOS_VERSION` and `PP_VERSION` are defined once in `rhc.setup.consents.ts` and must agree in three places: the setup file, the Guards rule condition, and the public HTML files (`public/terms.html`, `public/privacy.html`).",
+      "evidence": [
+        {
+          "resource": "repo://public/privacy.html",
+          "version": "repo-file-v1:sha256:dc417ce345449f5e2134b64dd895750828729d66dfe3fd0e465c9f7289e388ff"
+        },
+        {
+          "resource": "repo://public/terms.html",
+          "version": "repo-file-v1:sha256:57f2e6376f38b21bebaee5f60177fcf9194490677492ff9ccec88b949c09a006"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:b2161f1898ab50dbe4ffb58fd9a1a0069649b1320b7a4471da8c615ffb756bef"
+        }
+      ]
+    },
+    {
+      "id": "claim_2ec9077451bb4a8cb06110673c15947c",
+      "statement": "The design system in `src/styles.css` is structured in five sections: design tokens (CSS custom properties), reset & base, skin classes, utility classes, and page scaffolds.",
+      "evidence": [
+        {
+          "resource": "repo://src/styles.css",
+          "version": "repo-file-v1:sha256:1d0397e5db6b861d79e04e75a142a555dc09d81561e4b440f141f5a991707378"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc05ba850f5b464284f9cfbc93986c39",
+      "statement": "Light/dark mode is implemented via a `useTheme()` hook in `src/pages/shell/Shell.tsx` that persists preference to `localStorage` under key `rh-theme` and toggles the `dark` class on `<html>`.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/shell/Shell.tsx",
+          "version": "repo-file-v1:sha256:a71f61485069c51d4cb101eb3f98e5fbcdbdb4d15c5bd13e34e36c9ac6c3488c"
+        }
+      ]
+    },
+    {
+      "id": "claim_76ad79ae133f4b559c2c2ee154b656c8",
+      "statement": "The build workflow uses `npm run dev` for development (Vite with HMR), `npm run build` for production (tsc -b + vite build), and produces static files in `dist/` for deployment to any static hosting.",
+      "evidence": [
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:b018d8dd95b940443dc011b533f726a9c9ef54c6ff296db79ed435e6249126f0"
+        }
+      ]
+    },
+    {
+      "id": "claim_889b28f7840a4f99921ee53b05a2ee69",
+      "statement": "Page-specific CSS files under `src/pages/` contain only page-specific layout; all design tokens and shared styles live in `src/styles.css`.",
+      "evidence": [
+        {
+          "resource": "repo://src/styles.css",
+          "version": "repo-file-v1:sha256:1d0397e5db6b861d79e04e75a142a555dc09d81561e4b440f141f5a991707378"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-31T10:59:30.610Z"
+  }
+}

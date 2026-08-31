@@ -1,8 +1,29 @@
 ---
 type: Runbook
 title: Operations & Runbook
-description: Environment configuration, design system and styling, build and deploy workflow, theming, and feature flag management for the RESTHeart Cloud React starter.
-tags: [operations, runbook, config, styling, build, deploy, theming]
+description: Environment configuration, server setup with rhc CLI, design system, theming, build/deploy, and the consents gate server-side setup.
+tags: [operations, runbook, config, styling, build, deploy, theming, server-setup, consents]
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-31T10:59:30.610Z
+sources:
+  - id: openwiki-source-5b54a58d1b51cd490b0e7162
+    resource: repo://package.json
+  - id: openwiki-source-85dc2a049a0943b56218c045
+    resource: repo://public/privacy.html
+  - id: openwiki-source-ad504d4d06a9b4cc6851d32b
+    resource: repo://public/terms.html
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
+    resource: repo://rhc.setup.ts
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+  - id: openwiki-source-d246777daf29ea6fdf9f8b53
+    resource: repo://src/pages/shell/Shell.tsx
+  - id: openwiki-source-146419bb9b2415894a6bd677
+    resource: repo://src/styles.css
+generated: { by: "openwiki/0.4.3", at: "2026-08-31T10:59:30.610Z" }
 ---
 
 # Operations & Runbook
@@ -28,8 +49,7 @@ export const environment = {
 
 ### apiUrl
 
-<!-- openwiki: broken internal link [source-map.md#entrypoint--app-shell] file "source-map.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-Must be a valid `*.restheart.com` URL. The app validates this on startup with `isValidApiBaseUrl()` from the kit. If invalid, a [ConfigPage](source-map.md#entrypoint--app-shell) is shown instead of the app.
+Must be a valid `*.restheart.com` URL. The app validates this on startup with `isValidApiBaseUrl()` from the kit. If invalid, a [ConfigPage](/openwiki/architecture/overview.md#config-gating) is shown instead of the app.
 
 **After cloning**, tell git to ignore local changes:
 
@@ -41,8 +61,79 @@ Then edit the file to point to your own service.
 
 ### Feature Flags
 
-<!-- openwiki: broken internal link [domain/auth-and-teams.md#feature-flags] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-See [Auth & Teams — Feature Flags](domain/auth-and-teams.md#feature-flags) for the complete reference. These must match your RESTHeart Cloud service's toggles.
+See [Auth & Teams — Feature Flags](/openwiki/domain/auth-and-teams.md#feature-flags) for the complete reference. These must match your RESTHeart Cloud service's toggles.
+
+## Server Setup
+
+The starter uses the `@restheart-cloud/cli` (rhc CLI) to configure its RESTHeart Cloud service. Two setup files define the server-side configuration:
+
+- **`rhc.setup.ts`** — basic accounts configuration
+- **`rhc.setup.consents.ts`** — extends the basic setup with the consents gate
+
+### rhc CLI Workflow
+
+```bash
+npm i -D @restheart-cloud/cli
+rhc login
+rhc setup --srv <srvId> --dry-run    # what is missing
+rhc setup --srv <srvId>              # make it so
+```
+
+Every step is a `check` and an `apply`: run it against a service already configured and it writes nothing and reports each step satisfied. `--dry-run` runs the checks only, which is the honest answer to "what is this service missing".
+
+### rhc.setup.ts — Basic Accounts Configuration
+
+**File:** `rhc.setup.ts`
+
+This file configures the accounts plugin and derives server feature flags from the app's `environment.ts`. It imports the same `environment` object the app uses, so the flags are stated once.
+
+#### What it configures:
+
+1. **Accounts plugin installation** — installs the `accounts` plugin if not present
+2. **Accounts configuration** — sets `app-name`, `frontend-url`, and feature toggles derived from `environment.features`:
+   - `registration` and `verification` from `emailRegistration`
+   - `password-reset` from `passwordReset`
+   - `invitations` from `teamInvitations`
+   - `oauth` from `oauthLogin`
+3. **Google OAuth credentials** (conditional) — only when `oauthLogin` is enabled and `'google'` is in `oauthProviders`. Uses `fromEnv('GOOGLE_CLIENT_ID')` and `fromEnv('GOOGLE_CLIENT_SECRET')` to read credentials from environment variables, but only when not already stored on the service.
+4. **Origin allowlist** — installs the `origin-allowlist` plugin and adds `APP_URL` (defaults to `http://localhost:5173`) to the allowed origins. Origins are added, never replaced, so a service reached from multiple origins keeps both.
+
+#### Environment variables:
+
+- `APP_URL` — where the app is served from (default: `http://localhost:5173`)
+- `APP_NAME` — shown in verification, reset and invitation emails (default: `RESTHeart Cloud Starter`)
+- `GOOGLE_CLIENT_ID` — Google OAuth client ID (only when needed)
+- `GOOGLE_CLIENT_SECRET` — Google OAuth client secret (only when needed)
+
+### rhc.setup.consents.ts — Consents Gate Setup
+
+**File:** `rhc.setup.consents.ts`
+
+This file extends `rhc.setup.ts` with the consents gate's four server-side documents. It imports the accounts steps and appends:
+
+1. **User schema** — validates the `users` collection with `userConsentsSchema`. Requires `_id`, `password`, `roles`, `profile`; optionally allows `latestConsents`, `consents`, `teams`, `team`, `socialAuths`. The schema uses `_$date` (escaped) for BSON date fields.
+
+2. **Users collection validation** — attaches the schema to the `/users` collection via its `_meta` endpoint.
+
+3. **Acceptance permission** — creates `userCanPatchOwnConsents` permission that authorizes `PATCH /users/{userId}` with `bson-request-whitelist(consents)`. The server stamps `latestConsents` and pushes to the `consents` history array via `mergeRequest`.
+
+4. **JWT claims** — adds `latestConsents/tos` and `latestConsents/pp` to `account-properties-claims` so the guard can read them from the JWT without a database query.
+
+5. **Guards rule** — installs the `consentsGate` rule with status `451` and a version-based condition that blocks users who haven't accepted the current versions.
+
+#### Version management:
+
+The versions live in one place as `TOS_VERSION` and `PP_VERSION` constants. Everything is derived from them. The versions must agree in three places:
+
+1. **Setup file** — `TOS_VERSION` and `PP_VERSION` constants in `rhc.setup.consents.ts`
+2. **Guards rule condition** — the rule compares `@user.latestConsents.tos` and `@user.latestConsents.pp` against these versions
+3. **Public HTML files** — `public/terms.html` and `public/privacy.html` display the version dates
+
+If they don't agree, the failure is quiet: a user accepts, the acceptance is stamped with one version, the rule compares against another, and they are blocked forever by a form that says it worked.
+
+#### What it deliberately does not do:
+
+It does not write the Terms or the Privacy Policy — those are `public/`, and they are yours. It only decides which *versions* the service demands.
 
 ## Design System
 
@@ -152,9 +243,6 @@ Each page directory under `src/pages/` contains its own CSS file (e.g., `Shell.c
 
 ## See Also
 
-<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Architecture Overview](architecture/overview.md) — component tree and config gating
-<!-- openwiki: broken internal link [domain/auth-and-teams.md] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Auth & Teams](domain/auth-and-teams.md) — feature flag definitions
-<!-- openwiki: broken internal link [testing/guidance.md] file "testing/guidance.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Testing Guidance](testing/guidance.md) — running tests
+- [Architecture Overview](/openwiki/architecture/overview.md) — component tree and config gating
+- [Auth & Teams](/openwiki/domain/auth-and-teams.md) — feature flag definitions
+- [Testing Guidance](/openwiki/testing/guidance.md) — running tests
