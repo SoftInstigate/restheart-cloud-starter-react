@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:11d459ae4702d9bf705872d4aa6d0f3ee7c89ec4257a089f1e3ea50499acf448",
+  "claims": [
+    {
+      "id": "claim_08a0555bdd924ad4b63ceea3b363fd2d",
+      "statement": "All authentication logic is provided by @restheart-cloud/kit-react through the RhAuthProvider component and the useAuth() hook, which expose methods like login, register, verify, forgotPassword, resetPassword, acceptConsents, and checkSession.",
+      "evidence": [
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L2-L2",
+          "version": "repo-lines-v1:sha256:3bbd564e58e8614304f3b0d2d816594b17ac77faabf0f8e2a8374b14ace81c12:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JiZDU2NGU1OGU4NjE0MzA0ZjNiMGQyZDgxNjU5NGIxN2FjNzdmYWFiZjBmOGUyYTgzNzRiMTRhY2U4MWMxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JiZDU2NGU1OGU4NjE0MzA0ZjNiMGQyZDgxNjU5NGIxN2FjNzdmYWFiZjBmOGUyYTgzNzRiMTRhY2U4MWMxMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjEsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzI4OTM0OTE2ZWQwOTA2ZDE4OGRlZmVkMmZiOWRmZDQwMzBkNDFlMGQ5YzcxMmM1ZjE2NzMyZDk0MGQxNTliMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzc5NDY1MDYwNmQzODBhZWUyMzhkZmQ3ZWYyZWI0ZTU1ZTA4ZTg1ZTMyZDcwNzFiOGZkMTdmYjdlNDllMGI1NCJ9"
+        },
+        {
+          "resource": "repo://src/pages/auth/login/Login.tsx#L3-L4",
+          "version": "repo-lines-v1:sha256:1307583d29b77dd0543c362ee6d9a39c82f21f0f51642d05f3ef46ac80c8faba:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JiZDU2NGU1OGU4NjE0MzA0ZjNiMGQyZDgxNjU5NGIxN2FjNzdmYWFiZjBmOGUyYTgzNzRiMTRhY2U4MWMxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmZkMTIzY2E5Mjc4MTFkNWNiNWEyMWFmN2Y0MjM1MjZlNTAwZmRiYmI0NTU5NzM5MTU0YzBhZGE5OTA2NDE1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTdkM2I0ZWRiZDAwNzRkNmM5N2Q0NTdlYmFkMTlhMDk3NDE4MjlhMTBmN2MxM2EzOTFlODU2ODllZWU3MzdhZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTdhNTA5NjFiNDNkMDFmYjgzYjZlNjBiZGQxZjc0ZWI4M2RlNTZiYTVhNzZiMTUwYjViZjAyOTQ4YzY0YjhlMCJ9"
+        },
+        {
+          "resource": "repo://src/pages/auth/signup/Signup.tsx#L3-L3",
+          "version": "repo-lines-v1:sha256:3bbd564e58e8614304f3b0d2d816594b17ac77faabf0f8e2a8374b14ace81c12:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JiZDU2NGU1OGU4NjE0MzA0ZjNiMGQyZDgxNjU5NGIxN2FjNzdmYWFiZjBmOGUyYTgzNzRiMTRhY2U4MWMxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JiZDU2NGU1OGU4NjE0MzA0ZjNiMGQyZDgxNjU5NGIxN2FjNzdmYWFiZjBmOGUyYTgzNzRiMTRhY2U4MWMxMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzlkOWYzNDJmMjJmNDg1YTgxNWRhYzU1MzM1OTJlMzQ3NGQzYmMxNDMwMmY2YjE2YjNlYTE5NzNiNmZmYmE5NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjQxZTk1MDdkZDVlNWFiYTQ0MmQ3N2FiYzVjNDlkYmY3N2QzYzRiY2VmMGMwNjY2N2M1ODU4MWI5NGFjNDMzOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7e0d22c4e9f343a4b1762c576ba025de",
+      "statement": "The login page at /auth/login (guarded by PublicGuard) renders OAuth buttons when oauthLogin is enabled, an email/password form with inline validation, and links to signup and forgot-password. On submit it calls auth.login(email, password) and navigates to / on success, showing 'Invalid email or password' on 401.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/auth/login/Login.tsx#L12-L46",
+          "version": "repo-lines-v1:sha256:0a310f15e4eaa47c56646b2bada13a883d6f9361f0714d987c15829a8fbedb7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3YWNjZDdiMDExYWQyNTNmYWNiZTI4ZmZlYmZmNTY3NThhZDY1ZWMzMGIwNTc0ZTZjMDE5YWRmMTcwMjM2ZGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0YTY1OGNlZmI0NGQyOTVhM2Y5MzFkMDU3OWEyNzYwMjU1ZWY5YjBhMjBhNzUzZTM5NWZkMjMxN2FjZTk0YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI5YWM3N2QyYTk4MmEwOGJiMDRkODY1ZmRmY2UxZDVmNWEyODRhZTMwMzE4YThhZTBiODFiMTg3NzQxNjUyNDAifQ"
+        },
+        {
+          "resource": "repo://src/routes.tsx#L27-L35",
+          "version": "repo-lines-v1:sha256:bf90588bb7cbeaee27e849b99ae6c78b99ddc468d6b840f63be570bec790915a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmU4YjIxYjFjNDA3Y2E2YjY4MDBiMGVlMmM1ZmIzNTFhYzIzZTNiZTE1YzY2OThkY2FlMDNkZTU5NTliYTc5YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWM4MGE2MmYxOWQ2ZjY1ZjZjZWU3MmY0OTJiZTE3MzljNzUxYzVjNTlkNzkxOWI4ZDU0OGUxMTk1NDE1N2NhNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2Y3NDA3NTJmMTM5OTRhMjA0NjNhYmRiNzlhOWUzZjRmYWE0ZDM2ZWRiMThhOTVjZGI0Nzg2ZjY2NDE2NTM4NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5e8df377fdf94868b0e8a9491dfb351b",
+      "statement": "The signup form auto-generates a team name as {firstName}'s Team (falling back to {emailPrefix}'s Team) and passes it to auth.register({ teamName, firstName, lastName, email, password }). On 409 it shows 'An account with this email already exists.'",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/auth/signup/Signup.tsx#L32-L42",
+          "version": "repo-lines-v1:sha256:62c107d5d88a30bea9731920fe446a68750ac406696c71977942a82dec0896bd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmYjY1NzZmYTZlNGZkZDRkNWMyNGNhYzUwODIzYzQ4ZjhhY2U0MWY4MTdjMzQwZTdlZWQ2NjY4Y2E0M2ZkNTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzNjBlYjcwYmQ4N2UyZjZkMTZhZDhjMWZiMDMxMzYxNTM3NzM3Y2ViYzg5MmIxNjhjMTlhZmVlZGNhYzE5ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiNmMxOWNjMjA3Yzk4YmUxNjQxZmM1MjBhYTcxNGU5Y2YyYjdkMTYzNDI1NGRlYjA4YzM3ZDA1ODI5ZTI3MDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7d96fe10a9da42928462ec3a6e1b576b",
+      "statement": "The email verification page at /auth/verify reads email, token, and error from URL search params. Missing params show 'Invalid link'; an error param shows 'Verification failed'; valid params call auth.verify(email, token) which returns a URL that the browser redirects to via window.location.href.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/auth/verify/Verify.tsx#L5-L20",
+          "version": "repo-lines-v1:sha256:370890e800ee8d71abb919de361a29bfa490da91b21683b4546d4606c78dbc2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0MzM1YmExYjZjY2NhNGY5ZmMxZjUzMWUzM2JiMmM5ZDU0NDExODE3Njg4YjhlYzIwYzFiMjQyYmJlMzkyZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlYzkyNmMyZDlmMWVhYTIxYmQ3MDQ2YTM0Y2QzMmM0MWMzNTRhNzFiN2U5YmQzZWU4OThkYzBhNWMwYTcwYmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkNTI3MmE2NjA3MGQwNmM5MTEwNWRhZTU5MmZhNmRlZTExZjQ0Nzc0NjA1OGIzYWRlY2M3NzU2ZDBkODc4YWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwM2YwNDJkYTJhYjBmMzkwNzQ0MDc1ZjQyNmI2ZjI5N2Y2YWZhMjFlNTFkOTQwMDE4NThiNDUzZTUwZDMwZmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3f5501b4115943059650104724babb20",
+      "statement": "Password reset is a two-step flow: ForgotPassword sends auth.forgotPassword(email) and always shows the same confirmation (the API returns 202 regardless of whether the email exists to avoid leaking registered addresses). ResetPassword reads email and token from query params, calls auth.resetPassword({ email, token, password }), and navigates to / on success.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/auth/forgot-password/ForgotPassword.tsx#L22-L28",
+          "version": "repo-lines-v1:sha256:3b6b204a49e154430f304b87d2697036d192cb9d3be604ada60bc8f3053fc7dd:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjUwZmZhNGZlNGVlZTBkNjdiMWM2OTQ1YTY4MmE2OTNmMzJhOWYzODAwOTQxMDMwMGJmNjY1NzI1YmYwNjQxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmNlZmMyNjQ2YjljYWViMTdkZjQ3NzYzZGY2YmJkYzFiOTk3Y2Q2MmJkYmM0NGNlYmUwNGYxZGNhOTRmMjkxNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDY1NjE4MzIyMTAxZTIwY2MwY2QxZThlZGIxNWE5ZTA5YzFmZWY3MTFiMDE2ZDBjZjE1ZDc2YzAzZmU0Y2FjOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2I2YzE5Y2MyMDdjOThiZTE2NDFmYzUyMGFhNzE0ZTljZjJiN2QxNjM0MjU0ZGViMDhjMzdkMDU4MjllMjcwNiJ9"
+        },
+        {
+          "resource": "repo://src/pages/auth/reset-password/ResetPassword.tsx#L30-L38",
+          "version": "repo-lines-v1:sha256:96afc716ce2b85fc4265e456a0741094fdd91c4fea90316b77ce31e8256fb257:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFkZjg3YTQ3MzE2YzcwOGM1NTAyMDk4ZTlhZjZjNDQ1MzRlYjgwYmVhZGNmNjA2MzAyOGVmY2E4NTkzN2FiZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjM2MGViNzBiZDg3ZTJmNmQxNmFkOGMxZmIwMzEzNjE1Mzc3MzdjZWJjODkyYjE2OGMxOWFmZWVkY2FjMTlkNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmExNWFiZDY3YzU3ZDJhMmZjNmI1ZDBiYTEwZDUzOTc4ODBhMGJmNmM0MjVhM2UzMzdiODExN2I1Mzk3ZmI0NiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4d5faf2de0154821b1e9b55246106b08",
+      "statement": "OAuth login is initiated by navigating to ${apiUrl}/auth/oauth/authorize/${provider}?noauthchallenge. The oauthUrl() helper in src/oauth-url.ts constructs this URL from environment.apiUrl.",
+      "evidence": [
+        {
+          "resource": "repo://src/oauth-url.ts#L1-L4",
+          "version": "repo-lines-v1:sha256:c3b84c6083197a9e960dbe68ee0b2f4c07716dfa1478c1ff9c19add1fe129dab:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkYWMwZTYyOTVmYTBmMjI4OWY4OTU0MDg1MTMwOGJjYzdjZGI2Y2QxN2MwZDJmOWMzZGFkZjgyYWNlNjY0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWNmNjAyMTljNTA0ZTRiOWZkOWVlYWM2MDZkZDlkZjYzYzBmM2I3YWFlZTBmNDg4YTViMGJjNjIzMjBlYzdjYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://src/pages/auth/oauth-buttons/OAuthButtons.tsx#L18-L18",
+          "version": "repo-lines-v1:sha256:df2d0910b60b0ca0dd6486332c47a957d0771055c6a777902923891f906b0244:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGYyZDA5MTBiNjBiMGNhMGRkNjQ4NjMzMmM0N2E5NTdkMDc3MTA1NWM2YTc3NzkwMjkyMzg5MWY5MDZiMDI0NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGYyZDA5MTBiNjBiMGNhMGRkNjQ4NjMzMmM0N2E5NTdkMDc3MTA1NWM2YTc3NzkwMjkyMzg5MWY5MDZiMDI0NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTc0YTQ2OWNmZmNkYjdiMjFkNWZmM2Q1ZDg4NmEwOTM2ZWQ5MTUwZWNmODk0MDU4M2MzMjg3ZTk0YzNhZDI4YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjU1OGI4NzA4ZTUzZjhhNTAwNWUwMDdjMGFmMjY3ZmMyMDY4ZWMzMjkwZDA4ZmQ2NThlMTAxZDkzZGQxMmY0YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c285e5f32b1422cb0ccab402b6ad37e",
+      "statement": "After OAuth provider authentication, the user is redirected back with an access token in the URL fragment (#access_token=...). The consumeFragmentToken() function in App.tsx extracts it, calls setToken() and scheduleRefresh(), then strips the fragment from the URL. It also detects ?flow=signup to set the justSignedUp flag.",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx#L10-L32",
+          "version": "repo-lines-v1:sha256:8bdf5a6e8f2537e40e4711ac165e6796ca60ad417b5de47dba4f5fb781e123a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjN2Q0ODQ4ODQ3OWQ4MWQ1NTg5NzhmZDk5MWM1M2Y3MjdhZTJhMzlmMGIxYjFiZTMzYTk5Y2IxMWM0YjY3ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkMWNjMDQ4MDQ5YzJjMDFlYTVhYjY3NzAwZjdmMTJkZjcxMWFmNzcyMDZmMzQwZGE0NzMwOWY1ZjEwNWE2MWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4Yzc4MzAzYjE3YjQ2NTVmZGQyMzdmYjcyZDk2MjZhYmRlZTdjOWJjZjE3ZDdjMjliNWI4MjNkY2QzZjYwNzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0be93dd528494dd0a39612222de8ebf1",
+      "statement": "When invitation.isNewUser === true, the invitation page shows a password form and calls auth.activate({ email, token, password }) which both creates the account and accepts the invitation, then navigates to /.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/invitations/accept/Accept.tsx#L115-L148",
+          "version": "repo-lines-v1:sha256:3428a0eeec6550899ffa89eaf3c0ed46fcc0a97fd28048161a19caa53242d0e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MTExMGNkMjIxMTY3YjY4NTkyNzlmYTAxYThlYTYyMTQyM2FjNmFiN2FkMjMyMTNmZDcxMzZkZmMxMzExNDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0ZTQyMDhjZDZmZmI4YzRhMzU0N2IyZjU0YWRhMTk5NzhjM2YzNjVlNzhmOTUwMmVmNTE0NWNkZDJhYTg1NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA4ZmIzNDUzZTM5NDI3NjM5MDExYTliMGMxY2U3ZjM5ZGJhM2U1YzlhODkxMWNkMTA4MGNhZTc4NmM1N2Q0NzQifQ"
+        },
+        {
+          "resource": "repo://src/pages/invitations/accept/Accept.tsx#L50-L59",
+          "version": "repo-lines-v1:sha256:53e3842b18cdffd3835507b9284e72204862fb4d3c5f1f860abed1f12f87fc9c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjMGQ1N2Y0MjJlYWNkZDgzOTE1NGU0ZGQwOGRjNWIwYWU3NmE4ZGRjMGY3ZDA4ODUxYTk1YTRjOWQ1N2FkZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwYmMxZGQ4MjZjYWQxMTg0OTRhZjdhMTM2NTNkMjlhYjFkYTBiNTA5NjVkM2UxOTU0ZTc1ZjFmZTA0ZDVlMzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRjMmJkOTA5MTdhYWE4ZDU0ZWVmOThlNThkZTIzOWU4NTYyMzI5MTkzODhlZDM5NjdlMWEwOGFjYTRjNDZiYTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7c508e697556403fb4218c74e2f593bd",
+      "statement": "When invitation.isNewUser === false, if the user is already logged in they get a one-click 'Join team' button calling auth.acceptInvite(token). If not logged in, they enter their password, which triggers auth.login() followed by auth.acceptInvite(token). On success, 'You're in' is shown and the user is redirected to / after 1.2 seconds.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/invitations/accept/Accept.tsx#L151-L188",
+          "version": "repo-lines-v1:sha256:b5ea81f7205f1f3a248a44a3e9fc4e4b0077c526d72eefbe8ceb885c6f0afa6a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzMThiZGE2MzUxNWQxMzM3MWQwMGQ2ZWQ0YTRlM2Q2MzRiZTU2NGRlZDIwMjM2NjJiMmVkNzlmZDM5NGM3YjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1MjBhMGFlYzVjZTA4OTFmNzFmYTkzYWRkOWU4ZDc4NWRlNjg3N2ZjNGY1MmE2YjUwZDAyYTFjNGY5MTE3ZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiOGI2MDBhNWI0NDhiMWU0ZDAyZGYwOTc0NmVkM2NhMzE3MmY3NWM0YWFiYjAxZGRlMDgwZTM2Y2FiMDc0YjQifQ"
+        },
+        {
+          "resource": "repo://src/pages/invitations/accept/Accept.tsx#L62-L81",
+          "version": "repo-lines-v1:sha256:8432f366d2011b55c7479fb8aa28fcb032430c2b701a3277459ee255b04c06e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2ODUxNGM5ZTM4NzliOWFmNGYzZmVlYzY2ZjFjZWQ1OGY4MzUyZGM4MjkyYWVkYzYzMzdlYjU0NmYzNzczNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxZTM3MjVkYTAwMmI0NmVkOGI0ZGU4ODAwM2FkOTcxMGRjYWYxOGQ1N2M0NzAxZGMzYmVmZjBiMmM1Y2IxM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwM2YwNDJkYTJhYjBmMzkwNzQ0MDc1ZjQyNmI2ZjI5N2Y2YWZhMjFlNTFkOTQwMDE4NThiNDUzZTUwZDMwZmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fa8a9c9fbd414224999bb93a33835a3e",
+      "statement": "The team list page calls auth.loadTeams() on mount and renders each team with name, description, and role. The active team gets a 'current' badge. Clicking an inactive team calls auth.switchTeam(team.id) before navigating to the team detail page.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/teams/Teams.tsx#L13-L27",
+          "version": "repo-lines-v1:sha256:a506eedbf3486f05a39e3e1a3233c0bdfa7444247203aa35a647d48f5477b426:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NjZmYmZhODg5OThkYTc0NjU2YzUwMTk0OTU2YzI1ZjA4NDk0NTc2NjBjMDA5ZmU2M2QxZTlmYTlkYzkzMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4YmFjMjhjMTE2MzU5NDkyM2E0MDkwMjdiOWViZDdkMjY5MmMzYjBiNjdjNWI3N2ExYWJhYzVjNDgyNzEwMjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4MzViNmM4MjFiNTNiNjQ4YmQ1MjJiM2RmNTY3ODYzZjc2ZGQ2YzMyZWY0YTBjMDcyODY2NTE3NGVjYmNlZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjN2VmZDVmMTM0MTUzZjBmN2ZiNWUyYTgzYzU4MGIzNjI1ZTAyZTRiZTVjZTI5YjY0MzFlOWY0NGFhZWU3NDQifQ"
+        },
+        {
+          "resource": "repo://src/pages/teams/Teams.tsx#L41-L65",
+          "version": "repo-lines-v1:sha256:fd6631ae858fd911116dbcd4285c5797451de51d623db67fa02006f718a3b331:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYWExNGFmODM0YTZiYTFhMTY4MzllMmZmMjM4MmQyZWFkNmNmZjM0NmRmYTZiYWViNzIwNWRjN2RjZDVhZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxMzAwNDg0N2UwNGQ4ODQxMmY5NGVhYjZiMDU2NDlkNjJiMDQyM2QwNDliYjRiMzI3YTgxNjMxNmQ2NDQzY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIyYjQwOGVjYTM2ZDRkNTdhODdjOWU1YTFlYjBkMzFiNGZlMzQzNDAxMjNmMjkyYTk4ZTQ5ZWU1YzBmNTNjOTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyMjY3NGQwOWYxODEzZTQxMTkwZTk3M2M1NmUxODk2MzRmYWQwMjg4YTQ1NmI3M2FkMTNmMjdmZjc4MTZjNDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_758acf746449492d9378cb102f5750e0",
+      "statement": "TeamDetail loads members via auth.listTeamMembers() and invitations via auth.listInvitations() on mount. Owner-only operations include: changing member roles (auth.updateMemberRole), removing members (auth.removeMember with confirmation), inviting new members (auth.invite with email and role), resending invitations (auth.resendInvite with 5-minute cooldown), editing team settings (auth.updateTeam), and deleting the team (auth.deleteTeam with confirmation, then switching to the first remaining team).",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/teams/detail/TeamDetail.tsx#L57-L77",
+          "version": "repo-lines-v1:sha256:58a701622dc4f557ba5cedd6d1f30ad5445e1e5979beca24ddfbb534de1b7fb3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NjZmYmZhODg5OThkYTc0NjU2YzUwMTk0OTU2YzI1ZjA4NDk0NTc2NjBjMDA5ZmU2M2QxZTlmYTlkYzkzMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiOTU2MzYxOGE5MjViZDA1NzI0NzU3OGI1NWQyNDJiMjdjZmM3YjQ2MzgyOWFjNzA3ZTFiNmFjNzRjOTEyMWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkNmQ0OGUwMGZjZGI4NTdhNDY0NThkMTU0NjMwNDZhYjg3NzZhZDU1YjQ0ZmQzYjY4NThkZWUxNWVjZTdmNjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkYmVlM2QwMGU5NjNiZTdjM2RhM2JiYzgwMzQwYTMxMWVkNDViNGI5MjEzNzNlZDdmNjA3YjI4ZDY4ZThkNGMifQ"
+        },
+        {
+          "resource": "repo://src/pages/teams/detail/TeamDetail.tsx#L94-L190",
+          "version": "repo-lines-v1:sha256:581426c45f716f0cf2357d7d9e8ca5c7b777849768cb1ca8c693341132bcad70:eyJzZWxlY3RlZExpbmVDb3VudCI6OTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2YmEwNDQyNjY3NGIyZTg0ODY2ZTQwYzk2YzVkZjY1ZTI4YWNmOWI5YWNjYzkwMzkyMjZlNTVlN2I5Mjg5NjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUyZmUwMDE4MzYyNzEyOGRlMDRlYWRmNDhmOGE2MzM4MTFlMWU3NDQ2NWU4YjdlNjUxNTY1NDQyZTMzYWY1YjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3NWU1NGM2ZDg3NmUwYTRhMjJhMzdkNmFjNWYwOTFhNmVhNjdmZmMzYWI1NjNkMzEwNzhiZWZmMWExM2UxNDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_06c6085a3b624f2ab2ae990a7975e209",
+      "statement": "The Account page loads the user profile via auth.checkSession() on mount and provides two sections: profile editing (first name, last name via auth.updateProfile) and password change (current + new password via auth.changePassword). Email is displayed as read-only.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/account/Account.tsx#L27-L35",
+          "version": "repo-lines-v1:sha256:6c29db16f96998ee84d8492c83937138eb80c1f8a4f7ec00bd0310009eb5e39a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk2NmZiZmE4ODk5OGRhNzQ2NTZjNTAxOTQ5NTZjMjVmMDg0OTQ1NzY2MGMwMDlmZTYzZDFlOWZhOWRjOTMxYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGQxMThiZDk2YThiYWI4MjlkZDg0NTIwNmNjNzMxOTY3ZGU4NTcxY2ZjY2ZkNzQ2ODljYzFmMDY1NDBjZmVkNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGYyZGIzNTczMGY4MGMxOGNiMzBkZWQ1Y2U3ZDNkZDA2OWFmNjcwNzNkMWNhNmQwOTMyMjMyZDM4NWRmN2ZiNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg1ZDg1N2RiNjFhM2JkYjQ3ZjdhMmU2MGUzY2MyMDRmNzUzYzdhODA3Mjk3ODNjNjM0ZDVkZGRjNDA4YjJlNCJ9"
+        },
+        {
+          "resource": "repo://src/pages/account/Account.tsx#L37-L74",
+          "version": "repo-lines-v1:sha256:21ba59f6641005b047d1480683681ab93d8a86368982a9db242bd1103b387a8c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiNWY1OTI4NzYxZTgxNDIzMmFlMjBjMGQ5OGY5ODRhMmI2MWQ2MjJjMDJkMGFkYjY2YWJhNWQ5Nzk4ZTEzZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMzZjI3MzhjYmI3NTk2NWZjYWUwZWU1ZmNhY2RkZjk5MDRkMTZmNzFjMTIwYjhlNGM1MDlhMDAzNTExYmQ1MGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhZThjOTQwZDIyZGUzZjZkMmFhZmRlZWE4YWY0NjlhZDM4NTBjZWNhYThiMTdkZmI5ZTExNzZkZTlmNDMzMzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_96a314a5524546d2bbe80d1e222b8899",
+      "statement": "The consents gate client-side signal (src/consents-signal.ts) exports a consentsOnError callback that sets a module-level blocked flag when any API call returns HTTP 451. This callback is passed to RhAuthProvider as config.onError, enabling detection of the server-side Guards rule blocking users who haven't accepted current terms.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts#L1-L49",
+          "version": "repo-lines-v1:sha256:2f4dcd9869e64c98d92d3372d2381d7c7c78b85f0c3b1a351dfc3e74eec94b87:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiZmY1MDg5NDY4NTEyNTdjZWQ4N2ZjMTNmNzNkYWVlYTQ1NjNmNjc1NmExNTBmOGE5N2M1MGY3M2VjYTQ4MTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8e8d438f1a6c48d3a84aae4352876307",
+      "statement": "ConsentsGate (src/ConsentsGate.tsx) renders above the router in App.tsx, wrapping the entire route tree. This placement is essential because a blocked user has no valid session — /users/me is also refused by the 451 rule — so AuthGuard would bounce them to login before they could see the acceptance form.",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx#L55-L57",
+          "version": "repo-lines-v1:sha256:558e2563dc0ddb6994fedc76258ea67c43f5c374cd9cc494ed7814f29fcf342e:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTVjY2NhM2JmOTMwODYwZjhiN2NiOTgzY2I3ZmRhNmVkMjIzMzAwOTc2NjljYmQ3NWQzMmE2MjUyMjJlZmJiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDZkYzY0ZTM3NDI2MTc4MjE2MWMyZTUzNmU3NWUzODVkMzgwNjRmNjM0NWJhZDE0ZTJhN2Q5MjgxN2VhYjAzMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODJiMWE0MmE3N2YzYTVjNjVjYmZiYjNkZDUyNTkzMWI1M2YwNjg1ZTAyNTY0N2Y1YzVhN2FjYmYxNjYyYjQxNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L8-L16",
+          "version": "repo-lines-v1:sha256:c76890275d6122b3888cb3715f95adee61a202a2c8ec60574db087b28e0051ec:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGE4MTMwYTlhOTc5ZWNkNGZjNzE3ZjQ0YWM0N2RhMzNhNTA4Y2MzMWI3NWQzMWUyMDc3NzdmMDhhMmZiMjE3MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWZjZmI3NzViOTg4M2FjYWM5OWYzOWM0ODYyNGY2ODEwZDcxNjVhYjA2NjM3ZWZiYmU0YzkyN2E2MGM5ZDU4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODRiYzRiZWZmZmYzYTNjZmVlNTEyZjhjYWFkNWQzZWFkMzg1YTY1MDc5ZjUzOWJkNzg0OWVjNGJiZWNlYWYwMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjJmOGI3ZWZlNzNmMGQ0Y2E5ZTVjZDliODRjYzM1NzBkYTQ1ZGQ5NWMxOWZlZjkwYTMwNTIwNTQwYTA2MDQ3YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b5e8bdf1ada54adc81793c6eb7accc54",
+      "statement": "When the user checks both ToS and Privacy Policy boxes and clicks 'I accept', ConsentsGate calls auth.acceptConsents() which sends a PATCH to /users/{userId} with an empty consents array — the client states nothing about versions. The server's permission stamps the current versions and timestamp via mergeRequest. Then auth.checkSession() reloads the user document (now unblocked) and the blocked flag is cleared.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L194-L223",
+          "version": "repo-lines-v1:sha256:56499f2d0ad5eed28fb40c71ad06fe70a7a4e81e66811d8d67d473627ab1b050:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzNWM2MjE2YjNjYmQ1NDZkM2I2OTFhN2NiMjExNjZjZDA0Yzc5OTlmZGI1MzY5OWUwZGI3ODYwNjc0NDgwNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NDliNTZkYWQ2OTczMWRlYWFhMzc3NDFiYWUzNWM1NWVlMjY5YWI0ZWI4ZTRhZDM1ODQ4YTYwNWFkYTViNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4MGNkYWU4ZjEwZmY5MzFhMTg2NjYyODJhZTBkZTliOTQwZGYzZTQ0NDYyYTBjOWI1Y2Q2YjIwZTU3MzVkN2YifQ"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L33-L51",
+          "version": "repo-lines-v1:sha256:36821e11be376177dcd4b12efe71f864ef22254c37efae989582b05cea96fbf5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNzNiNDlkMmMwMmMwMDlmY2UyODdlODFhNDE4ZGIxZTU2YzgzMDllMmJjODY5MWRiYmI5NDFkMWE0MzlkZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2NTQwYTBhZDQwYWMzZDBjZjVmNjU3NTQ5MGY5NTI0Y2FhN2M0MTg0ZmIwZTcxYjk3ZGJlYThhMDc4YmU4MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhNmM4OGYyNWQyYjYxNDFiZDg4YTk2NmFkYjZiM2RmNzQxOTRmZGM3M2M5YjQ5MTM5MzliMmE1MmEzZTk5NjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_08295ed978dc4816b6ab0df6f9284195",
+      "statement": "The consents gate server-side setup (rhc.setup.consents.ts) extends the base accounts setup with four steps: a user schema validation, an acceptance permission that stamps latestConsents and pushes to consents history, token claims configuration (latestConsents/tos and latestConsents/pp in account-properties-claims), and a Guards rule with status 451 that blocks authenticated users whose consents don't match the current version strings.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L167-L294",
+          "version": "repo-lines-v1:sha256:dbe7b85b707589d175941a57a6fe044d469d3c76b3ea6bf52694bd9d21330015:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiYmRhYTUxODcwMDViMjQ0YTM4NzJmNGM5Yjk2NmViMTZmNWNhZDEyZjY3N2VhNGU1YTczOTUwOWJjNGM4NmE3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkMmU2ZmNkZDRkNzI3NDg3ZThiOGQ3YTQzNzdmMDYyY2QxYmNlNTk0NDRkNmQ3M2FhODhjYTU4NDhmOTRiNGUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxMTZhZDE5NDM5Mjg5NzM5NzczNzI3MGM4NDBlNmI4NTZlNDYyNzVmMGJlMThiNGExYjUxYjY0ZTRlNWEyNTI2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MSwiZm9sbG93aW5nQ29udGV4dEhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_967850bb3d2f407db71741b04933b475",
+      "statement": "Version strings TOS_VERSION and PP_VERSION are defined once in rhc.setup.consents.ts and derived everywhere else — in the permission's mergeRequest and in the guard rule's condition. Bumping them and re-running rhc setup requires all users to accept again. The acceptance history is preserved in the consents array on each user document.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L134-L160",
+          "version": "repo-lines-v1:sha256:152607e653da37f5f18e11d56b3e53c87e63a611c2dfc3bc59005995c4e38be8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5NTQ3N2VkYWI3MTU2NTFlZjNmZDBhOGE1ZjgzYzYwMTM1YTIwYjNhMmI3N2MxYTc5N2EwZjZjODM1MmFkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZjVhODU2NTdiOGU4NTQwZjZmNWYyZWM3YjY2YjY2YWNiNzc3ZmJlNjQyY2E5M2I5N2QyNWU4NjBlZDM4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmNjI4MGZjMDFmYzc1OWFhZGY4ODgwY2RmM2E4M2Q1YmIxYzZkNmNiYTJkNjdiZWEzOTRlZDUyMDI1ZWEzZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1MTM5YmE0ZDJjMmQ3MDhiZGE0MTA5ZmU3OGM2MWI0NjI3ZmExYTgxNTY1NGQxNmQzMTg0YmQxN2U0ZTRmODkifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L54-L63",
+          "version": "repo-lines-v1:sha256:7ec50a8ee4aa61da743a6dbc21a8018aaaf4b05f5f1de5d595da3f445ba85328:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmZjBjY2Q2OTMyYzE5MWU4Yzc0Yjk2MzQzODk4ZWViZmJjMGFiMTdiNTcxMjJmNDE3ZjIyMDY2ZjZmYTgxYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViZGJjNzViMGM0ZWJhMWVkYzVmNDVhNzQ4NzFkNzM3MzFiNmIxMDU1NmE0ZmUzMjk0NTJmZDVjZWFkMTAxNGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4ZWVlNWVlMzRjMTZjZDQ0YzdmZDMzODZjZDEwYmI5Njk0MDY5ODFhZGE4OTJmOTQ1YmY2YjI0ODJmYjZjYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d14a7c9d0c334fbbbe0a5e61846878b9",
+      "statement": "The Terms of Service and Privacy Policy are static HTML pages at public/terms.html and public/privacy.html. They open in new tab from links in the acceptance dialog and mirror the app's light/dark theme by reading localStorage.getItem('rh-theme') before first paint.",
+      "evidence": [
+        {
+          "resource": "repo://public/privacy.html#L1-L50",
+          "version": "repo-lines-v1:sha256:d1f01234f13636f520ad719f592d1f6105b677c8f97a1144338467c0ac5546bd:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNWZjYTg1NzRmMDYwZWVhMjRlYmNkYWU2Yjc4ZjMyNDE0ZjVkZTAzZGExMDg0ZmQwZTczZDcxMDc2OGUzYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlNGQ3MjE1ZGM4OTZmOGYxMDZhNjUyMjUwOWNiNzVkM2NkNjJmMzBjOGQwZDBkOWQ1ZGIyZGRmMjA2ODlmN2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEwN2E4YTMzMDNhM2JmNzYyOWNkMTY5MzJmZDRhNzQ4Njk4Y2ZmZTlmNTY5YjhhNDVlZmM3NTgzNjMyMDk4NmMifQ"
+        },
+        {
+          "resource": "repo://public/terms.html#L1-L50",
+          "version": "repo-lines-v1:sha256:b36dd6c6186363c639fd95f58f2fb03a9f821f1478f27e6b04efdafc1e2df9f4:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNWZjYTg1NzRmMDYwZWVhMjRlYmNkYWU2Yjc4ZjMyNDE0ZjVkZTAzZGExMDg0ZmQwZTczZDcxMDc2OGUzYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlNGQ3MjE1ZGM4OTZmOGYxMDZhNjUyMjUwOWNiNzVkM2NkNjJmMzBjOGQwZDBkOWQ1ZGIyZGRmMjA2ODlmN2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEwN2E4YTMzMDNhM2JmNzYyOWNkMTY5MzJmZDRhNzQ4Njk4Y2ZmZTlmNTY5YjhhNDVlZmM3NTgzNjMyMDk4NmMifQ"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L73-L74",
+          "version": "repo-lines-v1:sha256:40434aaefee4ebda1bf98781d90a1ea3b8daef32bf712d19ef12507df397347e:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWU0YzBlNmRmNjk0MmYzNzg5NzBlYTgyMGRlYzFiNzJlOTI0YTEzZWZmMWUyN2ViNjhlZWY4NDBkMDA4MjRmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Y3NTRhZjc2MzMzZjk5YTA2MDRjNThmZDYwMDkzNzg4NDU2NmZhN2I3NGVmYzlkMzk0YjZhYzIxOTM2ZjExMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGEyMTZlMDI4MzVhNGRlZmNjYmY4YmVkZmUwNmJjN2I4YWVmMzMwNGRjYjA3MjcwOTEwNzU5ZTM5OTI4NmIwMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2M1NDEyNDdiMTViZjQyNWZlMTJhNDJhM2E2NTJhMTM3NDA5OGQ3ZTI4OTkyY2U0MzhkYzg0N2QxMmU3MGU3NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_aa35109674cc4c65ad2c25c8d14a2972",
+      "statement": "The justSignedUp flag is a module-level boolean in src/just-signed-up.ts. setJustSignedUp(true) is called in App.tsx when ?flow=signup is detected in the URL. Shell reads isJustSignedUp() on mount to show a welcome banner, then immediately calls setJustSignedUp(false) — a one-shot mechanism that avoids React context for a transient UI effect.",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx#L22-L26",
+          "version": "repo-lines-v1:sha256:7d1b7400e8e0a6ea653cd8678535b5686b13d282ccaccf65d2887ef6aa616109:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDhjNTM3N2Y1YjJiMjlkZDQwZWNjNjQ4MTQ0ZDhjOWZjNTAyZmFmYWU1NzQ0ODA5NmRiODUwYThhMjlmZDQ1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTdjMjY1ZTVkNDY0Zjc3YmI1ZDNmMzlmYTlkNzU0MjZhMmE4ODRhZGE2OTkxZDlkZjI3MTM1ODU0NjFlYjU1YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGFkOTMxMTA5NDFmMDg4YmVlNzY4NzI5YjEwYTNlYTdlMWM0OWZkMTQxZmQ1MmJmYTIyODM0ZjE3N2ViN2UwYSJ9"
+        },
+        {
+          "resource": "repo://src/just-signed-up.ts#L1-L9",
+          "version": "repo-lines-v1:sha256:715d87aba0c654c526dadb8cb74cfd52eee85d29ff53bc3a192482edcc9d0448:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjcyOWRmMjg5Nzc0ZDVlNzMyOWY1MTJiZTU2MmQyN2RjYzlmODM0NmY3M2EyNDA3MWJlYWZlNzkyOWJlNTc2NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/pages/shell/Shell.tsx#L37-L47",
+          "version": "repo-lines-v1:sha256:5a907d69d99811328ad39ef8f370e096e1b46ce30f32b4c9d3aafab0fa27cac1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkZjdkZjQyNDg5ZWYwZDgzN2IwYmFhZWJkNmEyMzYxZGViOWY2NzQzNDkxM2FkOGQyOTJmMmI0NTEzNTY1NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkYzUyZjA4YjM5YjA4YjAxYzhkMzA4YmY4ODBiMGJlZjAyZmQxZGZjYzlkOWFhOTNhNGQxYjVmNGQ1OGI2Y2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmNGMyN2Q0M2RjOGQ5MjEyNDA0OTY4Y2ZlMTg4M2NhNDVmMzE1ZjU2ZGNjYTdjMjJhZDg0ZGQ2NjAzMTA2NmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxY2FmOGQ5MzY3YWRhNDk5OTNhYjEwNTFmZTY5ZmFlMWM5ZjMxYzU4MjAzMmU0MTZkYzUwNWNkNWJhZTU1ZGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b2cf7fe574dc4719b1244ae184482197",
+      "statement": "Feature flags in environment.features control which routes are included in the route array. When a flag is false, the corresponding route object is excluded via spread-conditionals in src/routes.tsx, and UI elements referencing the disabled flow are not rendered.",
+      "evidence": [
+        {
+          "resource": "repo://src/environments/environment.ts#L10-L16",
+          "version": "repo-lines-v1:sha256:656c4fbbf11fc98034ed6273e3a64cf79c1f415a3f9e3fa2d2e0dd673b0ca07d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjRjNjE5ZmZkNmI5MjFjNTI3OTExZWRlMTQ3MWM5MTQ5YTFkZTg2NTUzNDE4NWIwOWY2Nzg1MGRjMzMwZDU2MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTQwM2NhYjc3MGI2NjA0MzQ5Njg4YzAwNTk1ZmVmNWU0NjcwN2M1ZWVjZTU5NGMzYWIxM2RjMzY0NWRlMTdmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCJ9"
+        },
+        {
+          "resource": "repo://src/routes.tsx#L19-L99",
+          "version": "repo-lines-v1:sha256:2f86c7fbb8dcacc4efbfa6a4862ee9ccec68a37d3ad0502f395a71e0be52c792:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0NjUzZmFjZmE0MjJhYTEwOGFjMzFhYTVhMDJhOTIwNzc5YTM2MDNiOTI4ZWJiNzAwMjRjOWVjYzU0YWE2NWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMTFlMDg5MDA4OGYzMThmZTMzMGFiOGE2MThlYjRlOTI5NmNhN2RkYzA4NDY0NzFmM2I2ZTVkZjc2MWI4N2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1Mjk3NDUwNGYyZGI1ZTg3OGEyNzk4NjMyZmFiOTViNWYwMzA4MGFmZWJlMmZjMjkxODY1MzAxZWU4MDkyZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlMzdiZDYwMzI3NDZiYzk0YWE5NDU3NDY4NjJkNGRkMGM2MDZkMDExOTc0N2ZjZTFiYmY1ZDlhOWQ5OTdkYjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_35214e3c03cc47cd905767d80023d5cf",
+      "statement": "The rhc.setup.ts file imports the same environment object as the app and derives the server's feature toggles from it (emailRegistration maps to both registration and verification, passwordReset to password-reset, teamInvitations to invitations, oauthLogin to oauth). This ensures the flags are stated once and the server configuration stays in sync.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L31-L64",
+          "version": "repo-lines-v1:sha256:659d664b72677d1485921b0cf6c877965424cc0c402404595bb0019ea5b314bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyNTlkNDgzNDg0MzJjNzlmNWZhZmMwOTQ5ZmIxM2JmMGY3NTFkYTlhZDc0YmEyNzBjY2RiYjFlOGRkMTZlODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiYjk0ZGI4N2Q5ZDIwNTY2NDllNzE0NzQwZmE0Y2U2Y2ZhMmNjMzM4NGI1MmQyOGExYmI3M2NjNmZlZmMyMDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwMjYxYTgxMzhmZDQ0Y2Q0MWZhOGU5MGNmYTMyMGRhYWYxOTIxMmZhMTMyM2Q1YWNkNmFlMzdhZDFiMjk0ZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_747b30ccae7d4c9c8ce7bd08ad73d40e",
+      "statement": "For application-specific collections, auth.api(path) attaches the bearer token automatically and rejects non-2xx responses with ApiError({ status, message }). A plain fetch to the same URL is unauthenticated and receives 401.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/account/Account.tsx#L2-L2",
+          "version": "repo-lines-v1:sha256:3bbd564e58e8614304f3b0d2d816594b17ac77faabf0f8e2a8374b14ace81c12:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JiZDU2NGU1OGU4NjE0MzA0ZjNiMGQyZDgxNjU5NGIxN2FjNzdmYWFiZjBmOGUyYTgzNzRiMTRhY2U4MWMxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2JiZDU2NGU1OGU4NjE0MzA0ZjNiMGQyZDgxNjU5NGIxN2FjNzdmYWFiZjBmOGUyYTgzNzRiMTRhY2U4MWMxMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjEsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjU1OGI2NzczNGY0MGYzMzI3MjdkNzg4ODBiYzc3NjU3NDM4OTkzZWEyNzkzMTg4OWQwZTcxNDhjMDk2MDA2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWYwNzZiYWI2OTgwZjllOWU2NzRjOWNhM2JlYTAyNzE5ZDkwNTM3YzNlY2ZlZDhhOWRmZWM3MjYyNjNiNDg2NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-31T10:59:30.610Z"
+  }
+}

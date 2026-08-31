@@ -1,14 +1,62 @@
 ---
 type: Domain
 title: Auth & Teams
-description: Detailed documentation of authentication flows (login, signup, OAuth, email verification, password reset), team management, invitation handling, and feature flags in the RESTHeart Cloud React starter.
-tags: [auth, teams, invitations, oauth, feature-flags, domain]
+description: Detailed documentation of authentication flows (login, signup, OAuth, email verification, password reset), team management, invitation handling, consents acceptance, and feature flags in the RESTHeart Cloud React starter.
+tags: [auth, teams, invitations, oauth, feature-flags, consents, domain]
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-31T10:59:30.610Z
+sources:
+  - id: openwiki-source-85dc2a049a0943b56218c045
+    resource: repo://public/privacy.html
+  - id: openwiki-source-ad504d4d06a9b4cc6851d32b
+    resource: repo://public/terms.html
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
+    resource: repo://rhc.setup.ts
+  - id: openwiki-source-54631e6ebf1d3b815c4a5eed
+    resource: repo://src/App.tsx
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-9674080b0675d512256b80bc
+    resource: repo://src/ConsentsGate.tsx
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+  - id: openwiki-source-440d3aa4e5dbdff8211c15e3
+    resource: repo://src/just-signed-up.ts
+  - id: openwiki-source-62327449da47479a80c27d31
+    resource: repo://src/oauth-url.ts
+  - id: openwiki-source-5f5ab9debc6f9b32eab997bb
+    resource: repo://src/pages/account/Account.tsx
+  - id: openwiki-source-69233b952dc2ecb1c3d6e3c1
+    resource: repo://src/pages/auth/forgot-password/ForgotPassword.tsx
+  - id: openwiki-source-c9161dbd621f22e3073aa0a1
+    resource: repo://src/pages/auth/login/Login.tsx
+  - id: openwiki-source-218c8734c88d36610ad967a5
+    resource: repo://src/pages/auth/oauth-buttons/OAuthButtons.tsx
+  - id: openwiki-source-bbbc426be9a626165e738dce
+    resource: repo://src/pages/auth/reset-password/ResetPassword.tsx
+  - id: openwiki-source-9b67846f4bc6291f7850560e
+    resource: repo://src/pages/auth/signup/Signup.tsx
+  - id: openwiki-source-599eb255d8fa329c9092fdcb
+    resource: repo://src/pages/auth/verify/Verify.tsx
+  - id: openwiki-source-25246136842acdbaf0ab42fd
+    resource: repo://src/pages/invitations/accept/Accept.tsx
+  - id: openwiki-source-d246777daf29ea6fdf9f8b53
+    resource: repo://src/pages/shell/Shell.tsx
+  - id: openwiki-source-e31f18ccf81f23fb0b5d1a06
+    resource: repo://src/pages/teams/detail/TeamDetail.tsx
+  - id: openwiki-source-d5277d8efe8978259c7811b5
+    resource: repo://src/pages/teams/Teams.tsx
+  - id: openwiki-source-07aa4341cebe71bfc8fd2890
+    resource: repo://src/routes.tsx
+generated: { by: "openwiki/0.4.3", at: "2026-08-31T10:59:30.610Z" }
 ---
 
 # Auth & Teams
 
-<!-- openwiki: broken internal link [architecture/overview.md#auth-provider] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-This page documents every authentication and multi-tenancy flow implemented in the starter. All auth logic is provided by `@restheart-cloud/kit-react` through the [`RhAuthProvider`](architecture/overview.md#auth-provider) and the `useAuth()` hook.
+This page documents every authentication and multi-tenancy flow implemented in the starter. All auth logic is provided by `@restheart-cloud/kit-react` through the `RhAuthProvider` and the `useAuth()` hook.
 
 ## Authentication Flows
 
@@ -68,8 +116,7 @@ Two-step flow:
 
 OAuth is initiated by navigating to `${apiUrl}/auth/oauth/authorize/${provider}?noauthchallenge`. The `oauthUrl()` helper in `src/oauth-url.ts` builds this URL.
 
-<!-- openwiki: broken internal link [architecture/overview.md#fragment-token-capture] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-After the OAuth provider authenticates the user, they are redirected back with an access token in the URL **fragment** (`#access_token=...`). The [fragment token capture](architecture/overview.md#fragment-token-capture) in `App.tsx` picks this up.
+After the OAuth provider authenticates the user, they are redirected back with an access token in the URL **fragment** (`#access_token=...`). The fragment token capture in `App.tsx` picks this up — `consumeFragmentToken()` reads the hash, extracts `access_token`, calls `setToken()` and `scheduleRefresh()`, then strips the fragment from the URL.
 
 **Supported providers:** Configured in `environment.features.oauthProviders` array. Currently `['google']`. Add `'github'` or others as your RESTHeart Cloud service supports them.
 
@@ -140,6 +187,61 @@ All data loads via `auth.listTeamMembers()` and `auth.listInvitations()` on moun
 
 Form to create a new team. Calls `auth.createTeam(teamName)` and navigates to `/teams` on success.
 
+## Account Management
+
+**Route:** `/account` · **Guard:** `AuthGuard` · **File:** `src/pages/account/Account.tsx`
+
+Two sections for managing the authenticated user's own data:
+
+### Profile
+
+- Loads current profile via `auth.checkSession()` on mount
+- Editable fields: first name, last name
+- Email is displayed but read-only (shown as disabled input)
+- Calls `auth.updateProfile({ firstName, lastName })` on save
+- Success → "Profile updated!" alert; error → displays message
+
+### Change Password
+
+- Current password and new password fields (minimum 8 characters)
+- Password visibility toggles on both fields
+- Calls `auth.changePassword(currentPassword, newPassword)`
+- Success → "Password changed!" alert, fields cleared; error → displays message
+
+## Consents Gate
+
+The consents gate is a server-side enforcement mechanism that blocks authenticated users who have not accepted the current Terms of Service and Privacy Policy. It requires no feature flag — the gate is active whenever a Guards rule exists on the service, and absent when it does not.
+
+### How It Works
+
+1. **Server-side rule:** A RESTHeart Guards plugin rule answers `451 Unavailable For Legal Reasons` to every authenticated request from a user whose `latestConsents.tos` or `latestConsents.pp` does not match the current version strings. The rule exempts `/auth/*`, `/token/*`, and the acceptance PATCH itself.
+
+2. **Client-side detection:** `src/consents-signal.ts` exports a `consentsOnError` callback passed to `RhAuthProvider` as `config.onError`. When any API call returns status `451`, it sets a module-level `blocked` flag and notifies listeners.
+
+3. **Overlay:** `ConsentsGate` (`src/ConsentsGate.tsx`) sits above the router in `App.tsx`. It subscribes to the blocked signal and, when blocked, replaces the entire app with an acceptance dialog. This placement is critical — a blocked user has no valid session, so `AuthGuard` would bounce them to login before they could ever see the acceptance form.
+
+4. **Acceptance flow:** When the user checks both boxes and clicks "I accept":
+   - `auth.acceptConsents()` sends a PATCH to `/users/{userId}` with `{"consents": []}` — the client states nothing about versions; the server's permission stamps the current versions and timestamp via `mergeRequest`
+   - `auth.checkSession()` reloads the user document (now that `/users/me` is unblocked)
+   - The blocked flag is cleared and the app renders normally
+
+5. **Sign out:** The "Sign out" button clears the blocked flag and calls `auth.logout()`, preventing the overlay from persisting for the next user on the same tab.
+
+### Document Pages
+
+The Terms of Service and Privacy Policy are static HTML pages served from `public/terms.html` and `public/privacy.html`. They open in a new tab from links in the acceptance dialog. Both pages mirror the app's theme (light/dark) by reading `localStorage.getItem('rh-theme')` before first paint.
+
+### Server Setup
+
+The consents gate is configured by `rhc.setup.consents.ts`, which extends the base `rhc.setup.ts` with four additional steps:
+
+1. **User schema** — validates the `users` collection, requiring `_id`, `password`, `roles`, `profile`; optionally allowing `latestConsents`, `consents`, `teams`, `team`
+2. **Acceptance permission** — authorizes `PATCH /users/{userId}` with `bson-request-whitelist(consents)`, stamping `latestConsents` and pushing to the `consents` history array
+3. **Token claims** — adds `latestConsents/tos` and `latestConsents/pp` to `account-properties-claims` so the guard can read them from the JWT without a database query
+4. **Guard rule** — installs the `consentsGate` rule with status `451` and the version-based condition
+
+Version strings (`TOS_VERSION`, `PP_VERSION`) are defined once in `rhc.setup.consents.ts` and derived everywhere else. Bump them and re-run `rhc setup` to require all users to accept again.
+
 ## Just-Signed-Up Flag
 
 **File:** `src/just-signed-up.ts`
@@ -169,6 +271,8 @@ These flags must match your RESTHeart Cloud service's **Sign-up Mgmt → Feature
 - The corresponding route is removed from the route array
 - UI elements (links, buttons) that reference the disabled flow are not rendered
 
+The `rhc.setup.ts` file imports the same `environment` object and derives the server's feature toggles from it, so the flags are stated once.
+
 ## Reading Your Own Data
 
 Everything the starter does talks to `/auth/*`, `/token`, and `/users/me` — the kit handles those. For your application's own collections, use `auth.api()`:
@@ -193,12 +297,7 @@ function Notes() {
 
 Pass a path, not a full URL. `auth.api()` attaches the bearer token automatically and rejects non-2xx responses with `ApiError({ status, message })`. A plain `fetch` to the same URL is unauthenticated — the service answers 401.
 
-<!-- openwiki: broken internal link [source-map.md#home] file "source-map.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-The [Home page](source-map.md#home) includes a working "Fetch /demo" button that demonstrates this pattern.
-
 ## See Also
 
-<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Architecture Overview](architecture/overview.md) — how the auth provider and routing work
-<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Operations & Runbook](operations/runbook.md) — how to configure feature flags and environment
+- [Source Map](/openwiki/source-map.md) — file-by-file index of the starter
+- [Operations & Runbook](/openwiki/operations/runbook.md) — how to configure feature flags and environment

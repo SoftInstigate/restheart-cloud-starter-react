@@ -1,3 +1,3 @@
 # Files
 
-- [Operations & Runbook](runbook.md) - Environment configuration, design system and styling, build and deploy workflow, theming, and feature flag management for the RESTHeart Cloud React starter.
+- [Operations & Runbook](runbook.md) - Environment configuration, server setup with rhc CLI, design system, theming, build/deploy, and the consents gate server-side setup.

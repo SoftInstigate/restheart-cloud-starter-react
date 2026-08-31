@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:158573e9a1a3ccefb44d08355b2f0e0b956d8ed1235dc5098ed71b1f7b5c10c4",
+  "claims": [
+    {
+      "id": "claim_0d3ab92dba3941f381a193c621a747d8",
+      "statement": "Vitest is configured as a devDependency (^2.0.0) and the npm test script runs vitest.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L25-L26",
+          "version": "repo-lines-v1:sha256:b38e3076d203cedafc40286b42f8089232f54c6a4ff40abeb9840cf473b6aeb8:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODMyYjBmNmRlNThlM2E0Yzc4ZjZjZDFjODAyNmU5OGUxM2ExMmI3MDRkMjVlYWFkNmVkZDIwMjY4YWFkOTMxMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjg2NzA0MTE5YjA2ODQ1N2Y1MWM4YTBkYmQ0MGJhYWRiZjUxYWY4MzNjZmU1MzMxZjlkMTA1OThjOTg2ZDAwNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://package.json#L9-L10",
+          "version": "repo-lines-v1:sha256:66e17b2a071bd6f59ddef464f01c910cfcf64f65cfec4ea1b23403d1907146ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTg0NDQ1YTdjYzYxYjU2NDljODQ0ODEyYTVlMzkyMzk5MTdmMjQwM2NjNDNkY2ZmNjA4MGQxZTdhOTY2MjIwZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzU2ZTYwY2NjYTI5N2EwOTdlMWFkMGI3ZWI2ZWVmY2I4M2FjMzRhMzA0ZDdjOTBhNDI0NTA4OGU5YTE4NzQyNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTk2NzI5ZmUxMzc2YjM0OGE4NGYxN2MzZGY5YzgwNDY5ZGUzODAzNTZmMWRhOTMzZTZiNjVjYTM4OWFjODY5YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b9db821152f4ed0a8ad1a6ee9031bae",
+      "statement": "No test files (.test.ts, .spec.ts, or .test.tsx) exist in the repository yet.",
+      "evidence": [
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:b018d8dd95b940443dc011b533f726a9c9ef54c6ff296db79ed435e6249126f0"
+        }
+      ]
+    },
+    {
+      "id": "claim_91b95040f2b94cafbe6b07fba1595c2a",
+      "statement": "The Vite config is minimal and Vitest uses it automatically without a separate config file.",
+      "evidence": [
+        {
+          "resource": "repo://vite.config.ts",
+          "version": "repo-file-v1:sha256:0709465427668ae85ef999f63762d7a06fd92962363fe8cc142ad656d3548115"
+        }
+      ]
+    },
+    {
+      "id": "claim_e465dd2fcd8f428e9767fba6bb93eb19",
+      "statement": "The consents-signal.ts module is a unit test target that should test setBlocked/isBlocked state changes, subscribe pub/sub behavior, and consentsOnError with 451 vs other status codes.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts",
+          "version": "repo-file-v1:sha256:2f4dcd9869e64c98d92d3372d2381d7c7c78b85f0c3b1a351dfc3e74eec94b87"
+        }
+      ]
+    },
+    {
+      "id": "claim_869673da970f4579b485699ea9c10099",
+      "statement": "The consents-signal module implements a pub/sub pattern with a module-level blocked boolean, isBlocked() getter, setBlocked() setter that notifies listeners, and subscribe() that returns an unsubscribe function.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts#L17-L37",
+          "version": "repo-lines-v1:sha256:d52408e12a9244355919641979633e32df4895aa873945b9bbaaf5cd2bec13c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZDdkNDdjZmVkNGMxZmYzNTkzN2M3OGMzMWY2MGQwOTUzYzM2NDkwNjAwMmNiM2RmZWRkMjE2YjZhOTNlYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4YzZjYzNkMDVmMTM2ZTQ2ZjYyM2ZmZWI3NmQzOWM1ODUyNDM5YWEzM2QxMTBlODk5ODM5Y2Q5YTRhYTQ5NGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzODNlYjY2Yjg5ZTdhMzg2N2Y5YzRhYjdiNzJhY2JjMWFmMjNkZjAxZjk1MTZkMTNiODE0ZTAxYzY2M2Y3YTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9d4ec66cf0414469be2ce01d5bdb9704",
+      "statement": "The consentsOnError function only sets blocked to true when the API error status is 451 (Unavailable For Legal Reasons), leaving blocked unchanged for other status codes.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts#L47-L49",
+          "version": "repo-lines-v1:sha256:17ba753bdcee6043aaa18b206e08a8317a65acaca8aed450354ca817fa458543:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjVjZjc2YjZhOTQwZTk0ZmJkMGU0YjBjYmFiMzVmYzc0NTM3NGU2MDAxNDVkY2QxMmJlMDc4NGRiM2M3ZWY0NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDM5NmU0ZTM3MjU3NTEzYTk4ZWY4ODY1ZjA1ODFhOGMyMTAyYjhiM2JkODlmNGRkOGFkYTZjMzBmNGU1YWNhZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_631950f85cfa4f42a0fb4c0040468ecc",
+      "statement": "Test files should be created alongside source files using the .test.ts or .test.tsx convention.",
+      "evidence": [
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:b018d8dd95b940443dc011b533f726a9c9ef54c6ff296db79ed435e6249126f0"
+        }
+      ]
+    },
+    {
+      "id": "claim_5c8d3a0857d54e9fad7603db6e3061dc",
+      "statement": "The recommended test strategy includes unit tests for utilities, component tests for auth pages using @testing-library/react, and integration tests for routing guards.",
+      "evidence": [
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:b018d8dd95b940443dc011b533f726a9c9ef54c6ff296db79ed435e6249126f0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-31T10:59:30.610Z"
+  }
+}

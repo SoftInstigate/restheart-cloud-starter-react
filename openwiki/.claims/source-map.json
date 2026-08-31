@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4a21a6dd21a77a37523b947e91836a8d76652fcbcbe4e4b06a3d2c0367996365",
+  "claims": [
+    {
+      "id": "claim_d80278d0d52f4057bd0c66edb4137901",
+      "statement": "rhc.setup.ts is the primary service configuration script for @restheart-cloud/cli that defines idempotent steps to install and configure the accounts plugin, set feature flags derived from environment.ts, configure Google OAuth credentials when enabled, and add the app origin to the allowlist.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts",
+          "version": "repo-file-v1:sha256:2c84d9a03bd7c70adfa49cf50afae15f5f1d38565f9c102a0c6988381290027f"
+        },
+        {
+          "resource": "repo://rhc.setup.ts#L82-L185",
+          "version": "repo-lines-v1:sha256:eabe8a78827a9e139375c8032616c863707a3e22bc6e7b8c50fe8dff97cbf8c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiNjIxODg0ZTc0ZDY2NDZlMDlkZTY4YzYyOWNjNmIzZmZmYWZjZTJiMjcxNjAxMzZkOTM4MGViMjJhMjg2ZWI0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI3MjEyOWMyNzM1MmI0OTU1NDhiMDcxYWUzNGFiOTA4MTE3Mjg3MzQyOGY2Zjg3ZjU0YjU4MGU1MTUzYzlhYTAyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_39a07c3c59b04fa4a8651050b8cd0e04",
+      "statement": "rhc.setup.consents.ts imports rhc.setup.ts and extends it with four consents-gate documents: a JSON Schema for user documents with latestConsents/consents fields, an ACL permission allowing users to PATCH their own consents with mergeRequest that stamps versions, JWT claims for latestConsents/tos and latestConsents/pp, and a Guards rule that blocks authenticated users with 451 when either acceptance is missing.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:b2161f1898ab50dbe4ffb58fd9a1a0069649b1320b7a4471da8c615ffb756bef"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L167-L295",
+          "version": "repo-lines-v1:sha256:09801a9d00da987606daaa707e059c8813e8d0a7225323c388c2afa0265f1251:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiYmRhYTUxODcwMDViMjQ0YTM4NzJmNGM5Yjk2NmViMTZmNWNhZDEyZjY3N2VhNGU1YTczOTUwOWJjNGM4NmE3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxMTZhZDE5NDM5Mjg5NzM5NzczNzI3MGM4NDBlNmI4NTZlNDYyNzVmMGJlMThiNGExYjUxYjY0ZTRlNWEyNTI2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_f47b2d8dae7d4ff980a5ad1e6240e50d",
+      "statement": "src/consents-signal.ts provides a reactive blocked flag with isBlocked(), setBlocked(), and subscribe() functions. The consentsOnError handler (passed to RhAuthProvider as config.onError) sets the flag on any 451 API response, distinguishing blocked users from signed-out users.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts",
+          "version": "repo-file-v1:sha256:2f4dcd9869e64c98d92d3372d2381d7c7c78b85f0c3b1a351dfc3e74eec94b87"
+        },
+        {
+          "resource": "repo://src/consents-signal.ts#L47-L49",
+          "version": "repo-lines-v1:sha256:17ba753bdcee6043aaa18b206e08a8317a65acaca8aed450354ca817fa458543:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjVjZjc2YjZhOTQwZTk0ZmJkMGU0YjBjYmFiMzVmYzc0NTM3NGU2MDAxNDVkY2QxMmJlMDc4NGRiM2M3ZWY0NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDM5NmU0ZTM3MjU3NTEzYTk4ZWY4ODY1ZjA1ODFhOGMyMTAyYjhiM2JkODlmNGRkOGFkYTZjMzBmNGU1YWNhZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_353c1e016a3f43a9bf5e9ca299395f9a",
+      "statement": "src/ConsentsGate.tsx is a blocking overlay component that wraps the router in App.tsx above AuthGuard. When blocked is true, it replaces the entire app with a modal dialog requiring acceptance of Terms and Privacy Policy, calling auth.acceptConsents() which performs PATCH /users/{id}, GET /token?renew=true, GET /users/me, and setUser().",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx",
+          "version": "repo-file-v1:sha256:5864d8ab3be5d448e76df645db1a75939def85bca97853bfd69d83de15fb457e"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx",
+          "version": "repo-file-v1:sha256:4049f0540fd879ef652e5eb4c6285f39a8cc3d423c8249fa572419017a251172"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L18-L51",
+          "version": "repo-lines-v1:sha256:d92a7f4546d84e3c83f7b112df8a6ffbb2358d623e7f39205b8cb8620632f197:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmOTVjZGE4ZWNhZWZhZWVkZDc4MTdkNjY3NjNjODI0YjQyNWNkN2Y5MzNjMmFkNjQzOTE0NWVkMDI4NWQ4MjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1YTQ0M2UzNGRkYmE2Nzg5OGMyZTFlOTM1MTE5MGVmOTQyNWQyYzZiNTIzYmJkMWEyZWFmMzQ4NzI4ZDdlOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhNmM4OGYyNWQyYjYxNDFiZDg4YTk2NmFkYjZiM2RmNzQxOTRmZGM3M2M5YjQ5MTM5MzliMmE1MmEzZTk5NjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ed4109b841a349f7b895463aa3e35784",
+      "statement": "public/terms.html and public/privacy.html are static HTML placeholder legal documents served to anyone regardless of auth state. Each carries Version 2026-07-01 which must match TOS_VERSION and PP_VERSION in rhc.setup.consents.ts and the Guards rule.",
+      "evidence": [
+        {
+          "resource": "repo://public/privacy.html",
+          "version": "repo-file-v1:sha256:dc417ce345449f5e2134b64dd895750828729d66dfe3fd0e465c9f7289e388ff"
+        },
+        {
+          "resource": "repo://public/terms.html",
+          "version": "repo-file-v1:sha256:57f2e6376f38b21bebaee5f60177fcf9194490677492ff9ccec88b949c09a006"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L55-L56",
+          "version": "repo-lines-v1:sha256:24db7d5a25a2c15a2a00dcca5d6cf4d76d1911051383c317e9f58d9109f3e857:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTYxNDM4ZjE1MTViZmM4ZWJiZTE1ODQ4ZWYyMTY1MGQ2MTAxNzEzZTFhNjExNmJhODIwNzBhYjY1NDA0NGZkYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDgzNWM2NTg1YWEwYjEwNjE1ODI1MzMzN2RhNDdjZjZiNmIzZjJjODZhZjJlMmUzOTkzZGRiMjIwNWRiNGMyYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmRmNTM5ODRlYzgwMDIzOGYxMzE2OGViMjAxZDU5YzBiYjkzY2U2YzJlY2U3MDJlYmI2MWRjYmU1MjE2NmM4ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjNiZmNkOWYwOWMzYzU5ZDEwNGE2YjFiZGIwODM1OTMxNzUxZjRkY2UzYjNiNGYxNzEyM2JkMWRhMTAzNDk1NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc7a444938b4419eab8ee902a77cfd0c",
+      "statement": "src/pages/auth/oauth-buttons/OAuthButtons.tsx renders OAuth provider buttons (Google, GitHub) with inline SVG icons and builds URLs via oauthUrl(). It is used in Login.tsx and Signup.tsx when oauthLogin feature flag is enabled.",
+      "evidence": [
+        {
+          "resource": "repo://src/pages/auth/login/Login.tsx",
+          "version": "repo-file-v1:sha256:099e85adca34918ccabcba49c7cb53c964eb725e3a0cadb280f5c8172b193a64"
+        },
+        {
+          "resource": "repo://src/pages/auth/oauth-buttons/OAuthButtons.tsx",
+          "version": "repo-file-v1:sha256:3e5009075a835990ea234c622bee17266db7215846fdb7e31d0996bd88bbc76e"
+        },
+        {
+          "resource": "repo://src/pages/auth/signup/Signup.tsx",
+          "version": "repo-file-v1:sha256:ffd36546823cb2d7223cbff408cdcc89b5691a578f29602ccbd378c68518dbfc"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-31T10:59:30.610Z"
+  }
+}

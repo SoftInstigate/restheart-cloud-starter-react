@@ -1,8 +1,19 @@
 ---
 type: Guide
 title: Testing Guidance
-description: Vitest setup, recommended test strategy, and how to run tests for the RESTHeart Cloud React starter.
-tags: [testing, vitest, guidance]
+description: Vitest setup, recommended test strategy, and test targets including consents gate testing.
+tags: [testing, vitest, guidance, consents]
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-31T10:59:30.610Z
+sources:
+  - id: openwiki-source-5b54a58d1b51cd490b0e7162
+    resource: repo://package.json
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-5e1b077422a94ae165e88e4e
+    resource: repo://vite.config.ts
+generated: { by: "openwiki/0.4.3", at: "2026-08-31T10:59:30.610Z" }
 ---
 
 # Testing Guidance
@@ -39,6 +50,7 @@ The simplest targets for initial tests:
 |------|-------------|
 | `src/just-signed-up.ts` | `setJustSignedUp(true)` → `isJustSignedUp()` returns `true`; reset to `false` returns `false` |
 | `src/oauth-url.ts` | `oauthUrl('google')` returns the correct URL pattern |
+| `src/consents-signal.ts` | `setBlocked(true)` → `isBlocked()` returns `true`; `setBlocked(false)` → `isBlocked()` returns `false`; `subscribe` listener is called on state change; unsubscribe stops notifications; `consentsOnError` with status `451` sets blocked to `true`; `consentsOnError` with other status codes does not change blocked state |
 
 ### Component Tests: Auth Pages
 
@@ -73,6 +85,7 @@ Create test files alongside source files using the `.test.ts` or `.test.tsx` con
 src/
   just-signed-up.test.ts
   oauth-url.test.ts
+  consents-signal.test.ts
   pages/
     auth/
       login/
@@ -88,7 +101,5 @@ npm test -- --run # Single run
 
 ## See Also
 
-<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Architecture Overview](architecture/overview.md) — understanding the component tree for test setup
-<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Operations & Runbook](operations/runbook.md) — build and dev workflow
+- [Architecture Overview](/openwiki/architecture/overview.md) — understanding the component tree for test setup
+- [Operations & Runbook](/openwiki/operations/runbook.md) — build and dev workflow
