@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:382e35bb4cf35b51730ea28dcd34b037de1ba1e5b5d6552aa1a5438ef43bb84e",
+  "claims": [
+    {
+      "id": "claim_523aad4c7c474d13a4dda1f2a90bf1b9",
+      "statement": "Vitest is configured as a devDependency (^2.0.0) and the npm test script runs vitest, but no test files (.test.ts or .spec.ts) exist yet in the repository.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L25-L26",
+          "version": "repo-lines-v1:sha256:b38e3076d203cedafc40286b42f8089232f54c6a4ff40abeb9840cf473b6aeb8:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODMyYjBmNmRlNThlM2E0Yzc4ZjZjZDFjODAyNmU5OGUxM2ExMmI3MDRkMjVlYWFkNmVkZDIwMjY4YWFkOTMxMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjg2NzA0MTE5YjA2ODQ1N2Y1MWM4YTBkYmQ0MGJhYWRiZjUxYWY4MzNjZmU1MzMxZjlkMTA1OThjOTg2ZDAwNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://package.json#L9-L10",
+          "version": "repo-lines-v1:sha256:66e17b2a071bd6f59ddef464f01c910cfcf64f65cfec4ea1b23403d1907146ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTg0NDQ1YTdjYzYxYjU2NDljODQ0ODEyYTVlMzkyMzk5MTdmMjQwM2NjNDNkY2ZmNjA4MGQxZTdhOTY2MjIwZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzU2ZTYwY2NjYTI5N2EwOTdlMWFkMGI3ZWI2ZWVmY2I4M2FjMzRhMzA0ZDdjOTBhNDI0NTA4OGU5YTE4NzQyNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTk2NzI5ZmUxMzc2YjM0OGE4NGYxN2MzZGY5YzgwNDY5ZGUzODAzNTZmMWRhOTMzZTZiNjVjYTM4OWFjODY5YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a0ad2c6f92144adfb31fea1ecae21147",
+      "statement": "The recommended test strategy is to write unit tests for utilities first, then component tests for auth pages, then integration tests for routing.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts",
+          "version": "repo-file-v1:sha256:2f4dcd9869e64c98d92d3372d2381d7c7c78b85f0c3b1a351dfc3e74eec94b87"
+        },
+        {
+          "resource": "repo://src/just-signed-up.ts",
+          "version": "repo-file-v1:sha256:715d87aba0c654c526dadb8cb74cfd52eee85d29ff53bc3a192482edcc9d0448"
+        },
+        {
+          "resource": "repo://src/oauth-url.ts",
+          "version": "repo-file-v1:sha256:812f81c7665baaee10200873b65b415847736966aed02b2ede485e247b3fc3ba"
+        }
+      ]
+    },
+    {
+      "id": "claim_a33715e6c65a487c9e6a681fbebce0e7",
+      "statement": "src/consents-signal.ts exposes isBlocked, setBlocked, and subscribe; setBlocked is idempotent (no-op when the value does not change), and subscribe returns an unsubscribe function.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts#L19-L37",
+          "version": "repo-lines-v1:sha256:58856b2c7aea880acd6c9fe801f5dd3801b8aef94c1a2b1fd5f9547ebb3bdb46:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1MjliN2I2OWJjYjFhMjUzYThkZTA5MjNiMzEzMjBkY2Q4MzE1NDgzZjQzZGYyYmVkMjdlZmY3N2VlODU2MjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3NzgxYzVjYjg3YjgwMmE5MjY4YTQ4YmQ1MWFmOTE2YjEyNWI0MGNiNzZkZDBhZTdmODE1ZmVjMjYwNzcwMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzODNlYjY2Yjg5ZTdhMzg2N2Y5YzRhYjdiNzJhY2JjMWFmMjNkZjAxZjk1MTZkMTNiODE0ZTAxYzY2M2Y3YTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_15d37fb2f09342b0a2addc1eb59b28a4",
+      "statement": "src/just-signed-up.ts is a simple boolean flag module with isJustSignedUp and setJustSignedUp, suitable as the simplest unit-test target.",
+      "evidence": [
+        {
+          "resource": "repo://src/just-signed-up.ts#L1-L9",
+          "version": "repo-lines-v1:sha256:715d87aba0c654c526dadb8cb74cfd52eee85d29ff53bc3a192482edcc9d0448:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjcyOWRmMjg5Nzc0ZDVlNzMyOWY1MTJiZTU2MmQyN2RjYzlmODM0NmY3M2EyNDA3MWJlYWZlNzkyOWJlNTc2NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2a96e90e0df34abf9ce2cd0e3286d0f7",
+      "statement": "src/oauth-url.ts builds an OAuth authorize URL from the environment apiUrl and a provider parameter.",
+      "evidence": [
+        {
+          "resource": "repo://src/oauth-url.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:812f81c7665baaee10200873b65b415847736966aed02b2ede485e247b3fc3ba:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkYWMwZTYyOTVmYTBmMjI4OWY4OTU0MDg1MTMwOGJjYzdjZGI2Y2QxN2MwZDJmOWMzZGFkZjgyYWNlNjY0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b28800736cf4454587f336d1d7861d13",
+      "statement": "Tests should not test @restheart-cloud/kit-react internals and should not snapshot-test disposable skin CSS because the starter is designed to be reskinned.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L13-L14",
+          "version": "repo-lines-v1:sha256:ae7ce3860456f8b43dc9c2b375d5d2f90f083308e2d8aa95a5dd55e1958ed9f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWM3N2EzNzA5ZDc0ZjE1OTlkMzQ0MDJhMWMzOWI4MzU2Mzg3NjE2NzQxMjZhZjFlOTk1NjFkODIwNGViZThhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjJjMjEyNWE5ODU5YWQ0YWEzY2NlMTcxY2QxZGZkZDc3NWZhYjFjYzBkODA3MjJhZTAzODEwYWU2MGQwYzQzOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTUzZTgyM2Y0NTI5YmY0NTRhOTkyMDQyODRmZTk0NWRmZGE5OWM5NzIyYzBlZDI4NzM0MzAxZDA3OWMwNjMwMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDM5MDE2NmJlMzJjNjlkYmZjMzM3Yjc4MGFlMmYyMTc3OTc1ZmRhNzI5ZjBjNzYyMzAzYTYwZjEzMGZmZDJkZCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-16T09:23:22.035Z"
+  }
+}

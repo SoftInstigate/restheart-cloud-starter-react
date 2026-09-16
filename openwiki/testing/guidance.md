@@ -1,8 +1,21 @@
 ---
 type: Guide
 title: Testing Guidance
-description: Vitest setup, recommended test strategy, and how to run tests for the RESTHeart Cloud React starter.
+description: Vitest setup, recommended test strategy, what to test, and how to run tests for the RESTHeart Cloud React starter.
 tags: [testing, vitest, guidance]
+verified:
+  - by: openwiki/0.5.2
+    at: 2026-09-16T09:23:22.035Z
+sources:
+  - id: openwiki-source-5b54a58d1b51cd490b0e7162
+    resource: repo://package.json
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-440d3aa4e5dbdff8211c15e3
+    resource: repo://src/just-signed-up.ts
+  - id: openwiki-source-62327449da47479a80c27d31
+    resource: repo://src/oauth-url.ts
+generated: { by: "openwiki/0.5.2", at: "2026-09-16T09:23:22.035Z" }
 ---
 
 # Testing Guidance
@@ -31,6 +44,8 @@ The Vite config (`vite.config.ts`) is minimal — Vitest uses it automatically. 
 
 ## Recommended Test Strategy
 
+The recommended order is: **utilities first, then auth page component tests, then routing integration tests**. This builds confidence from the smallest, most isolated units outward.
+
 ### Unit Tests: Utilities
 
 The simplest targets for initial tests:
@@ -39,6 +54,7 @@ The simplest targets for initial tests:
 |------|-------------|
 | `src/just-signed-up.ts` | `setJustSignedUp(true)` → `isJustSignedUp()` returns `true`; reset to `false` returns `false` |
 | `src/oauth-url.ts` | `oauthUrl('google')` returns the correct URL pattern |
+| `src/consents-signal.ts` | `isBlocked()` returns initial `false`; `setBlocked(true)` flips state and notifies subscribers; `setBlocked` with same value is a no-op; `subscribe` returns an unsubscribe function that removes the listener |
 
 ### Component Tests: Auth Pages
 
@@ -73,6 +89,7 @@ Create test files alongside source files using the `.test.ts` or `.test.tsx` con
 src/
   just-signed-up.test.ts
   oauth-url.test.ts
+  consents-signal.test.ts
   pages/
     auth/
       login/
@@ -88,7 +105,5 @@ npm test -- --run # Single run
 
 ## See Also
 
-<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Architecture Overview](architecture/overview.md) — understanding the component tree for test setup
-<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Operations & Runbook](operations/runbook.md) — build and dev workflow
+- [Architecture Overview](../architecture/overview.md) — understanding the component tree for test setup
+- [Operations & Runbook](../operations/runbook.md) — build and dev workflow

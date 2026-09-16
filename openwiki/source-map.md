@@ -3,6 +3,23 @@ type: Source Map
 title: Source Map
 description: File-by-file inventory of the RESTHeart Cloud React starter, mapping every source file to its purpose and cross-referencing documentation.
 tags: [source-map, reference, files]
+verified:
+  - by: openwiki/0.5.2
+    at: 2026-09-16T09:23:22.035Z
+sources:
+  - id: openwiki-source-85dc2a049a0943b56218c045
+    resource: repo://public/privacy.html
+  - id: openwiki-source-ad504d4d06a9b4cc6851d32b
+    resource: repo://public/terms.html
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-41263ba637a35415c845f5fb
+    resource: repo://src/ConsentsGate.css
+  - id: openwiki-source-9674080b0675d512256b80bc
+    resource: repo://src/ConsentsGate.tsx
+generated: { by: "openwiki/0.5.2", at: "2026-09-16T09:23:22.035Z" }
 ---
 
 # Source Map
@@ -19,6 +36,13 @@ Complete inventory of repository source files. Each entry links to the page wher
 | `vite.config.ts` | Vite config: minimal — just the `@vitejs/plugin-react` plugin | [Testing](testing/guidance.md) |
 | `index.html` | SPA shell: mounts `#root` div, links `/src/main.tsx` as entry module | — |
 | `.gitignore` | Ignores `node_modules`, `dist`, `.env*`, IDE files | — |
+
+## Public Assets
+
+| File | Purpose | See Also |
+|------|---------|----------|
+| `public/terms.html` | Placeholder Terms of Service. Plain HTML, no build step. Theme mirrors the app (`rh-theme` localStorage). Replace before production. | — |
+| `public/privacy.html` | Placeholder Privacy Policy. Plain HTML, no build step. Theme mirrors the app (`rh-theme` localStorage). Replace before production. | — |
 
 ## Entrypoint & App Shell
 
@@ -49,6 +73,17 @@ Complete inventory of repository source files. Each entry links to the page wher
 | File | Purpose | See Also |
 |------|---------|----------|
 | `src/ui/alert/Alert.tsx` | Shared feedback component. Props: `type` ("error"/"success"), `children`, `onClose`, `dismissible?` (default `true`), `autoDismiss?` (default `4000`ms). Auto-dismisses after the timeout. Uses `.form-error` / `.success-msg` class hooks and correct ARIA roles (`alert` / `status`). | [Auth & Teams](domain/auth-and-teams.md) |
+
+## Consents Gate
+
+| File | Purpose | See Also |
+|------|---------|----------|
+<!-- openwiki: broken internal link [domain/consents-gate.md] file "domain/consents-gate.md" does not exist. Fix the href or restore the target, then delete this comment. -->
+| `src/consents-signal.ts` | Consents gate client-side signal. Maintains a `blocked` boolean that flips to `true` on any `451` API response. Exposes `isBlocked()`, `setBlocked()`, `subscribe()`, and `consentsOnError` (passed to `RhAuthProvider` as `config.onError`). | [Consents Gate](domain/consents-gate.md) |
+<!-- openwiki: broken internal link [domain/consents-gate.md] file "domain/consents-gate.md" does not exist. Fix the href or restore the target, then delete this comment. -->
+| `src/ConsentsGate.tsx` | Consents gate component. Renders a full-screen overlay with acceptance form when blocked. Calls `auth.acceptConsents()` then reloads session. No route guard — sits above the router so blocked users (no session) are never bounced to login. | [Consents Gate](domain/consents-gate.md) |
+<!-- openwiki: broken internal link [domain/consents-gate.md] file "domain/consents-gate.md" does not exist. Fix the href or restore the target, then delete this comment. -->
+| `src/ConsentsGate.css` | Consents gate overlay styles. Fixed overlay (`z-index: 400`), centered card, checkbox alignment, disabled button state. | [Consents Gate](domain/consents-gate.md) |
 
 ## Page Components
 
@@ -99,6 +134,15 @@ Complete inventory of repository source files. Each entry links to the page wher
 |------|---------|----------|
 | `src/pages/account/Account.tsx` | User profile management (first name, last name via `auth.updateProfile()`) + change password form (`auth.changePassword()`). Loads profile via `auth.checkSession()` on mount. | [Auth & Teams](domain/auth-and-teams.md#reading-your-own-data) |
 | `src/pages/account/Account.css` | Account page styles | — |
+
+## Service Setup
+
+| File | Purpose | See Also |
+|------|---------|----------|
+<!-- openwiki: broken internal link [operations/service-setup.md] file "operations/service-setup.md" does not exist. Fix the href or restore the target, then delete this comment. -->
+| `rhc.setup.ts` | RESTHeart Cloud service setup script. Configures accounts side: feature flags, email settings, OAuth providers. Uses `@restheart-cloud/cli` `defineSetup` API with `check`/`apply` steps. Imports `environment.ts` to derive feature flags from a single source of truth. | [Service Setup](operations/service-setup.md) |
+<!-- openwiki: broken internal link [operations/service-setup.md] file "operations/service-setup.md" does not exist. Fix the href or restore the target, then delete this comment. -->
+| `rhc.setup.consents.ts` | RESTHeart Cloud service setup script with consents gate. Imports `rhc.setup.ts` and appends four documents for the consents gate: permission, guard rule, and version constants (`TOS_VERSION`, `PP_VERSION`). Single source of truth for version strings to prevent silent drift. | [Service Setup](operations/service-setup.md) |
 
 ## CI/CD
 
