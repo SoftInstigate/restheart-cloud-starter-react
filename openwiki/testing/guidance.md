@@ -3,6 +3,15 @@ type: Guide
 title: Testing Guidance
 description: Vitest setup, recommended test strategy, and how to run tests for the RESTHeart Cloud React starter.
 tags: [testing, vitest, guidance]
+verified:
+  - by: openwiki/0.6.0
+    at: 2026-09-25T09:42:01.514Z
+sources:
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-9674080b0675d512256b80bc
+    resource: repo://src/ConsentsGate.tsx
+generated: { by: "openwiki/0.6.0", at: "2026-09-25T09:42:01.514Z" }
 ---
 
 # Testing Guidance
@@ -39,6 +48,30 @@ The simplest targets for initial tests:
 |------|-------------|
 | `src/just-signed-up.ts` | `setJustSignedUp(true)` → `isJustSignedUp()` returns `true`; reset to `false` returns `false` |
 | `src/oauth-url.ts` | `oauthUrl('google')` returns the correct URL pattern |
+| `src/consents-signal.ts` | `isBlocked()`/`setBlocked()`/`subscribe()` cycle: setting blocked notifies listeners; setting the same value does not renotify; unsubscribe removes the listener. `consentsOnError()` sets blocked on 451 status but not on other status codes |
+
+The consents signal module exposes a simple observable state pattern: a boolean flag with subscriber notification. The `consentsOnError` function is designed to be passed as `config.onError` to `RhAuthProvider`, where it distinguishes "blocked by consents" (451) from other authentication failures.
+
+```mermaid
+sequenceDiagram
+    participant AuthProvider as RhAuthProvider
+    participant Signal as consents-signal
+    participant Gate as ConsentsGate
+    participant UI as User
+
+    AuthProvider->>Signal: consentsOnError(err with status 451)
+    Signal->>Signal: setBlocked(true)
+    Signal->>Gate: notify listener
+    Gate->>UI: show consents overlay
+    UI->>Gate: click "I accept"
+    Gate->>AuthProvider: auth.acceptConsents()
+    Gate->>AuthProvider: auth.checkSession()
+    Gate->>Signal: setBlocked(false)
+    Signal->>Gate: notify listener
+    Gate->>UI: render children
+```
+
+*The consents signal flow: 451 errors trigger the gate; accepting consents clears it.*
 
 ### Component Tests: Auth Pages
 
@@ -51,6 +84,9 @@ Auth pages have the most logic (form validation, error handling, loading states)
 | `Accept` | Missing params → error; new user flow → password form; existing user flow → login + accept; 404 → expired message |
 | `ForgotPassword` | Submits email; shows success message |
 | `ResetPassword` | Validates token from URL; submits new password |
+| `ConsentsGate` | Renders children when not blocked; shows overlay when blocked; accept flow calls `auth.acceptConsents()` then `auth.checkSession()`; sign-out clears the blocked flag and calls `auth.logout()` |
+
+The `ConsentsGate` component sits above the router in the component tree (see [Architecture Overview](/openwiki/architecture/overview.md)). It subscribes to `consents-signal` and renders either its children or a full-screen overlay requiring the user to accept Terms of Service and Privacy Policy. The enforcement lives on the server — removing the overlay in dev tools does not bypass the 451 rule.
 
 ### Integration Tests: Routing
 
@@ -73,6 +109,8 @@ Create test files alongside source files using the `.test.ts` or `.test.tsx` con
 src/
   just-signed-up.test.ts
   oauth-url.test.ts
+  consents-signal.test.ts
+  ConsentsGate.test.tsx
   pages/
     auth/
       login/
@@ -88,7 +126,6 @@ npm test -- --run # Single run
 
 ## See Also
 
-<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Architecture Overview](architecture/overview.md) — understanding the component tree for test setup
-<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Operations & Runbook](operations/runbook.md) — build and dev workflow
+- [Architecture Overview](/openwiki/architecture/overview.md) — understanding the component tree for test setup
+- [Operations & Runbook](/openwiki/operations/runbook.md) — build and dev workflow
+- [Auth & Teams](/openwiki/domain/auth-and-teams.md) — detailed auth flow documentation for writing accurate test cases

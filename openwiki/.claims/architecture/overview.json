@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:528f5791ec0bdc03e44803ca571458d86152b53e6d2911364266e1de8acf0e09",
+  "claims": [
+    {
+      "id": "claim_b9d435e589174b0383e7a686d348e899",
+      "statement": "RhAuthProvider receives consentsOnError from consents-signal.ts as config.onError",
+      "evidence": [
+        {
+          "resource": "repo://src/main.tsx#L13-L14",
+          "version": "repo-lines-v1:sha256:15df80d0e6b2d43a309495532d4cdb7191d5141e148e4fdb0c28ae26dbf79d93:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmM2MyZmJhNGQ4MTI3YzUzNDM1ZDk2OGMzMDBmODRkMzk1MTMyM2QxNmQ1MjVkY2NlOWJhMDBlYWY5ZWVkMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ3YWIxOTQ1ZWM2MjQzOTY1YTMxNmQwOWFiNzRiMjgwN2UzNTBlZTdkYjU5NDkyNDE1OTM3MDg3ZWU4MjJjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzg2MTNmZjczOWQxM2RjNzI0MzI3NDhjNjc4OGI5ZGQ4YTY4MGE4OWI3OGJjNjM4NjQzODVkMGI4NjM0NGIxYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDg5YTRlMjgxMDgyNDMxNmMyMGNjZTcyZDM4OGFiOGNiODY0ZjY2OTg5OTY1Mjg4OWFlMTYwM2Q4MGZmODg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8e978a84f18240e6a9e86daeefd1160d",
+      "statement": "ConsentsGate sits above the router in App.tsx, wrapping the route element",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx#L55-L57",
+          "version": "repo-lines-v1:sha256:558e2563dc0ddb6994fedc76258ea67c43f5c374cd9cc494ed7814f29fcf342e:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTVjY2NhM2JmOTMwODYwZjhiN2NiOTgzY2I3ZmRhNmVkMjIzMzAwOTc2NjljYmQ3NWQzMmE2MjUyMjJlZmJiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDZkYzY0ZTM3NDI2MTc4MjE2MWMyZTUzNmU3NWUzODVkMzgwNjRmNjM0NWJhZDE0ZTJhN2Q5MjgxN2VhYjAzMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODJiMWE0MmE3N2YzYTVjNjVjYmZiYjNkZDUyNTkzMWI1M2YwNjg1ZTAyNTY0N2Y1YzVhN2FjYmYxNjYyYjQxNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://src/App.tsx#L8-L8",
+          "version": "repo-lines-v1:sha256:1a2e9c7ca5300cf052f342685948224a5cbf19a2145fba8a27b1b4047ba210dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWEyZTljN2NhNTMwMGNmMDUyZjM0MjY4NTk0ODIyNGE1Y2JmMTlhMjE0NWZiYThhMjdiMWI0MDQ3YmEyMTBkYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWEyZTljN2NhNTMwMGNmMDUyZjM0MjY4NTk0ODIyNGE1Y2JmMTlhMjE0NWZiYThhMjdiMWI0MDQ3YmEyMTBkYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTJjZDU5NDRlM2FlZDVhOTQ1ZDIyNTI1Zjc2ZWM2NDQ1MzdkZGUwN2ZkOTE0ZTIwOWZjZGY0MWIxZTU0MGY0NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmY4ZTM5NDQyNzA3NDA2YzczOGMyM2I4YjQ3NmY4NGRkNWJhMmUzMWYyM2NmYzhmYTA2MjdjYWE5ZmJhZDI2YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d7a1f60f4fe3471cbe01092c222358ad",
+      "statement": "ConsentsGate is placed above the router because a blocked user has no session and AuthGuard would bounce them to the login page",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx#L55-L56",
+          "version": "repo-lines-v1:sha256:4c850cce70c9e6fe9ed46d0cb5aee121be1efb48dcaf3f6871b8c4ab153b31c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTVjY2NhM2JmOTMwODYwZjhiN2NiOTgzY2I3ZmRhNmVkMjIzMzAwOTc2NjljYmQ3NWQzMmE2MjUyMjJlZmJiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTIyMTkwMTMxYmYwZDc5NTBjZDQ5NTQ4MmUxMjFmNzBiMzQ5YjBmMjExOWFkN2ViZTAwMWFhNzMzZWJlYWY5MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODJiMWE0MmE3N2YzYTVjNjVjYmZiYjNkZDUyNTkzMWI1M2YwNjg1ZTAyNTY0N2Y1YzVhN2FjYmYxNjYyYjQxNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzJkY2ZlNTgyMDc1ZTA3NTczNGFhMzRlYmU4ZWYzNjYwNDBkYjhjMjBmMzAyZjAzNjNlZjM0ZmQwYWE2YTAwMSJ9"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L11-L13",
+          "version": "repo-lines-v1:sha256:f1e57b2574b8ffb7ea1924cac3335df17c39ffaaacc6485307bb41ad2db36541:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDY3NjQyYWYzYjQ1YzA1NjY1NjUyY2NiMTExYjJiMzhhMzI5MDE0ZWViYjQxYzZhYTAxNzkyODkwMGI2NmMxZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJiMmM5YWE4NmIwMTU3YmI3MDVhODg3NjU5MzJhZTQwNDA1NzQwODFkMjIyYWZhMzY3YmQ5YWU0MTVjMzJjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTQ1MmUxMmU3YjFkYzk0NThmNGNjZTNhMDAwNDY3ZThjMDUxYTNjN2Q1MGNkNWU3YjVhNjkyOWVkNGY3YjhhMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzI2MGQ3ZjkzNDliNDNiOGJlZTkwNjU1Y2QwMzdlNDk2OWU3ZDk5MWZmMzAzMjA2YzkxMmQyOTQzYWEzZTJmOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_000a1854cc064d54ba80138f370957e6",
+      "statement": "consentsOnError sets the blocked flag when the API returns HTTP 451 status",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts#L47-L48",
+          "version": "repo-lines-v1:sha256:6e5818c1554c0fc6a7a87b13d7c19b8ce110a5203ee70be72a0ac348cc57a43f:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjVjZjc2YjZhOTQwZTk0ZmJkMGU0YjBjYmFiMzVmYzc0NTM3NGU2MDAxNDVkY2QxMmJlMDc4NGRiM2M3ZWY0NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjIxZjkyNTE4ZmVjMjdhMjk5NmY5MjE1YmMzOWNlZmVhMzM3OTRiNDk4NjkyNGIyN2Y2MTkwNDNiZDFlZmEzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDM5NmU0ZTM3MjU3NTEzYTk4ZWY4ODY1ZjA1ODFhOGMyMTAyYjhiM2JkODlmNGRkOGFkYTZjMzBmNGU1YWNhZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fb5836d3a9a6492ca631e7453553807c",
+      "statement": "ConsentsGate subscribes to the blocked state via consents-signal and renders an acceptance overlay when blocked",
+      "evidence": [
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L29-L29",
+          "version": "repo-lines-v1:sha256:022f3fd32073e2484c7f46ecfc6fd6ed8ff46fc3137061e891341e3ef68d2216:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDIyZjNmZDMyMDczZTI0ODRjN2Y0NmVjZmM2ZmQ2ZWQ4ZmY0NmZjMzEzNzA2MWU4OTEzNDFlM2VmNjhkMjIxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDIyZjNmZDMyMDczZTI0ODRjN2Y0NmVjZmM2ZmQ2ZWQ4ZmY0NmZjMzEzNzA2MWU4OTEzNDFlM2VmNjhkMjIxNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzYzYTNjZjljODVkNTFjZTA0MGZiZTI5NTIwYTJlNDZhNGVmZjlhMjY5YmVjODZlNmYxZjRlOGJlZTBjNzIwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzY1NDBhMGFkNDBhYzNkMGNmNWY2NTc1NDkwZjk1MjRjYWE3YzQxODRmYjBlNzFiOTdkYmVhOGEwNzhiZTgxNCJ9"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L31-L31",
+          "version": "repo-lines-v1:sha256:31b60a38932f45fd115028a889f0e3b6f7059d66cc70bc93235ad638c9a2f838:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzFiNjBhMzg5MzJmNDVmZDExNTAyOGE4ODlmMGUzYjZmNzA1OWQ2NmNjNzBiYzkzMjM1YWQ2MzhjOWEyZjgzOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzFiNjBhMzg5MzJmNDVmZDExNTAyOGE4ODlmMGUzYjZmNzA1OWQ2NmNjNzBiYzkzMjM1YWQ2MzhjOWEyZjgzOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzIwZDM0MjA4N2E1NGY3MzdjZGNmMjAyZTlmZTBjNDJlMDlkMGNhYmNiZmI1NGU5MDAyZmRkMDY5YjQxNWE3ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjM3ODFlNWY3ZmQ1ZjI5YmMyZWE1OWVhMWNhNDBiZDBlM2NjN2I5NDViMTgzZjFlZTdjYzAyMjRiNDIwOWVkMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5f5ec195e5d74bb8b6fbc00542db8a50",
+      "statement": "ConsentsGate acceptance flow calls auth.acceptConsents() and auth.checkSession() to reload the session after the user accepts consents",
+      "evidence": [
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L41-L44",
+          "version": "repo-lines-v1:sha256:5be4a383bfa34176a17685aa9c7fafe6a8f88929ab6f4d43a6a72d47abbae878:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjlmNzU3MmI1OTJlYmFiYTAyNTg5MmI3ZTY5YjVhZDI4NDRhZjc1ODk3NTNkOTk0NDUwYjA5ZmRkN2Q5ZGFiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTllYmI2NDFmOTc0OTljZDQ0NTUyMGYyMzM4YWFjYWYxMTQ5NTYzYTU1NWQ5Y2Y2YjdjNWE0NjRhZjU0MDFjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmY4NGZlNTQyZjA0NDhkZWViZTIzZGI2YmU2NjVjMDhhMGU0ODAwOTVkYTYzZjQyZDllMDk4MjdkNGY5MmZmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTYwMGZmMTA3NjFiMmE2N2YxZjAyMTJjNDAwN2NjZDQyYzY4YjMwOWY3ZDdjZmNiMTBkMmM0NDg5NjNkYzA5MyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.6.0",
+    "at": "2026-09-25T09:42:01.514Z"
+  }
+}

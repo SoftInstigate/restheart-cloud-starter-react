@@ -3,6 +3,31 @@ type: Source Map
 title: Source Map
 description: File-by-file inventory of the RESTHeart Cloud React starter, mapping every source file to its purpose and cross-referencing documentation.
 tags: [source-map, reference, files]
+verified:
+  - by: openwiki/0.6.0
+    at: 2026-09-25T09:42:01.514Z
+sources:
+  - id: openwiki-source-85dc2a049a0943b56218c045
+    resource: repo://public/privacy.html
+  - id: openwiki-source-ad504d4d06a9b4cc6851d32b
+    resource: repo://public/terms.html
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
+    resource: repo://rhc.setup.ts
+  - id: openwiki-source-54631e6ebf1d3b815c4a5eed
+    resource: repo://src/App.tsx
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-41263ba637a35415c845f5fb
+    resource: repo://src/ConsentsGate.css
+  - id: openwiki-source-9674080b0675d512256b80bc
+    resource: repo://src/ConsentsGate.tsx
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+  - id: openwiki-source-95bfccfd0c712f6e72040e0d
+    resource: repo://src/main.tsx
+generated: { by: "openwiki/0.6.0", at: "2026-09-25T09:42:01.514Z" }
 ---
 
 # Source Map
@@ -24,8 +49,8 @@ Complete inventory of repository source files. Each entry links to the page wher
 
 | File | Purpose | See Also |
 |------|---------|----------|
-| `src/main.tsx` | React root creation. Renders `<StrictMode>` → `<BrowserRouter>` → `<RhAuthProvider>` → `<App />`. Imports `styles.css`. | [Architecture](architecture/overview.md) |
-| `src/App.tsx` | Fragment token capture on mount, API URL validation gate, renders `ConfigPage` or route tree via `useRoutes()` | [Architecture](architecture/overview.md) |
+| `src/main.tsx` | React root creation. Renders `<StrictMode>` → `<BrowserRouter>` → `<RhAuthProvider>` → `<App />`. Imports `styles.css` and passes `consentsOnError` as `config.onError` to the auth provider. | [Architecture](architecture/overview.md) |
+| `src/App.tsx` | Fragment token capture on mount, API URL validation gate, renders `ConfigPage` or route tree wrapped in `<ConsentsGate>` via `useRoutes()` | [Architecture](architecture/overview.md) |
 | `src/ConfigPage.tsx` | Setup wizard shown when `apiUrl` is invalid. Guides user to create a service at `cloud.restheart.com` and edit `environment.ts`. | [Operations](operations/runbook.md) |
 | `src/routes.tsx` | Route definitions as `RouteObject[]`. Lazy-loaded components, feature-flag conditional inclusion, `AuthGuard`/`PublicGuard` wrappers. | [Architecture](architecture/overview.md) |
 
@@ -49,6 +74,27 @@ Complete inventory of repository source files. Each entry links to the page wher
 | File | Purpose | See Also |
 |------|---------|----------|
 | `src/ui/alert/Alert.tsx` | Shared feedback component. Props: `type` ("error"/"success"), `children`, `onClose`, `dismissible?` (default `true`), `autoDismiss?` (default `4000`ms). Auto-dismisses after the timeout. Uses `.form-error` / `.success-msg` class hooks and correct ARIA roles (`alert` / `status`). | [Auth & Teams](domain/auth-and-teams.md) |
+
+## Consents Gate
+
+The consents gate is a full-stack feature that requires users to accept the current Terms of Service and Privacy Policy before using the app. It comprises client-side components that display an acceptance overlay, a signal module that tracks the blocked state, and server-side setup scripts that configure the Guards rule, permissions, and schema. See [RHC Setup Workflow](workflows/rhc-setup.md) for the complete setup procedure.
+
+| File | Purpose | See Also |
+|------|---------|----------|
+| `src/consents-signal.ts` | Client-side signal module. Maintains a `blocked` boolean and a listener set. Exports `isBlocked()`, `setBlocked()`, and `subscribe()` for state management. Also exports `consentsOnError` callback (for `RhAuthProvider`) that raises the flag on any `451` response from the service. | [Architecture](architecture/overview.md) |
+| `src/ConsentsGate.tsx` | Overlay component rendered above the router in `App.tsx`. When blocked, replaces the entire app with an acceptance form containing two checkboxes (ToS and Privacy Policy links) and an "I accept" button. Calls `auth.acceptConsents()` to record acceptance and `auth.checkSession()` to refresh the session. Also provides a "Sign out" option that clears the blocked flag. | [Architecture](architecture/overview.md) |
+| `src/ConsentsGate.css` | Styles for the consents overlay. Fixed positioning with `z-index: 400` (above header, dropdown, and navigation progress bar). Modal dialog with no close button or backdrop click — only acceptance or sign-out exits. | — |
+| `public/terms.html` | **Placeholder** Terms of Service document. Plain HTML served from the `public/` directory with no build step. Includes theme syncing (reads `rh-theme` from `localStorage`) and a version string (`2026-07-01`) that must match the version in the Guards rule and ACL permission. | [RHC Setup](workflows/rhc-setup.md) |
+| `public/privacy.html` | **Placeholder** Privacy Policy document. Plain HTML served from the `public/` directory with no build step. Includes theme syncing and a version string (`2026-07-01`) that must match the version in the Guards rule and ACL permission. | [RHC Setup](workflows/rhc-setup.md) |
+
+## Service Setup
+
+These files configure the RESTHeart Cloud service to match the starter's requirements. They are run with the `@restheart-cloud/cli` tool (`rhc setup`). The consents setup imports and extends the base accounts setup, adding the Guards rule, permissions, schema, and claims required for the consents gate.
+
+| File | Purpose | See Also |
+|------|---------|----------|
+| `rhc.setup.ts` | **Base accounts setup**. Configures the RESTHeart Cloud service for the starter's authentication needs: installs the accounts feature, sets `app-name` and `frontend-url`, enables/disables features (registration, verification, password-reset, invitations, OAuth) based on `environment.features`, configures Google OAuth credentials (when enabled), and adds the app origin to the CORS allowlist. Feature flags are derived from the app's `environment.ts` to prevent drift. | [RHC Setup](workflows/rhc-setup.md) |
+| `rhc.setup.consents.ts` | **Consents gate setup**. Imports and extends `rhc.setup.ts` with four additional documents: a JSON Schema for user documents (including `latestConsents` and `consents` history fields), an ACL permission that allows users to PATCH their own consents (with server-side version stamping via `mergeRequest`), JWT claims configuration (`latestConsents/tos` and `latestConsents/pp`), and a Guards rule that blocks authenticated users who have not accepted the current versions (HTTP 451). Versions are defined once as `TOS_VERSION` and `PP_VERSION` constants. | [RHC Setup](workflows/rhc-setup.md) |
 
 ## Page Components
 

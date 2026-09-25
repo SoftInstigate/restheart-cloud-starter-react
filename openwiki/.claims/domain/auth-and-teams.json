@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:6fc456d885131d93c0d14e6fdfd47d1f33351c051126e677becab9bdce8f0326",
+  "claims": [
+    {
+      "id": "claim_76610881b29040089c096f13ed9ec890",
+      "statement": "consents-signal.ts exports four items: isBlocked() (returns boolean), setBlocked(next) (sets flag and notifies listeners), subscribe(listener) (registers callback, returns unsubscribe), and consentsOnError (onError handler that raises the flag when err.status === 451). It is a plain module with no React dependency, so consentsOnError can be passed to RhAuthProvider before any component renders.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts",
+          "version": "repo-file-v1:sha256:2f4dcd9869e64c98d92d3372d2381d7c7c78b85f0c3b1a351dfc3e74eec94b87"
+        },
+        {
+          "resource": "repo://src/main.tsx#L6-L7",
+          "version": "repo-lines-v1:sha256:b96f2ee8de95ab412eb69a61fa38d2ce6cb0af2e79ae1f713c34e207c11e49a9:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTljNDJiNGU3MTE0OThhNzI2MTM2ZGRjOTJjYjEyZTEzMGM2MTBmODFjYmM0YzE1YjM1N2YyYjQ4NzZhMmY3ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkYWMwZTYyOTVmYTBmMjI4OWY4OTU0MDg1MTMwOGJjYzdjZGI2Y2QxN2MwZDJmOWMzZGFkZjgyYWNlNjY0NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDUzZjQ3Njk1ZDA3OGZiODA0YWU3MmEzZDU3ODM1M2E3ZDJkZDQ0N2Y3NzExNGYwZTI1NzdiNTIyMzE3NDk0ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWU2NDM4YTkxMWY4N2I5ZmQ0ODg5NmY0YTU3MTMwMmNkNDdlZThjZDhiYjg0ZDYzMzUxZTQ4MDg0NjlmYTc5ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d2dd7b3b48244cf4aab84158e5adacc8",
+      "statement": "ConsentsGate is rendered above the router in App.tsx (not inside Shell) because a blocked user has no session - the service answers 451 to /users/me too - so AuthGuard would bounce them to login before they could see any overlay.",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx#L55-L57",
+          "version": "repo-lines-v1:sha256:558e2563dc0ddb6994fedc76258ea67c43f5c374cd9cc494ed7814f29fcf342e:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTVjY2NhM2JmOTMwODYwZjhiN2NiOTgzY2I3ZmRhNmVkMjIzMzAwOTc2NjljYmQ3NWQzMmE2MjUyMjJlZmJiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDZkYzY0ZTM3NDI2MTc4MjE2MWMyZTUzNmU3NWUzODVkMzgwNjRmNjM0NWJhZDE0ZTJhN2Q5MjgxN2VhYjAzMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODJiMWE0MmE3N2YzYTVjNjVjYmZiYjNkZDUyNTkzMWI1M2YwNjg1ZTAyNTY0N2Y1YzVhN2FjYmYxNjYyYjQxNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L11-L17",
+          "version": "repo-lines-v1:sha256:c2bf8fe46db35d31ecee66ce3b09a4a601ed1e9800f1af875909caac5509adce:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDY3NjQyYWYzYjQ1YzA1NjY1NjUyY2NiMTExYjJiMzhhMzI5MDE0ZWViYjQxYzZhYTAxNzkyODkwMGI2NmMxZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTcyYTQyOTM4MmIyZTE0NzE4ZTBlMzdiMDU3MGE4YTE3MDI5OTFmY2Q4NDk4Y2Q4NDA2MGE4YmY0ZjA1MDE3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTQ1MmUxMmU3YjFkYzk0NThmNGNjZTNhMDAwNDY3ZThjMDUxYTNjN2Q1MGNkNWU3YjVhNjkyOWVkNGY3YjhhMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWZlMWU3OTc5NTAwYTI3YjM4YzFiMzMxMjIzMWNlNGZjODc3MjQxMTVjNGU4YTg4ZGIxZjk4NTIyNWIxNDgwNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4a963ea2f3ed4642921aa055f6978049",
+      "statement": "The consents gate fires automatically with no client-side probe: RhAuthProvider's session restore calls GET /users/me, and if the user has not accepted current consents, the server's Guards rule answers 451. The onError callback (consentsOnError) raises the blocked flag in the signal, and ConsentsGate subscribes to that signal to render the overlay.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L259-L294",
+          "version": "repo-lines-v1:sha256:61bb3204eef5b835755b0b6f6ddeb8cd77fc51636fd8e642903f24bd6671900f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNmE0MTQ1MmIwMTVkNzk5Y2ExMDkwNTI5YWQwYTI2MTk1MjcwZDFlOTdiMjMwZDY5N2E3NGNjMzEzYzZhNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmZjA4YjUzZGJiNWUzN2MzNTIxMDllODQzOGQxMmYyNzVmNWYwYTJkZjZiZWVhMWExYjYyNDYyNDI1N2ZiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1ZTI2Y2Q5MjM2NmY2MGQ4ZWQ5MmQwMjM5ZjA3ZmVmNzRjYWMxNGFhNjlhZGRmOWMyY2MwZDExZWIwMGE0NjMifQ"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L29-L29",
+          "version": "repo-lines-v1:sha256:022f3fd32073e2484c7f46ecfc6fd6ed8ff46fc3137061e891341e3ef68d2216:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDIyZjNmZDMyMDczZTI0ODRjN2Y0NmVjZmM2ZmQ2ZWQ4ZmY0NmZjMzEzNzA2MWU4OTEzNDFlM2VmNjhkMjIxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDIyZjNmZDMyMDczZTI0ODRjN2Y0NmVjZmM2ZmQ2ZWQ4ZmY0NmZjMzEzNzA2MWU4OTEzNDFlM2VmNjhkMjIxNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzYzYTNjZjljODVkNTFjZTA0MGZiZTI5NTIwYTJlNDZhNGVmZjlhMjY5YmVjODZlNmYxZjRlOGJlZTBjNzIwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzY1NDBhMGFkNDBhYzNkMGNmNWY2NTc1NDkwZjk1MjRjYWE3YzQxODRmYjBlNzFiOTdkYmVhOGEwNzhiZTgxNCJ9"
+        },
+        {
+          "resource": "repo://src/consents-signal.ts#L39-L48",
+          "version": "repo-lines-v1:sha256:678a3a4e62ae0ee0e0faec946a9774586b6bad8b02507b2f8a7ccc46738539b7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyMWY5MjUxOGZlYzI3YTI5OTZmOTIxNWJjMzljZWZlYTMzNzk0YjQ5ODY5MjRiMjdmNjE5MDQzYmQxZWZhMzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAifQ"
+        },
+        {
+          "resource": "repo://src/main.tsx#L13-L13",
+          "version": "repo-lines-v1:sha256:a8f3c2fba4d8127c53435d968c300f84d3951323d16d525dcce9ba00eaf9eed1:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmM2MyZmJhNGQ4MTI3YzUzNDM1ZDk2OGMzMDBmODRkMzk1MTMyM2QxNmQ1MjVkY2NlOWJhMDBlYWY5ZWVkMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmM2MyZmJhNGQ4MTI3YzUzNDM1ZDk2OGMzMDBmODRkMzk1MTMyM2QxNmQ1MjVkY2NlOWJhMDBlYWY5ZWVkMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzg2MTNmZjczOWQxM2RjNzI0MzI3NDhjNjc4OGI5ZGQ4YTY4MGE4OWI3OGJjNjM4NjQzODVkMGI4NjM0NGIxYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTFkYzg1NDQ4ZTJhN2EwODVhNmQyMDAwMTg3ZDhjMTBhNjcyODIzYjQ0NmM4NzJhZDdjN2FlNjM3NjFjNDFkNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_05224aa9695e43ae8ccaa23834d34a93",
+      "statement": "The ConsentsGate overlay is UX, not enforcement: removing it with dev tools does not bypass the 451 block. The server-side Guards rule is the actual enforcement, returning 451 Unavailable For Legal Reasons for every authenticated request from a user who has not accepted the current ToS and PP versions.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L259-L294",
+          "version": "repo-lines-v1:sha256:61bb3204eef5b835755b0b6f6ddeb8cd77fc51636fd8e642903f24bd6671900f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNmE0MTQ1MmIwMTVkNzk5Y2ExMDkwNTI5YWQwYTI2MTk1MjcwZDFlOTdiMjMwZDY5N2E3NGNjMzEzYzZhNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmZjA4YjUzZGJiNWUzN2MzNTIxMDllODQzOGQxMmYyNzVmNWYwYTJkZjZiZWVhMWExYjYyNDYyNDI1N2ZiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1ZTI2Y2Q5MjM2NmY2MGQ4ZWQ5MmQwMjM5ZjA3ZmVmNzRjYWMxNGFhNjlhZGRmOWMyY2MwZDExZWIwMGE0NjMifQ"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L15-L17",
+          "version": "repo-lines-v1:sha256:85a443e34ddba67898c2e1e9351190ef9425d2c6b523bbd1a2eaf348728d7e8c:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVjYjAwODMzMzRjNDAxZTQxN2Y4YWRmNDlmYjJiYWNmZTg1MzQzNGFmNjA2N2MzZTA5ZmQ3OWFiOWI5YjkyZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTcyYTQyOTM4MmIyZTE0NzE4ZTBlMzdiMDU3MGE4YTE3MDI5OTFmY2Q4NDk4Y2Q4NDA2MGE4YmY0ZjA1MDE3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYThkNDViN2E2YWI4ZGYxOGE5NzA4NmU4ZDIyZGI4NTExN2UzMDU3NTE2NTE5MjEwYWY2NmI5MjEyOWM3NGIxMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWZlMWU3OTc5NTAwYTI3YjM4YzFiMzMxMjIzMWNlNGZjODc3MjQxMTVjNGU4YTg4ZGIxZjk4NTIyNWIxNDgwNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f50c5050cace4031ab95421a2494b9ba",
+      "statement": "ConsentsGate renders two checkboxes (ToS and Privacy Policy), an 'I accept' button (disabled until both are checked), and a 'Sign out' button. Acceptance calls auth.acceptConsents() then auth.checkSession() to reload the session with the new token containing consent claims, then clears the blocked flag.",
+      "evidence": [
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L33-L51",
+          "version": "repo-lines-v1:sha256:36821e11be376177dcd4b12efe71f864ef22254c37efae989582b05cea96fbf5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNzNiNDlkMmMwMmMwMDlmY2UyODdlODFhNDE4ZGIxZTU2YzgzMDllMmJjODY5MWRiYmI5NDFkMWE0MzlkZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2NTQwYTBhZDQwYWMzZDBjZjVmNjU3NTQ5MGY5NTI0Y2FhN2M0MTg0ZmIwZTcxYjk3ZGJlYThhMDc4YmU4MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhNmM4OGYyNWQyYjYxNDFiZDg4YTk2NmFkYjZiM2RmNzQxOTRmZGM3M2M5YjQ5MTM5MzliMmE1MmEzZTk5NjgifQ"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L60-L99",
+          "version": "repo-lines-v1:sha256:b1abd9689ca07fdcf9bd151ff0af05ca65d8c8b7109c0597f12a9389115a46e6:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MjE2ZThlOWMwYTFhNjhkMDZjMmZiYWE1ZmQyMTM5NDgyYjhlZmQwYTE5MzE1YjkxNWU2Y2NlODQ5ZDg5ZGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0Y2MxODdkZjg4MDE2MWUwNjYwNjNhNjJhMTAxNWU4ZGQ1MmUzOGU5M2YxMjFjOGQyYTViMDc3YzI0NmVmN2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNTcwOWU3NjQ1NWVkMDU4M2Y5ZTM1MmZiYzQ3NzZhMzQ0NTE2M2Q0MWM0NDdmMDBkMjE5NDI1ZTNkMDljMjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1ZTI5MGNlMTQxNmUyNjkyY2U4OTkwMThiMWMxNTQxZTMxY2UyMmUwYzVmM2Q2NzRmMzlhNTNlMWJhODVmOWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d2bc4b08e2dc475c98eef33e1f7fedc5",
+      "statement": "rhc.setup.ts imports the same environment.ts as the app and derives server-side feature configuration from environment.features, preventing drift between client-side flags and server-side toggles. Turning a flag off and re-running rhc setup turns it off on the service as well.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L14-L29",
+          "version": "repo-lines-v1:sha256:1f4cc76de3f1cbccca94eaeae70f16dca626cdb421dc55c1e467f36857099bc3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzNGJiNzg0ODhjYTcyYTRkM2Y2YzQ3ODAxOGY2MmI2YjNlNmMwMzdiMmM4ODZlMzNjOGIyNzUxNzk3NTA1OWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4NzY2OTk2YWM5ZDkyZjdkMjlkNzQxZGViYzA1ZDZiMDA5NmU1YjViZWY3OWJmZDgzYmVjYTQ5Yjg3YmIyNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1MTgzN2JjZDIzMDMwOTU3ODA3YTI0ODdjYTMyMzc4Nzc0OTg2ZWRmMmQ1OWE1ZmVmNzRjNWUwMzU0NmVkMzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NzAxOTlkZDExNTU1ODljMDQ0YzgzNzhkMWM3MWRkZmEzNGI1NjQ2N2QwNTMxYmRkYTI3NWMwMjNiYzczMzkifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.ts#L34-L34",
+          "version": "repo-lines-v1:sha256:8523691b7ab1bdafc483887735d03b385458143ee675f508575aef0fc686c31b:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODUyMzY5MWI3YWIxYmRhZmM0ODM4ODc3MzVkMDNiMzg1NDU4MTQzZWU2NzVmNTA4NTc1YWVmMGZjNjg2YzMxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODUyMzY5MWI3YWIxYmRhZmM0ODM4ODc3MzVkMDNiMzg1NDU4MTQzZWU2NzVmNTA4NTc1YWVmMGZjNjg2YzMxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmYxODgyNmNjYjYxYTQ5ZjM2NDQ5NDQzMmQ0YWZmOWE1NTkwODJkODliODVhMzc4YzNiOTgyMzY4ZTAzZmQ0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmQyNDFhYmRiY2VmZjBhNGI1OGQzZjA1OTY3OTk4YjQxYzY0NjE5NzVlMGI1ZDkwMTE2ZTViNDIxYThlMmY3MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bc745b7399674423b7814869ad356600",
+      "statement": "The consents gate server-side setup (rhc.setup.consents.ts) defines TOS_VERSION and PP_VERSION constants, a user schema requiring latestConsents, a permission allowing users to PATCH only their own consents field with mergeRequest stamping versions and timestamp, and a Guards rule blocking authenticated requests when either version does not match.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L134-L160",
+          "version": "repo-lines-v1:sha256:152607e653da37f5f18e11d56b3e53c87e63a611c2dfc3bc59005995c4e38be8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5NTQ3N2VkYWI3MTU2NTFlZjNmZDBhOGE1ZjgzYzYwMTM1YTIwYjNhMmI3N2MxYTc5N2EwZjZjODM1MmFkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZjVhODU2NTdiOGU4NTQwZjZmNWYyZWM3YjY2YjY2YWNiNzc3ZmJlNjQyY2E5M2I5N2QyNWU4NjBlZDM4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmNjI4MGZjMDFmYzc1OWFhZGY4ODgwY2RmM2E4M2Q1YmIxYzZkNmNiYTJkNjdiZWEzOTRlZDUyMDI1ZWEzZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1MTM5YmE0ZDJjMmQ3MDhiZGE0MTA5ZmU3OGM2MWI0NjI3ZmExYTgxNTY1NGQxNmQzMTg0YmQxN2U0ZTRmODkifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L194-L222",
+          "version": "repo-lines-v1:sha256:d691885900551d601f5fe1163ab4cf3a3794f941d8ea4050d1ed2ae1e06c83e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzNWM2MjE2YjNjYmQ1NDZkM2I2OTFhN2NiMjExNjZjZDA0Yzc5OTlmZGI1MzY5OWUwZGI3ODYwNjc0NDgwNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2NzdkMmYwMzFlOThiNWU5MTFjNWFkNGZiOWIyMTg2YTkzMjUyMmU4ZjQ2ZWU0MGJhYmZhZTNkYTAwZmMxMjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NDliNTZkYWQ2OTczMWRlYWFhMzc3NDFiYWUzNWM1NWVlMjY5YWI0ZWI4ZTRhZDM1ODQ4YTYwNWFkYTViNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyMTIzNzI5N2Y0ZjQ0MGE2NWVjN2EyN2Y1YTBiYWUyYzMyMTRhN2U4MWIwNzFhMTRlNjZiMTBhYjMxMzljNjkifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L55-L56",
+          "version": "repo-lines-v1:sha256:24db7d5a25a2c15a2a00dcca5d6cf4d76d1911051383c317e9f58d9109f3e857:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTYxNDM4ZjE1MTViZmM4ZWJiZTE1ODQ4ZWYyMTY1MGQ2MTAxNzEzZTFhNjExNmJhODIwNzBhYjY1NDA0NGZkYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDgzNWM2NTg1YWEwYjEwNjE1ODI1MzMzN2RhNDdjZjZiNmIzZjJjODZhZjJlMmUzOTkzZGRiMjIwNWRiNGMyYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmRmNTM5ODRlYzgwMDIzOGYxMzE2OGViMjAxZDU5YzBiYjkzY2U2YzJlY2U3MDJlYmI2MWRjYmU1MjE2NmM4ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjNiZmNkOWYwOWMzYzU5ZDEwNGE2YjFiZGIwODM1OTMxNzUxZjRkY2UzYjNiNGYxNzEyM2JkMWRhMTAzNDk1NCJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L83-L116",
+          "version": "repo-lines-v1:sha256:699a29c1d586c6146f19c931fc3b6c857702bb9239bf464639bbfd377700f4a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiM2IzMWZjM2FjZDY5Yzc0OGE5NmU5MTc3ZjBkZDU3N2NkMjJjMGU0MTNmYjllNTJlYjUyZDdlY2RjMmRhYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIwOWNlNWRiN2Q5ZjhhN2FlNjVjYjhhYmI5YTU2ZDQyOTdhZDFjNjE0MWJlZDViMjEyNWQzMzk0ZDUwYWFiOGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiMDc1OTlkMDQxOTk2M2E1ZDcyZDc4OTFiYzk1YzlmOTEwYWE3MzE0MTRiYmYwOTYwNGZjNTIwOTZjMDBmODcifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.6.0",
+    "at": "2026-09-25T09:42:01.514Z"
+  }
+}

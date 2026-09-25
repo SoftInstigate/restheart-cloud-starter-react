@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f727f9fdb1b8981da3559f6e321bf013c39b4509a452183a341f8c0a7843f54e",
+  "claims": [
+    {
+      "id": "claim_9908a901c69f413da38f859fefe5a1bc",
+      "statement": "Two setup files exist: rhc.setup.ts configures accounts features only, while rhc.setup.consents.ts configures accounts plus the consents gate.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L1-L45",
+          "version": "repo-lines-v1:sha256:d8563d9bb0c2c90b7658dcdb3eadf562f4ca62f0291cdbd03fd8313a4cd9835c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzMGRhYTAzZGYyOWM0YTM0ZjdkZThiZWFjNTkwNGVlZTdiNTk0NmY5N2QzNWEzZWZiMDUzN2FkZGZlOTU4ODEifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.ts#L1-L34",
+          "version": "repo-lines-v1:sha256:d00bbb8546fa183be0e1c702182fff7298161ef65d268d305060ce471d9e53e8:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1MjM2OTFiN2FiMWJkYWZjNDgzODg3NzM1ZDAzYjM4NTQ1ODE0M2VlNjc1ZjUwODU3NWFlZjBmYzY4NmMzMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkMjQxYWJkYmNlZmYwYTRiNThkM2YwNTk2Nzk5OGI0MWM2NDYxOTc1ZTBiNWQ5MDExNmU1YjQyMWE4ZTJmNzMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_15bde18ef864432c845ce1a53b40c2c1",
+      "statement": "Feature flags are imported from environment.ts and transformed into server-side toggles, eliminating client-server configuration drift.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L34-L64",
+          "version": "repo-lines-v1:sha256:9a34bc8c68808029da7e44ad4da7cb34c514ef0c2030ac65b0b685a22db3f3ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1MjM2OTFiN2FiMWJkYWZjNDgzODg3NzM1ZDAzYjM4NTQ1ODE0M2VlNjc1ZjUwODU3NWFlZjBmYzY4NmMzMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmMTg4MjZjY2I2MWE0OWYzNjQ0OTQ0MzJkNGFmZjlhNTU5MDgyZDg5Yjg1YTM3OGMzYjk4MjM2OGUwM2ZkNGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUyMmMxZDQyNGM4YmUzYTY1OTA0MzYyMGU0Nzc4NmNlNDQxOTI0NTVmMzI2YTUyNTFlYmY3ZmRiNjA0NDE0N2QifQ"
+        },
+        {
+          "resource": "repo://src/environments/environment.ts",
+          "version": "repo-file-v1:sha256:c8b8bb3d574f916b328a791cfe2774c88a5c72b2f4a8540a0cd26ce3fc48b51d"
+        }
+      ]
+    },
+    {
+      "id": "claim_5dd50c3cbece40a8b0825e5526f8b6e8",
+      "statement": "Each setup step uses a check/apply pattern: check returns true if service already matches desired state, apply makes changes if check fails, ensuring idempotent execution.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L9-L15",
+          "version": "repo-lines-v1:sha256:2bb2e386bec112706822083c944f03c2fbb2711fce986ca9712712fb7b5aedff:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNThkYzNlMWYwMjdiNTI3OWJlZDg1OWQ1YWJlNzY1M2M1NjA4ZjBmNWIxZWJkNWFhNjRlZTIxOWRiM2Y5YTllNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTBmZmE5NjVhMTY2NmIwN2EzY2U2Yjg4MzJjZTY0NDJlNjA5NjNkNGE1YTAzNDQzZDg0NWVkOGUxMTEwNzE1YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjk5M2VkZjViNGIyN2MzZDYzNTBiYWJmMGUzY2RhZWU1MjRjYTIwNzFiZWY5MzFkNTdlOTVhM2NkYjY4OGFiZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2NmZmYyMjNkZGNhMTIxZmNhOTUwYjI2YWIwYzAzM2IzYmNlYmU2NzI5OTM4MGZlOGY4OGM1NzBiYjBlZWRlZSJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.ts#L9-L13",
+          "version": "repo-lines-v1:sha256:d38cb41d3339c6c30267c22c4b170707e4163e6b13b840ba323b3243cfb403d0:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWVmZDgwMGI5ZDdjMTA0M2U1NjU0OTUzNWVlMjc1NzNiMzdjMDczNjgyMjRmZDYxYjAwYzcxNjQ1NjgzZDc0MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjIzY2I0YzEzZDY3NzU5ZDU0Zjc2NzFkNDQwMzQ5NzJkMDkwM2EzOWQwOGFmYWU3M2JiOTgxZWI5YWIwZGNmMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjJlOTFkZGIyZWNhZGYyZWFiNDM1MTAyY2I1M2NkOWQyYTIxYTg3YTBlNzk3N2ZlZTgxNzM3M2ViZGZhN2I4MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODlhNGM1N2I2ZTdjZTJhNDFjYzQ4MWM1ZDY4MmY5NzQxMTY5NWI5YTU2Nzg4MDYxMTk0MzJiNDQwYTUyNzgyNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4767c5798374c148d2a3306848a2297",
+      "statement": "rhc.setup.ts defines 4 idempotent steps: accounts feature installed, accounts configured to match app, Google OAuth credentials (conditional), and origin allowlist.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L82-L185",
+          "version": "repo-lines-v1:sha256:787713ee36e9070df652976754c645426a8afda24743a5be3ac87dd2d3471d0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiNjIxODg0ZTc0ZDY2NDZlMDlkZTY4YzYyOWNjNmIzZmZmYWZjZTJiMjcxNjAxMzZkOTM4MGViMjJhMjg2ZWI0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI3MjEyOWMyNzM1MmI0OTU1NDhiMDcxYWUzNGFiOTA4MTE3Mjg3MzQyOGY2Zjg3ZjU0YjU4MGU1MTUzYzlhYTAyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_a9f0352d41414d89b93ce37290deb09d",
+      "statement": "rhc.setup.consents.ts imports accounts steps and appends 5 more: user schema stored, users collection validated, acceptance permission, JWT claims, and guards rule.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L48-L295",
+          "version": "repo-lines-v1:sha256:f83de42072ec99f27b63f39d1a70ba4a81a0df1071a97886f6930c4a213a4ee7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQ4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJkOTliYzI1ZDRiZDAyZTdlNTE2YTQ0NDM3YTI1Yzg3MzQ5YTU3YzAyYTU5YjU2YzhlZjM5ZWQ4MjU0MzAzOTllIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxMjJiMGIzNGNhZTVjZTFmMmMwN2QxZDFiZmU0ZGRhNmUyMGRlNDZkMThjNmZjMmNkZWY4ZjFmNGQ0YWQ0ZTJkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_d3340490cabd4e1681d32734e5d8e223",
+      "statement": "TOS_VERSION and PP_VERSION constants define document versions, flow into the guards condition and permission mergeRequest, and when bumped require re-acceptance from all users.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L54-L63",
+          "version": "repo-lines-v1:sha256:7ec50a8ee4aa61da743a6dbc21a8018aaaf4b05f5f1de5d595da3f445ba85328:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmZjBjY2Q2OTMyYzE5MWU4Yzc0Yjk2MzQzODk4ZWViZmJjMGFiMTdiNTcxMjJmNDE3ZjIyMDY2ZjZmYTgxYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViZGJjNzViMGM0ZWJhMWVkYzVmNDVhNzQ4NzFkNzM3MzFiNmIxMDU1NmE0ZmUzMjk0NTJmZDVjZWFkMTAxNGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4ZWVlNWVlMzRjMTZjZDQ0YzdmZDMzODZjZDEwYmI5Njk0MDY5ODFhZGE4OTJmOTQ1YmY2YjI0ODJmYjZjYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b96f382dd9c2429db7f79afea4aaff93",
+      "statement": "Versions appear in three places: TOS_VERSION/PP_VERSION constants in setup files, guards condition (derived from constants), and Version YYYY-MM-DD line in public/terms.html and public/privacy.html (manual).",
+      "evidence": [
+        {
+          "resource": "repo://public/privacy.html#L59-L59",
+          "version": "repo-lines-v1:sha256:80d02f34ab84020348c52b748de158547934729d1203127620f9444ae315e57f:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODBkMDJmMzRhYjg0MDIwMzQ4YzUyYjc0OGRlMTU4NTQ3OTM0NzI5ZDEyMDMxMjc2MjBmOTQ0NGFlMzE1ZTU3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODBkMDJmMzRhYjg0MDIwMzQ4YzUyYjc0OGRlMTU4NTQ3OTM0NzI5ZDEyMDMxMjc2MjBmOTQ0NGFlMzE1ZTU3ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWJiNTk2NzdkZjVhMTFiN2E2NDcxYzBjZjU0OGVmODhkN2EyNDc0YWFlZWRjY2UwMjZlNjE5ODYzZThlYWY5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTZjNjJkZTNjM2RhMzA3ODRjOGYwY2E1NDBjYjZhNDliYjdjMjdjODMxYjk1MDc2ZjE0NTkzZDExNTdkYzllNCJ9"
+        },
+        {
+          "resource": "repo://public/terms.html#L59-L59",
+          "version": "repo-lines-v1:sha256:80d02f34ab84020348c52b748de158547934729d1203127620f9444ae315e57f:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODBkMDJmMzRhYjg0MDIwMzQ4YzUyYjc0OGRlMTU4NTQ3OTM0NzI5ZDEyMDMxMjc2MjBmOTQ0NGFlMzE1ZTU3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODBkMDJmMzRhYjg0MDIwMzQ4YzUyYjc0OGRlMTU4NTQ3OTM0NzI5ZDEyMDMxMjc2MjBmOTQ0NGFlMzE1ZTU3ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTYzYzcxYWU0YTRjZGUxOTNiNjc2ZWIxMjEzYTQ3MTY0Y2VmYzE4NWMzOWQzMTZiMjM3NGZhMjBiZTRjYzliYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2Q0MmQ2MTcyOTZjNjIzYmFiYWM3NzhkY2YxNjI4ZDBiYjQ3Mzg0Nzc5Y2QxZmNiNGZjZDAxYzVjODZkY2JlOCJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L159-L159",
+          "version": "repo-lines-v1:sha256:debb09e1610a2aee892bd210f264c54af50a4afbdfb70204b696b66aec28691f:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGViYjA5ZTE2MTBhMmFlZTg5MmJkMjEwZjI2NGM1NGFmNTBhNGFmYmRmYjcwMjA0YjY5NmI2NmFlYzI4NjkxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGViYjA5ZTE2MTBhMmFlZTg5MmJkMjEwZjI2NGM1NGFmNTBhNGFmYmRmYjcwMjA0YjY5NmI2NmFlYzI4NjkxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGQ0NzAyNWY4NzVkNmFjMzE4NTMzNzA0MWU2YmYxNWRiMWM0MGU4NzllN2I1YTcxN2ZmY2M5YzAyYzkwZTRjNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzVlZjI1MzUzMjg2MTAzZjgwNGMzNjcwYjk2YjRmZjA3MzkxM2NkODJjYzhiZjA3OTZmMDg2NzljZGVjNzMxZCJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L54-L63",
+          "version": "repo-lines-v1:sha256:7ec50a8ee4aa61da743a6dbc21a8018aaaf4b05f5f1de5d595da3f445ba85328:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmZjBjY2Q2OTMyYzE5MWU4Yzc0Yjk2MzQzODk4ZWViZmJjMGFiMTdiNTcxMjJmNDE3ZjIyMDY2ZjZmYTgxYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViZGJjNzViMGM0ZWJhMWVkYzVmNDVhNzQ4NzFkNzM3MzFiNmIxMDU1NmE0ZmUzMjk0NTJmZDVjZWFkMTAxNGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4ZWVlNWVlMzRjMTZjZDQ0YzdmZDMzODZjZDEwYmI5Njk0MDY5ODFhZGE4OTJmOTQ1YmY2YjI0ODJmYjZjYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bc9d92874ad640189b4f88c0e2ea367a",
+      "statement": "The guards condition blocks authenticated users who haven't accepted current versions while excluding anonymous callers, auth/token endpoints, and the acceptance PATCH request.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L134-L160",
+          "version": "repo-lines-v1:sha256:152607e653da37f5f18e11d56b3e53c87e63a611c2dfc3bc59005995c4e38be8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5NTQ3N2VkYWI3MTU2NTFlZjNmZDBhOGE1ZjgzYzYwMTM1YTIwYjNhMmI3N2MxYTc5N2EwZjZjODM1MmFkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZjVhODU2NTdiOGU4NTQwZjZmNWYyZWM3YjY2YjY2YWNiNzc3ZmJlNjQyY2E5M2I5N2QyNWU4NjBlZDM4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmNjI4MGZjMDFmYzc1OWFhZGY4ODgwY2RmM2E4M2Q1YmIxYzZkNmNiYTJkNjdiZWEzOTRlZDUyMDI1ZWEzZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1MTM5YmE0ZDJjMmQ3MDhiZGE0MTA5ZmU3OGM2MWI0NjI3ZmExYTgxNTY1NGQxNmQzMTg0YmQxN2U0ZTRmODkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_83264c4be98a42ae9094174707c141f6",
+      "statement": "The acceptance permission uses mergeRequest to stamp TOS_VERSION, PP_VERSION, and acceptedAt timestamp server-side, preventing client-side manipulation.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L194-L222",
+          "version": "repo-lines-v1:sha256:d691885900551d601f5fe1163ab4cf3a3794f941d8ea4050d1ed2ae1e06c83e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzNWM2MjE2YjNjYmQ1NDZkM2I2OTFhN2NiMjExNjZjZDA0Yzc5OTlmZGI1MzY5OWUwZGI3ODYwNjc0NDgwNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2NzdkMmYwMzFlOThiNWU5MTFjNWFkNGZiOWIyMTg2YTkzMjUyMmU4ZjQ2ZWU0MGJhYmZhZTNkYTAwZmMxMjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NDliNTZkYWQ2OTczMWRlYWFhMzc3NDFiYWUzNWM1NWVlMjY5YWI0ZWI4ZTRhZDM1ODQ4YTYwNWFkYTViNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyMTIzNzI5N2Y0ZjQ0MGE2NWVjN2EyN2Y1YTBiYWUyYzMyMTRhN2U4MWIwNzFhMTRlNjZiMTBhYjMxMzljNjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_812e23eaa2f241159c2914ca3cc63f5e",
+      "statement": "The consents gate returns 451 Unavailable For Legal Reasons to signal the need for document acceptance.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L285-L286",
+          "version": "repo-lines-v1:sha256:5acfa5de19acc4e1026b672bd561f39500f43db72f9d56022b519a7ad984ac23:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFjODI2NjcxZWFhNGQzZmUzNDIxOTQxOWY3OGI5OWIwYzAzYmVkNDJlY2E0YTQyOGUwNzUyNzBlMmU0NGM5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDY3YWNlYzdlMDNmYzI4MGUxZTZiN2Y3NzBhZjBlMWMxZGQ5MjY5YzI4ZDMyZjhlYjE5OGJhMTA2OGFjOGRlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2NhMmY0YTQ2NWY1ODRlNDhiNTczZjJiNDg4Njg0MTU1ZjllMDI5YWI3OTcyNzA1MmUzMmExYmI2ZDUyODAxZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2MxYjE1MTY0NTVjZTEyMWFiZjI5ZmNiMGVmMDJmZDcxYmU4YzE5YzRjZTZmYzU5YjlmMzZiOTY0ZTI5YTBkZiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.6.0",
+    "at": "2026-09-25T09:42:01.514Z"
+  }
+}

@@ -1,14 +1,30 @@
 ---
 type: Domain
 title: Auth & Teams
-description: Detailed documentation of authentication flows (login, signup, OAuth, email verification, password reset), team management, invitation handling, and feature flags in the RESTHeart Cloud React starter.
-tags: [auth, teams, invitations, oauth, feature-flags, domain]
+description: Detailed documentation of authentication flows (login, signup, OAuth, email verification, password reset), team management, invitation handling, consents gate internals, and feature flags in the RESTHeart Cloud React starter.
+tags: [auth, teams, invitations, oauth, consents, feature-flags, domain]
+verified:
+  - by: openwiki/0.6.0
+    at: 2026-09-25T09:42:01.514Z
+sources:
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
+    resource: repo://rhc.setup.ts
+  - id: openwiki-source-54631e6ebf1d3b815c4a5eed
+    resource: repo://src/App.tsx
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-9674080b0675d512256b80bc
+    resource: repo://src/ConsentsGate.tsx
+  - id: openwiki-source-95bfccfd0c712f6e72040e0d
+    resource: repo://src/main.tsx
+generated: { by: "openwiki/0.6.0", at: "2026-09-25T09:42:01.514Z" }
 ---
 
 # Auth & Teams
 
-<!-- openwiki: broken internal link [architecture/overview.md#auth-provider] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-This page documents every authentication and multi-tenancy flow implemented in the starter. All auth logic is provided by `@restheart-cloud/kit-react` through the [`RhAuthProvider`](architecture/overview.md#auth-provider) and the `useAuth()` hook.
+This page documents every authentication and multi-tenancy flow implemented in the starter. All auth logic is provided by `@restheart-cloud/kit-react` through the [`RhAuthProvider`](../architecture/overview.md#auth-provider) and the `useAuth()` hook.
 
 ## Authentication Flows
 
@@ -68,8 +84,7 @@ Two-step flow:
 
 OAuth is initiated by navigating to `${apiUrl}/auth/oauth/authorize/${provider}?noauthchallenge`. The `oauthUrl()` helper in `src/oauth-url.ts` builds this URL.
 
-<!-- openwiki: broken internal link [architecture/overview.md#fragment-token-capture] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-After the OAuth provider authenticates the user, they are redirected back with an access token in the URL **fragment** (`#access_token=...`). The [fragment token capture](architecture/overview.md#fragment-token-capture) in `App.tsx` picks this up.
+After the OAuth provider authenticates the user, they are redirected back with an access token in the URL **fragment** (`#access_token=...`). The [fragment token capture](../architecture/overview.md#fragment-token-capture) in `App.tsx` picks this up.
 
 **Supported providers:** Configured in `environment.features.oauthProviders` array. Currently `['google']`. Add `'github'` or others as your RESTHeart Cloud service supports them.
 
@@ -151,6 +166,78 @@ A simple module-level boolean:
 
 This avoids passing state through React context for a transient UI effect.
 
+## Consents Gate
+
+The consents gate blocks users who have not accepted the current Terms of Service and Privacy Policy. A server-side Guards rule answers every authenticated request with HTTP `451 Unavailable For Legal Reasons` until the user accepts. The client-side gate detects this and shows an acceptance overlay.
+
+### consents-signal.ts
+
+**File:** `src/consents-signal.ts`
+
+A plain module (no React dependency) that manages the blocked/unblocked state:
+
+| Export | Purpose |
+|--------|---------|
+| `isBlocked()` | Returns the current boolean flag |
+| `setBlocked(next)` | Sets the flag and notifies all listeners (no-op if unchanged) |
+| `subscribe(listener)` | Registers a callback; returns an unsubscribe function |
+| `consentsOnError(err)` | The `onError` handler passed to `RhAuthProvider` — raises the flag when `err.status === 451` |
+
+The signal is intentionally decoupled from React so that `consentsOnError` can be passed into the provider before any component renders.
+
+### ConsentsGate component
+
+**File:** `src/ConsentsGate.tsx`
+
+`ConsentsGate` sits **above the router** in `App.tsx`, not inside the Shell. This placement is critical: a user who has not accepted has no session — the service answers `451` to `/users/me` too — so `AuthGuard` would bounce them to the login page and they would never see the overlay.
+
+When the signal is blocked, the component replaces the entire app with a modal overlay that contains:
+
+- Two checkboxes: "I have read and accept the Terms of Service" and "I have read and accept the Privacy Policy". Both must be checked to enable the submit button.
+- An "I accept" button that calls `auth.acceptConsents()` followed by `auth.checkSession()` to reload the session with the new token containing the consent claims.
+- A "Sign out" button that clears the blocked flag and calls `auth.logout()`.
+
+On successful acceptance, `setBlocked(false)` clears the signal and the app renders normally.
+
+### How the gate fires
+
+There is no client-side probe or flag to configure. Session restoration (the very first thing `RhAuthProvider` does on load) calls `GET /users/me`. If the user has not accepted the current consents, the Guards rule answers `451`. Because `main.tsx` passes `consentsOnError` as `onError` to `RhAuthProvider`, the provider calls that handler, which raises the blocked flag in the signal. `ConsentsGate` subscribes to the signal and renders the overlay.
+
+### UX, not enforcement
+
+The overlay is a convenience. Remove it with the browser dev tools and every request still returns `451`. The rule lives on the server; the client cannot bypass it.
+
+### Consents flow sequence
+
+```mermaid
+sequenceDiagram
+    participant User as User
+    participant App as App.tsx
+    participant Gate as ConsentsGate
+    participant Signal as consents-signal
+    participant RhAuth as RhAuthProvider
+    participant Server as RESTHeart Cloud
+
+    App->>RhAuth: render with onError=consentsOnError
+    RhAuth->>Server: GET /users/me (session restore)
+    Server-->>RhAuth: 451 Unavailable For Legal Reasons
+    RhAuth->>Signal: consentsOnError(err)
+    Signal->>Gate: setBlocked(true), notify listeners
+    Gate->>Gate: render acceptance overlay
+    User->>Gate: check ToS and PP boxes
+    User->>Gate: click I accept
+    Gate->>RhAuth: auth.acceptConsents()
+    RhAuth->>Server: PATCH /users self with consents
+    Server-->>RhAuth: 200 OK, new token with consent claims
+    Gate->>RhAuth: auth.checkSession()
+    RhAuth->>Server: GET /users/me
+    Server-->>RhAuth: 200 OK with user data
+    Gate->>Signal: setBlocked(false)
+    Signal->>Gate: notify listeners, clear overlay
+```
+
+*Consents flow: server blocks unconsented users with 451, client detects and shows overlay, acceptance reloads the session.*
+
 ## Feature Flags
 
 **File:** `src/environments/environment.ts`
@@ -168,6 +255,12 @@ features: {
 These flags must match your RESTHeart Cloud service's **Sign-up Mgmt → Features** toggles. When a flag is `false`:
 - The corresponding route is removed from the route array
 - UI elements (links, buttons) that reference the disabled flow are not rendered
+
+### Preventing drift with rhc setup
+
+`rhc.setup.ts` **imports the same `environment.ts`** the app imports and derives the server-side configuration from it. The flags are stated once: turning `passwordReset` off in the app and re-running `rhc setup` turns it off on the service too, because there is no second place to forget. The `rhc setup --dry-run` command checks whether the service matches and reports any mismatches without writing anything.
+
+See the [rhc setup workflow](../workflows/rhc-setup.md) for the full setup procedure.
 
 ## Reading Your Own Data
 
@@ -193,12 +286,9 @@ function Notes() {
 
 Pass a path, not a full URL. `auth.api()` attaches the bearer token automatically and rejects non-2xx responses with `ApiError({ status, message })`. A plain `fetch` to the same URL is unauthenticated — the service answers 401.
 
-<!-- openwiki: broken internal link [source-map.md#home] file "source-map.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-The [Home page](source-map.md#home) includes a working "Fetch /demo" button that demonstrates this pattern.
+The [Home page](../source-map.md#home) includes a working "Fetch /demo" button that demonstrates this pattern.
 
 ## See Also
 
-<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Architecture Overview](architecture/overview.md) — how the auth provider and routing work
-<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Operations & Runbook](operations/runbook.md) — how to configure feature flags and environment
+- [Architecture Overview](../architecture/overview.md) — how the auth provider and routing work
+- [Operations & Runbook](../operations/runbook.md) — how to configure feature flags and environment

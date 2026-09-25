@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:745d8375fe03d99725193bed1912bfb96e6dabeda9326be741f5c894220664d2",
+  "claims": [
+    {
+      "id": "claim_c1ad0ebf92da4afeb57757c664254efb",
+      "statement": "The client-side consents gate consists of three files: consents-signal.ts (raises a blocked flag on HTTP 451 responses via consentsOnError), ConsentsGate.tsx (a blocking overlay mounted above the router in App.tsx that renders an acceptance form when blocked), and ConsentsGate.css (styles the fixed overlay at z-index 400).",
+      "evidence": [
+        {
+          "resource": "repo://src/App.tsx",
+          "version": "repo-file-v1:sha256:5864d8ab3be5d448e76df645db1a75939def85bca97853bfd69d83de15fb457e"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.css",
+          "version": "repo-file-v1:sha256:320f307a19fbb1061e6eeb10577af17dea140cb6fba926885724f6431a07922b"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx",
+          "version": "repo-file-v1:sha256:4049f0540fd879ef652e5eb4c6285f39a8cc3d423c8249fa572419017a251172"
+        },
+        {
+          "resource": "repo://src/consents-signal.ts",
+          "version": "repo-file-v1:sha256:2f4dcd9869e64c98d92d3372d2381d7c7c78b85f0c3b1a351dfc3e74eec94b87"
+        },
+        {
+          "resource": "repo://src/main.tsx",
+          "version": "repo-file-v1:sha256:c303c58a6141c33fad24824fc2d9ccb2649ea3012e270c58391796290c6fe5e6"
+        }
+      ]
+    },
+    {
+      "id": "claim_7cb9ac4391374b428d9bc270ec117f27",
+      "statement": "The starter requires Node.js 18+, a RESTHeart Cloud service URL in src/environments/environment.ts, and optional server setup via rhc setup --srv <srvId> (using rhc.setup.ts for accounts-only or rhc.setup.consents.ts for accounts plus consents gate).",
+      "evidence": [
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:4fb8f3db9af354be8bdbc79dc3edcf05b0ab1dad4a6706ed103219935850e478"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:6b0563d7c04ea1755dbcbefac430da6a4358144d389cef4c17a266e56674fe9f"
+        },
+        {
+          "resource": "repo://rhc.setup.ts",
+          "version": "repo-file-v1:sha256:dabc6961cf223b41aa2da84b14166bec5cdab36651c3c88e11ede5d866614cca"
+        },
+        {
+          "resource": "repo://src/environments/environment.ts",
+          "version": "repo-file-v1:sha256:c8b8bb3d574f916b328a791cfe2774c88a5c72b2f4a8540a0cd26ce3fc48b51d"
+        }
+      ]
+    },
+    {
+      "id": "claim_48bb705e23fc4700a2c7c0788e83f52f",
+      "statement": "rhc.setup.consents.ts imports rhc.setup.ts and appends four additional documents (schema, permission, JWT claims, guards rule) to provision the server-side consents gate; the versions are defined as TOS_VERSION and PP_VERSION constants at the top of the setup file.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:6b0563d7c04ea1755dbcbefac430da6a4358144d389cef4c17a266e56674fe9f"
+        },
+        {
+          "resource": "repo://rhc.setup.ts",
+          "version": "repo-file-v1:sha256:dabc6961cf223b41aa2da84b14166bec5cdab36651c3c88e11ede5d866614cca"
+        },
+        {
+          "resource": "repo://src/consents-signal.ts",
+          "version": "repo-file-v1:sha256:2f4dcd9869e64c98d92d3372d2381d7c7c78b85f0c3b1a351dfc3e74eec94b87"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.6.0",
+    "at": "2026-09-25T09:42:01.514Z"
+  }
+}
