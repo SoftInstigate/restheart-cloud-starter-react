@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:6d62386c57321a52c6aa46ff0e4b3fdec7fcad5d71922f42560c1425c7430d0b",
+  "claims": [
+    {
+      "id": "claim_5a0cc621a0b74e5696e6b69c98785789",
+      "statement": "The environment.ts apiUrl is intentionally empty by default — a ConfigPage is shown instead of the app until the user sets it to a valid *.restheart.com URL.",
+      "evidence": [
+        {
+          "resource": "repo://src/environments/environment.ts",
+          "version": "repo-file-v1:sha256:c8b8bb3d574f916b328a791cfe2774c88a5c72b2f4a8540a0cd26ce3fc48b51d"
+        }
+      ]
+    },
+    {
+      "id": "claim_d18a463155154649ba401c2a6b39bf7a",
+      "statement": "The rhc CLI reads environment.ts and configures the RESTHeart Cloud service automatically, preventing feature flag drift between client and server.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts",
+          "version": "repo-file-v1:sha256:dabc6961cf223b41aa2da84b14166bec5cdab36651c3c88e11ede5d866614cca"
+        }
+      ]
+    },
+    {
+      "id": "claim_a7a12668f6f94214a98869c0c96fec3a",
+      "statement": "The consents gate is server-enforced via a Guards rule that returns HTTP 451 to unauthenticated requests — removing the client overlay does not bypass the requirement.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:6b0563d7c04ea1755dbcbefac430da6a4358144d389cef4c17a266e56674fe9f"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx",
+          "version": "repo-file-v1:sha256:4049f0540fd879ef652e5eb4c6285f39a8cc3d423c8249fa572419017a251172"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8501aa8444245f89bfaa95d66a94491",
+      "statement": "Three common troubleshooting issues: origin not allowed (re-run rhc setup), missing page/feature flag mismatch (re-run rhc setup), and 401 on custom requests (use auth.api not plain fetch).",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L89-L100",
+          "version": "repo-lines-v1:sha256:94499ad7fa197ad7fcc8b2f738e21eebe0ac512cfdac38d4543ad401e879e27b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYTVkOGUzYzg5NWZhMzc0YjZhNTQ0YTczMTc3Mjk4YzJmMmI5MGFmY2E0YjEwNjI4MWRmNTIxODgyOTI5NTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzYjQ0ODdlNzNmZDUxNDJlZWE2MDVjYjljMzgzNzM2ZDJlM2IzYjNjYmY0MmYzYmEzZTUxZThkNjgyZDdiNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5NGM1ZmVhMDQ2NDNhMWFmNDYzMDk0OGZhOTgxY2E1NGYxYjIyYWM1MjEwN2E2NTk5NjljOTQyMjAyODI2NjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3MTcyMTU0NGQ0ODMxNzJlODkzZTRlMjFmODJiZjA2MjBkNDFjN2VlMDI5YjA0ZTYzMjUyNGY2ZjVlZGE4OTgifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.6.0",
+    "at": "2026-09-25T09:42:01.514Z"
+  }
+}

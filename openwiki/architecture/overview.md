@@ -1,35 +1,48 @@
 ---
 type: Architecture
 title: Architecture Overview
-description: Runtime architecture of the RESTHeart Cloud React starter — component tree, authentication provider setup, routing strategy, fragment token capture, and config gating.
-tags: [architecture, react, auth, routing, restheart-cloud]
+description: Runtime architecture of the RESTHeart Cloud React starter — component tree, authentication provider setup, routing strategy, fragment token capture, config gating, and consents gate.
+tags: [architecture, react, auth, routing, restheart-cloud, consents]
+verified:
+  - by: openwiki/0.6.0
+    at: 2026-09-25T09:42:01.514Z
+sources:
+  - id: openwiki-source-54631e6ebf1d3b815c4a5eed
+    resource: repo://src/App.tsx
+  - id: openwiki-source-a3fd7ec517783a7d5d8842d0
+    resource: repo://src/consents-signal.ts
+  - id: openwiki-source-9674080b0675d512256b80bc
+    resource: repo://src/ConsentsGate.tsx
+  - id: openwiki-source-95bfccfd0c712f6e72040e0d
+    resource: repo://src/main.tsx
+generated: { by: "openwiki/0.6.0", at: "2026-09-25T09:42:01.514Z" }
 ---
 
 # Architecture Overview
 
-This page explains how the application boots, authenticates users, routes requests, and gates unconfigured deployments.
+This page explains how the application boots, authenticates users, routes requests, gates unconfigured deployments, and enforces Terms of Service / Privacy Policy acceptance.
 
 ## Component Tree
 
 ```
 <StrictMode>
   <BrowserRouter>
-    <RhAuthProvider config={{ apiBaseUrl }}>
+    <RhAuthProvider config={{ apiBaseUrl, onError: consentsOnError }}>
       <App />                     ← fragment token capture + config gate
         ├── <ConfigPage />        ← if apiUrl is invalid
-        └── useRoutes(routes)     ← React Router route tree
-              ├── PublicGuard → Login / Signup / Verify / ForgotPassword / ResetPassword
-              ├── Accept (no guard — works signed-in or out)
-              └── AuthGuard → Shell (authenticated frame)
-                    └── <Outlet /> → Home / Teams / NewTeam / TeamDetail / Account
+        └── <ConsentsGate>        ← wraps route element
+              └── useRoutes(routes)   ← React Router route tree
+                    ├── PublicGuard → Login / Signup / Verify / ForgotPassword / ResetPassword
+                    ├── Accept (no guard — works signed-in or out)
+                    └── AuthGuard → Shell (authenticated frame)
+                          └── <Outlet /> → Home / Teams / NewTeam / TeamDetail / Account
 ```
 
-<!-- openwiki: broken internal link [domain/auth-and-teams.md] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-The entrypoint is `src/main.tsx`, which renders `<RhAuthProvider>` from `@restheart-cloud/kit-react` wrapping the entire app. This provider manages auth state (user, teams, tokens) and exposes it via the [`useAuth()` hook](domain/auth-and-teams.md).
+The entrypoint is `src/main.tsx`, which renders `<RhAuthProvider>` from `@restheart-cloud/kit-react` wrapping the entire app. This provider manages auth state (user, teams, tokens) and exposes it via the [`useAuth()` hook](../domain/auth-and-teams.md).
 
 ## Auth Provider
 
-`RhAuthProvider` receives `config={{ apiBaseUrl: environment.apiUrl }}` and provides:
+`RhAuthProvider` receives `config={{ apiBaseUrl: environment.apiUrl, onError: consentsOnError }}` and provides:
 
 ### Properties
 
@@ -74,8 +87,7 @@ The entrypoint is `src/main.tsx`, which renders `<RhAuthProvider>` from `@resthe
 
 ### Data Access
 
-<!-- openwiki: broken internal link [domain/auth-and-teams.md#reading-your-own-data] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- **`auth.api(path)`** — authenticated `fetch` wrapper; attaches the bearer token automatically and rejects non-2xx responses as `ApiError({ status, message })`. Use this for your app's own collections — see [Auth & Teams](domain/auth-and-teams.md#reading-your-own-data).
+- **`auth.api(path)`** — authenticated `fetch` wrapper; attaches the bearer token automatically and rejects non-2xx responses as `ApiError({ status, message })`. Use this for your app's own collections — see [Auth & Teams](../domain/auth-and-teams.md#reading-your-own-data).
 
 Token management (`setToken`, `scheduleRefresh`) is also provided by the kit and is called during [fragment token capture](#fragment-token-capture).
 
@@ -95,8 +107,7 @@ const Shell = lazy(() => import('./pages/shell/Shell'));
 
 ### Feature-Flag Gating
 
-<!-- openwiki: broken internal link [domain/auth-and-teams.md#feature-flags] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-Routes are conditionally included in the array based on [feature flags](domain/auth-and-teams.md#feature-flags) from `src/environments/environment.ts`:
+Routes are conditionally included in the array based on [feature flags](../domain/auth-and-teams.md#feature-flags) from `src/environments/environment.ts`:
 
 ```typescript
 const { emailRegistration, passwordReset, oauthLogin, teamInvitations } = environment.features;
@@ -146,11 +157,60 @@ This runs once on app load, before any route renders.
 
 This prevents confusing failures when someone clones the repo but forgets to configure the service URL.
 
+## Consents Gate
+
+The `ConsentsGate` component sits **above the router** in `App.tsx`, not inside the Shell. This placement is critical: a user who has not accepted the current Terms of Service and Privacy Policy has no session — the service answers `451` to every request, including `/users/me`. If the gate were inside the Shell (behind `AuthGuard`), the session check would fail and `AuthGuard` would bounce the user to the login page, creating an infinite loop.
+
+### How it works
+
+1. The service's Guards rule blocks every request from a user who has not accepted the current consents, returning HTTP `451 Unavailable For Legal Reasons`.
+2. `RhAuthProvider` passes `consentsOnError` (from `src/consents-signal.ts`) as `config.onError`.
+3. When session restoration (the first thing the app does on load) receives a `451`, `consentsOnError` sets the `blocked` flag in the signal.
+4. `ConsentsGate` subscribes to that signal and, when blocked, replaces the entire app with an acceptance overlay.
+5. The overlay lets the user accept the Terms of Service and Privacy Policy, then calls `auth.acceptConsents()` and `auth.checkSession()` to reload the session.
+6. If the user declines, they can sign out, which clears the blocked flag for the next user.
+
+The overlay is a UX convenience, not enforcement: removing it with dev tools still results in `451` responses from the server.
+
+### Boot Sequence
+
+The following diagram shows the full boot sequence, including session restoration, consents gating, and config validation.
+
+```mermaid
+sequenceDiagram
+    participant main as main.tsx
+    participant RhAuth as RhAuthProvider
+    participant signal as consents-signal
+    participant App as App
+    participant Gate as ConsentsGate
+    participant Routes as useRoutes
+
+    main->>RhAuth: render with onError=consentsOnError
+    RhAuth->>RhAuth: restore session (GET /users/me)
+    alt 451 response
+        RhAuth->>signal: consentsOnError(err)
+        signal->>Gate: setBlocked(true)
+    end
+    RhAuth-->>App: render
+    App->>App: consumeFragmentToken()
+    App->>App: validate apiConfigured
+    alt !apiConfigured
+        App-->>App: render ConfigPage
+    else apiConfigured
+        App->>Gate: wrap route element
+        Gate->>Gate: check blocked state
+        alt blocked
+            Gate-->>Gate: show acceptance overlay
+        else not blocked
+            Gate->>Routes: render routes
+        end
+    end
+```
+
+*Boot sequence showing session restoration, consents gate, and config gating.*
+
 ## See Also
 
-<!-- openwiki: broken internal link [domain/auth-and-teams.md] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Auth & Teams](domain/auth-and-teams.md) — detailed auth flows, team management, and feature flag definitions
-<!-- openwiki: broken internal link [operations/runbook.md] file "operations/runbook.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Operations & Runbook](operations/runbook.md) — how to configure `environment.ts` and the styling system
-<!-- openwiki: broken internal link [source-map.md] file "source-map.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Source Map](source-map.md) — file-by-file inventory
+- [Auth & Teams](../domain/auth-and-teams.md) — detailed auth flows, team management, and feature flag definitions
+- [Operations & Runbook](../operations/runbook.md) — how to configure `environment.ts` and the styling system
+- [Source Map](../source-map.md) — file-by-file inventory

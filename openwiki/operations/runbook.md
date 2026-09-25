@@ -1,8 +1,23 @@
 ---
 type: Runbook
 title: Operations & Runbook
-description: Environment configuration, design system and styling, build and deploy workflow, theming, and feature flag management for the RESTHeart Cloud React starter.
-tags: [operations, runbook, config, styling, build, deploy, theming]
+description: Environment configuration, design system, build/deploy, theming, feature flag management, consents gate, and troubleshooting for the RESTHeart Cloud React starter.
+tags: [operations, runbook, config, styling, build, deploy, theming, troubleshooting, consents]
+verified:
+  - by: openwiki/0.6.0
+    at: 2026-09-25T09:42:01.514Z
+sources:
+  - id: openwiki-source-23775c3de52f3ab95a13cb8b
+    resource: repo://README.md
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
+    resource: repo://rhc.setup.ts
+  - id: openwiki-source-9674080b0675d512256b80bc
+    resource: repo://src/ConsentsGate.tsx
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+generated: { by: "openwiki/0.6.0", at: "2026-09-25T09:42:01.514Z" }
 ---
 
 # Operations & Runbook
@@ -15,7 +30,7 @@ This is the single configuration file for the starter. It contains:
 
 ```typescript
 export const environment = {
-  apiUrl: '<your-restheart-cloud-servie-url>',
+  apiUrl: '',  // empty on purpose — set to your *.restheart.com URL
   features: {
     emailRegistration: true,
     passwordReset: true,
@@ -28,8 +43,7 @@ export const environment = {
 
 ### apiUrl
 
-<!-- openwiki: broken internal link [source-map.md#entrypoint--app-shell] file "source-map.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-Must be a valid `*.restheart.com` URL. The app validates this on startup with `isValidApiBaseUrl()` from the kit. If invalid, a [ConfigPage](source-map.md#entrypoint--app-shell) is shown instead of the app.
+Must be a valid `*.restheart.com` URL. The app validates this on startup with `isValidApiBaseUrl()` from the kit. If invalid, a [ConfigPage](../source-map.md#entrypoint--app-shell) is shown instead of the app.
 
 **After cloning**, tell git to ignore local changes:
 
@@ -39,10 +53,11 @@ git update-index --assume-unchanged src/environments/environment.ts
 
 Then edit the file to point to your own service.
 
+> **Automated setup:** Use the [`rhc` CLI](../workflows/rhc-setup.md) to configure your RESTHeart Cloud service automatically. It reads `environment.ts` and sets up accounts, features, origin allowlist, and (optionally) the consents gate — so feature flags cannot drift between client and server.
+
 ### Feature Flags
 
-<!-- openwiki: broken internal link [domain/auth-and-teams.md#feature-flags] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-See [Auth & Teams — Feature Flags](domain/auth-and-teams.md#feature-flags) for the complete reference. These must match your RESTHeart Cloud service's toggles.
+See [Auth & Teams — Feature Flags](../domain/auth-and-teams.md#feature-flags) for the complete reference. These must match your RESTHeart Cloud service's toggles. The `rhc setup` command ensures they stay in sync.
 
 ## Design System
 
@@ -150,11 +165,35 @@ A GitHub Actions workflow runs OpenWiki documentation updates on a schedule. Thi
 
 Each page directory under `src/pages/` contains its own CSS file (e.g., `Shell.css`, `Teams.css`, `Account.css`). These hold **page-specific layout only** — all design tokens and shared styles live in `src/styles.css`.
 
+## Consents Gate
+
+The consents gate is **server-enforced**. When enabled via `rhc setup --file rhc.setup.consents.ts`, the RESTHeart Cloud service returns HTTP `451` to every authenticated request from a user who has not accepted the current Terms of Service and Privacy Policy.
+
+The client overlay in `src/ConsentsGate.tsx` is a UX convenience — it detects the `451` response and shows an acceptance form. **Removing the overlay with dev tools does not bypass the requirement**: every API call still fails with `451` until the user accepts. The enforcement lives in the server's Guards rule, not in the client.
+
+See [Auth & Teams — Consents Gate](../domain/auth-and-teams.md#consents-gate) for the full flow.
+
+## Troubleshooting
+
+### Everything fails, and the console says the origin is not allowed
+
+The service only answers origins it has been told about. Re-run `rhc setup` after changing where the app is served from, or add the origin under **Service → Origin Allowlist** in the console.
+
+### A page is missing and its link is gone
+
+The feature flags in `environment.ts` must match the service's **Sign-up Mgmt → Features** toggles. `rhc setup` reads the flags from that same file and sets the service to match, so re-running it is usually the fix.
+
+### `401` on a request you wrote yourself
+
+A plain `fetch` carries no session. Use `auth.api()`, which attaches it — see [Auth & Teams — Reading Your Own Data](../domain/auth-and-teams.md#reading-your-own-data).
+
+### `rhc` runs something about OpenShift
+
+A different, retired tool of the same name is first in your `PATH`. `type -a rhc` shows both. The RESTHeart Cloud CLI is `@restheart-cloud/cli`.
+
 ## See Also
 
-<!-- openwiki: broken internal link [architecture/overview.md] file "architecture/overview.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Architecture Overview](architecture/overview.md) — component tree and config gating
-<!-- openwiki: broken internal link [domain/auth-and-teams.md] file "domain/auth-and-teams.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Auth & Teams](domain/auth-and-teams.md) — feature flag definitions
-<!-- openwiki: broken internal link [testing/guidance.md] file "testing/guidance.md" does not exist. Fix the href or restore the target, then delete this comment. -->
-- [Testing Guidance](testing/guidance.md) — running tests
+- [Architecture Overview](../architecture/overview.md) — component tree and config gating
+- [Auth & Teams](../domain/auth-and-teams.md) — feature flag definitions and consents gate
+- [Testing Guidance](../testing/guidance.md) — running tests
+- [rhc setup workflow](../workflows/rhc-setup.md) — automated server configuration

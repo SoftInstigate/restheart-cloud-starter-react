@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e321b38e73f61e4c2dc94022619f26da956cecce95423cdf065f1c331a57a6cb",
+  "claims": [
+    {
+      "id": "claim_fe05038cfe994855bcfc5bfedaf61193",
+      "statement": "The consents-signal module exposes a simple observable state pattern: a boolean blocked flag with isBlocked(), setBlocked(), and subscribe() functions; setting the same value twice does not renotify listeners; unsubscribe removes the listener.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts#L19-L37",
+          "version": "repo-lines-v1:sha256:58856b2c7aea880acd6c9fe801f5dd3801b8aef94c1a2b1fd5f9547ebb3bdb46:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1MjliN2I2OWJjYjFhMjUzYThkZTA5MjNiMzEzMjBkY2Q4MzE1NDgzZjQzZGYyYmVkMjdlZmY3N2VlODU2MjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3NzgxYzVjYjg3YjgwMmE5MjY4YTQ4YmQ1MWFmOTE2YjEyNWI0MGNiNzZkZDBhZTdmODE1ZmVjMjYwNzcwMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzODNlYjY2Yjg5ZTdhMzg2N2Y5YzRhYjdiNzJhY2JjMWFmMjNkZjAxZjk1MTZkMTNiODE0ZTAxYzY2M2Y3YTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4f4fe1af6bb84a9a844225dc82e70201",
+      "statement": "consentsOnError sets blocked to true when the API error status is 451 (Unavailable For Legal Reasons) but does not modify state for any other status code.",
+      "evidence": [
+        {
+          "resource": "repo://src/consents-signal.ts#L47-L49",
+          "version": "repo-lines-v1:sha256:17ba753bdcee6043aaa18b206e08a8317a65acaca8aed450354ca817fa458543:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjVjZjc2YjZhOTQwZTk0ZmJkMGU0YjBjYmFiMzVmYzc0NTM3NGU2MDAxNDVkY2QxMmJlMDc4NGRiM2M3ZWY0NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDM5NmU0ZTM3MjU3NTEzYTk4ZWY4ODY1ZjA1ODFhOGMyMTAyYjhiM2JkODlmNGRkOGFkYTZjMzBmNGU1YWNhZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e81331fecb2f4f86b2575616531b29d7",
+      "statement": "ConsentsGate renders its children when the blocked flag is false; when blocked is true it shows a full-screen overlay requiring acceptance of Terms of Service and Privacy Policy before proceeding.",
+      "evidence": [
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L18-L31",
+          "version": "repo-lines-v1:sha256:c140e92b69989667af34044b6b0fd146554141274b758c960ac5a4f5eff77e51:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmOTVjZGE4ZWNhZWZhZWVkZDc4MTdkNjY3NjNjODI0YjQyNWNkN2Y5MzNjMmFkNjQzOTE0NWVkMDI4NWQ4MjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxYjYwYTM4OTMyZjQ1ZmQxMTUwMjhhODg5ZjBlM2I2ZjcwNTlkNjZjYzcwYmM5MzIzNWFkNjM4YzlhMmY4MzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1YTQ0M2UzNGRkYmE2Nzg5OGMyZTFlOTM1MTE5MGVmOTQyNWQyYzZiNTIzYmJkMWEyZWFmMzQ4NzI4ZDdlOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzNzgxZTVmN2ZkNWYyOWJjMmVhNTllYTFjYTQwYmQwZTNjYzdiOTQ1YjE4M2YxZWU3Y2MwMjI0YjQyMDllZDMifQ"
+        },
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L60-L103",
+          "version": "repo-lines-v1:sha256:386c48c916182d0bfac3f3ea06661e44f38b00abd0113b2861aefa4305376991:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MjE2ZThlOWMwYTFhNjhkMDZjMmZiYWE1ZmQyMTM5NDgyYjhlZmQwYTE5MzE1YjkxNWU2Y2NlODQ5ZDg5ZGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNTcwOWU3NjQ1NWVkMDU4M2Y5ZTM1MmZiYzQ3NzZhMzQ0NTE2M2Q0MWM0NDdmMDBkMjE5NDI1ZTNkMDljMjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_16b6fdfff5fe4ab183ef417cb6361dfe",
+      "statement": "The ConsentsGate accept flow calls auth.acceptConsents() then auth.checkSession() and clears the blocked flag via setBlocked(false); the sign-out handler clears the blocked flag before calling auth.logout().",
+      "evidence": [
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L33-L58",
+          "version": "repo-lines-v1:sha256:5fc0f18560651c692851f25ca3ad2278372e23bb4e497733d81134ae8727d327:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNzNiNDlkMmMwMmMwMDlmY2UyODdlODFhNDE4ZGIxZTU2YzgzMDllMmJjODY5MWRiYmI5NDFkMWE0MzlkZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2NTQwYTBhZDQwYWMzZDBjZjVmNjU3NTQ5MGY5NTI0Y2FhN2M0MTg0ZmIwZTcxYjk3ZGJlYThhMDc4YmU4MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2YTlkMjM3YWQ5NDU1MWMyNzQ1YWFhZTg4ZGEyMmEyOTZlMmFmODVkMmMxODgwNzBjMzczZmY2ZWE3OTY2MWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7067fc5ee58f4b18a9161a0b67f9ea53",
+      "statement": "ConsentsGate subscribes to consents-signal on mount and unsubscribes on unmount via the cleanup function returned by subscribe().",
+      "evidence": [
+        {
+          "resource": "repo://src/ConsentsGate.tsx#L29-L29",
+          "version": "repo-lines-v1:sha256:022f3fd32073e2484c7f46ecfc6fd6ed8ff46fc3137061e891341e3ef68d2216:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDIyZjNmZDMyMDczZTI0ODRjN2Y0NmVjZmM2ZmQ2ZWQ4ZmY0NmZjMzEzNzA2MWU4OTEzNDFlM2VmNjhkMjIxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDIyZjNmZDMyMDczZTI0ODRjN2Y0NmVjZmM2ZmQ2ZWQ4ZmY0NmZjMzEzNzA2MWU4OTEzNDFlM2VmNjhkMjIxNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzYzYTNjZjljODVkNTFjZTA0MGZiZTI5NTIwYTJlNDZhNGVmZjlhMjY5YmVjODZlNmYxZjRlOGJlZTBjNzIwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzY1NDBhMGFkNDBhYzNkMGNmNWY2NTc1NDkwZjk1MjRjYWE3YzQxODRmYjBlNzFiOTdkYmVhOGEwNzhiZTgxNCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.6.0",
+    "at": "2026-09-25T09:42:01.514Z"
+  }
+}
